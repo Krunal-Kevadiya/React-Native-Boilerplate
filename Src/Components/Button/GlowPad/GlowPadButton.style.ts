@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import type { StylePropsType } from './GlowPadButton.type';
 
-export default StyleSheet.create<StylePropsType>({
+export default StyleSheet.create({
   centerView: {
     alignItems: 'center',
     justifyContent: 'center'

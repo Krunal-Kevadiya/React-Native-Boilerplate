@@ -1,7 +1,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { StatusBar, Text, View, FlatList, StyleSheet, LayoutChangeEvent } from 'react-native';
 import Modal from 'react-native-modal';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { isNotNullOrEmpty } from '@utils';
 import type { BottomSheetHandleType, BottomSheetPropsType } from './BottomSheet.type';
 import styleSheet from './BottomSheet.style';
@@ -12,7 +12,7 @@ function CustomBottomSheet<T>(
 ): React.ReactElement {
   const [isVisible, setVisible] = useState<boolean>(false);
   const [swipeThresholdHeight, setSwipeThresholdHeight] = useState<number>(0);
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const { data, style, ...otherFlatlistProps } = extraFlatListProps;
   useImperativeHandle(ref, () => ({
     show: () => {

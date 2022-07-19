@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { isNotNullOrEmpty } from '@utils';
 import type { CenterSidePropsType } from './CenterSide.type';
 import { Icon } from '../../Icon';
@@ -16,7 +16,11 @@ export default function CenterSide({
   isLeftAlign,
   ...OtherProps
 }: CenterSidePropsType): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
+  const object: Record<string, any> = {
+    style: StyleSheet.flatten([styles.imageTitle, imageStyle, !isLeftAlign && styles.centerImageTitle]),
+    svgStyle: svgStyle
+  };
 
   return (
     <Pressable
@@ -28,14 +32,7 @@ export default function CenterSide({
           {label}
         </Text>
       )}
-      {isNotNullOrEmpty(OtherProps.type) && (
-        <Icon
-          size={24}
-          {...OtherProps}
-          style={StyleSheet.flatten([styles.imageTitle, imageStyle, !isLeftAlign && styles.centerImageTitle])}
-          svgStyle={svgStyle}
-        />
-      )}
+      {isNotNullOrEmpty(OtherProps.type) && <Icon size={24} {...OtherProps} {...object} />}
     </Pressable>
   );
 }

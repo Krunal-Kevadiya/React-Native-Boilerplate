@@ -1,4 +1,4 @@
-import { ImageStyle, PanResponderGestureState, TextStyle, ViewStyle, LayoutChangeEvent } from 'react-native';
+import { PanResponderGestureState, LayoutChangeEvent } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 export type InternalDataPropsType = {
@@ -9,17 +9,15 @@ export type InternalDataPropsType = {
 };
 
 export type ToastPosition = 'top' | 'bottom';
-export type ToastPropsType = Partial<{
-  translucent: boolean;
-  numberOfLines: number;
+export type ToastPropsType = {
+  translucent?: boolean;
+  numberOfLines?: number;
   toastPosition: ToastPosition;
-}> &
-  typeof defaultProps;
+} & typeof defaultProps;
 
 export const defaultProps = {
   translucent: true,
-  numberOfLines: 2,
-  toastPosition: 'top' as ToastPosition
+  numberOfLines: 2
 };
 
 export type ToastHandleType = Required<{
@@ -34,12 +32,4 @@ export type UseToastReturnType = {
   minHeight: number;
   handlerSwipeUp: (gestureState: PanResponderGestureState) => void | undefined | null;
   handleLayout: (event: LayoutChangeEvent) => void;
-};
-
-export type StylePropsType = {
-  absoluteView: ViewStyle;
-  contentContainerStyle: ViewStyle;
-  imageStyle: ImageStyle;
-  messageStyle: TextStyle;
-  tintColor: ImageStyle;
 };

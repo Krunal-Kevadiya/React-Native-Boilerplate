@@ -19,7 +19,7 @@ export default function ProfileAvatarPile({
   overflowLabelStyle
 }: ProfileAvatarPilePropsType): React.ReactElement {
   return (
-    <View style={StyleSheet.compose(styles.container, containerStyle)}>
+    <View style={StyleSheet.flatten([styles.container, containerStyle])}>
       {overflow > 0 && !hideOverflow && (
         <OverflowCircle
           overflow={overflow}

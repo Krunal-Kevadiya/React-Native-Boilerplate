@@ -1,16 +1,15 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
 import { Colors } from '@themes';
-import type { StylePropsType } from './ImageUrl.type';
-import type { ThemeType } from 'rn-custom-style-sheet';
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
-export default function styleSheet(themeType: ThemeType) {
-  return CustomStyleSheet.createScaledTheme<StylePropsType>(
+export default function styleSheet(option?: StyleSheetOption) {
+  return CustomStyleSheet.create(
     {
       imageStyle: {
         tintColor: Colors.gray,
         tintColorDark: Colors.gray
       }
     },
-    themeType
+    option
   );
 }

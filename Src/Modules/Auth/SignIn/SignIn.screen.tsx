@@ -2,7 +2,7 @@ import { Formik, FormikProps } from 'formik';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { XmlProps } from 'react-native-svg';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { Icons } from '@assets';
 import { Header, Icon } from '@components';
 import { SignInFormModel, SignInFormSchema } from '@models';
@@ -13,7 +13,7 @@ import styleSheet from './SignIn.style';
 import SignInForm from './SignInForm/SignInForm';
 
 export default function SignInScreen(): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const { refSignIn, onFormSubmit }: UseSignInReturnType = useSignIn();
 
   return (

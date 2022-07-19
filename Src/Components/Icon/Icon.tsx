@@ -5,10 +5,11 @@ import { moderateScale } from 'rn-custom-style-sheet';
 import type { IconPropsType } from './Icon.type';
 
 export default function Icon({ type, size, source, style, svgStyle }: IconPropsType): React.ReactElement {
-  const { width, height, tintColor } = (style as ImageStyle) ?? { width: 0, height: 0, tintColor: '' };
+  const { width, height } = style ?? { width: 0, height: 0 };
   const widthIsString = typeof width === 'string';
   const heightIsString = typeof height === 'string';
-  const localColor = svgStyle?.color ?? tintColor ?? 'transparent';
+  // @ts-ignore
+  const localColor = svgStyle?.color ?? style?.tintColor ?? 'transparent';
   const localWidth: string | number = widthIsString ? width : moderateScale(width ?? size ?? 24);
   const localHeight: string | number = heightIsString ? height : moderateScale(height ?? size ?? 24);
 
@@ -24,13 +25,14 @@ export default function Icon({ type, size, source, style, svgStyle }: IconPropsT
       return (
         <Image
           source={source ?? -1}
-          // @ts-ignore
-          style={StyleSheet.compose(style, {
-            tintColor: localColor,
-            width: localWidth,
-            height: localHeight
-          })}
-          {...svgStyle}
+          style={StyleSheet.flatten<ImageStyle>([
+            style as ImageStyle,
+            {
+              tintColor: localColor,
+              width: localWidth,
+              height: localHeight
+            }
+          ])}
         />
       );
     default:

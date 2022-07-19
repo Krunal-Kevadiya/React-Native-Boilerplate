@@ -14,10 +14,6 @@ export type ProfileAvatarPilePropsType = Partial<{
 }> &
   typeof defaultProps;
 
-export type StylePropsType = {
-  container: ViewStyle;
-};
-
 export const defaultProps = {
   circleSize: 42,
   overflow: 8,

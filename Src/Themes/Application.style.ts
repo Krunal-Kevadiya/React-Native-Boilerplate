@@ -1,17 +1,10 @@
-import { TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Fonts } from '@assets';
 import { colorOpacity } from '@utils';
-import type { MyViewStyle, MyTextStyle } from 'rn-custom-style-sheet';
 import Colors from './Colors';
 import { isIos } from './Metrics';
 
-export type ViewStylePropsType = {
-  centerAlign: ViewStyle;
-  flexColumn: ViewStyle;
-  flexRow: ViewStyle;
-  screen: ViewStyle;
-};
-const viewStyle: ViewStylePropsType = Object.freeze({
+const viewStyle = StyleSheet.create({
   centerAlign: {
     alignItems: 'center',
     justifyContent: 'center'
@@ -27,15 +20,7 @@ const viewStyle: ViewStylePropsType = Object.freeze({
   }
 });
 
-export type LineStylePropsType = {
-  bottomLine: ViewStyle;
-  normalLine: ViewStyle;
-};
-type LocalLineStylePropsType = {
-  bottomLine: MyViewStyle;
-  normalLine: MyViewStyle;
-};
-const lineStyle: LocalLineStylePropsType = {
+const lineStyle = {
   bottomLine: {
     borderBottomWidth: '0.8@s',
     borderBottomColor: colorOpacity(Colors.primary, 0.3),
@@ -49,27 +34,9 @@ const lineStyle: LocalLineStylePropsType = {
   }
 };
 
-export type TextStylePropsType = {};
-type LocalTextStylePropsType = {};
-const textStyle: LocalTextStylePropsType = Object.freeze({});
+const textStyle = {};
 
-export type ButtonStylePropsType = {
-  buttonBorderStyle: ViewStyle;
-  buttonBottomMargin: ViewStyle;
-  buttonContainer: ViewStyle;
-  buttonTopMargin: ViewStyle;
-  spinnerButton: ViewStyle;
-  textLabel: TextStyle;
-};
-export type LocalButtonStylePropsType = {
-  buttonBorderStyle: MyViewStyle;
-  buttonBottomMargin: MyViewStyle;
-  buttonContainer: ViewStyle;
-  buttonTopMargin: MyViewStyle;
-  spinnerButton: MyViewStyle;
-  textLabel: MyTextStyle;
-};
-const buttonStyle: LocalButtonStylePropsType = {
+const buttonStyle = {
   buttonBorderStyle: {
     borderRadius: '5@s',
     borderStyle: 'solid',

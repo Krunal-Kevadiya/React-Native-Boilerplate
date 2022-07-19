@@ -1,5 +1,4 @@
 import React from 'react';
-import { TextStyle } from 'react-native';
 import type { BottomSheetHandleType } from '../../BottomSheet';
 
 export type ImagePickerType = Required<{
@@ -8,7 +7,3 @@ export type ImagePickerType = Required<{
   handleTakePhoto: () => void;
   handleChooseLibrary: () => void;
 }>;
-
-export type StylePropsType = {
-  actionSheetItem: TextStyle;
-};

@@ -8,7 +8,7 @@ export { default as useDebounce } from './Debounce.hook';
 export { default as useDebouncedCallback } from './DebouncedCallback.hook';
 export { default as useDeepCompareCallback } from './DeepCompareCallback.hook';
 export { default as useDeepCompareEffect } from './DeepCompareEffect.hook';
-export { default as useDeepCompareMemo } from './DeepCompareMemo..hook';
+export { default as useDeepCompareMemo } from './DeepCompareMemo.hook';
 export { default as useDidMount } from './DidMount.hook';
 export { default as useExceptionHandler } from './ExceptionHandler.hook';
 export { default as useImageSelection } from './ImageSelection.hook';

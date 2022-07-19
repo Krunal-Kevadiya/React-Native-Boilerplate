@@ -1,6 +1,6 @@
 import React, { forwardRef, memo, useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { useDeepCompareCallback } from '@hooks';
 import { isNotNullOrEmpty } from '@utils';
 import type { FormInputPropsType } from './FormInput.type';
@@ -42,7 +42,7 @@ function CustomInput(
   }: FormInputPropsType,
   ref: React.LegacyRef<TextInput> | undefined
 ): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const [isFocus, setFocus] = useState<boolean>(false);
 
   const handleChange = useCallback<(value: string) => void>(

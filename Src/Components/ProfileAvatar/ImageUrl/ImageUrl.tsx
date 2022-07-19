@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import * as Progress from 'react-native-progress';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { Icons } from '@assets';
 import { Colors } from '@themes';
 import type { ImageUrlPropsType } from './ImageUrl.type';
@@ -14,7 +14,7 @@ const FastImageProgress = withImageProgress(FastImage);
 
 export default function ImageUrl({ url, style, imageStyle, onLoading }: ImageUrlPropsType): React.ReactElement {
   const [indicatorSize, setIndicatorSize] = useState<number>(0);
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
 
   const handleLayout = useCallback<(event: LayoutChangeEvent) => void>((event) => {
     const { width, height } = event.nativeEvent.layout;

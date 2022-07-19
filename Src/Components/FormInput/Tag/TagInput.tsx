@@ -1,10 +1,11 @@
 import React, { forwardRef } from 'react';
 import { View, Text, TextInput, TextProps, StyleSheet, TextStyle, StyleProp } from 'react-native';
+import { useTheme } from 'rn-custom-style-sheet';
 import { Colors, isAndroid, isIos } from '@themes';
 import { colorOpacity, isNotNullOrEmpty } from '@utils';
 import type { MatchPartType, ParseType, TagInputPropsType, UseTagInputReturnType } from './TagInput.type';
 import useTagInput from './TagInput.hook';
-import styles from './TagInput.style';
+import styleSheet from './TagInput.style';
 import { defaultProps } from './TagInput.type';
 import { removePrefixOrPostfixText, textExtraction, removeHtmlTags } from './TagInput.util';
 
@@ -64,6 +65,7 @@ function CustomTabInput(
   }: TagInputPropsType,
   ref: React.LegacyRef<TextInput> | undefined
 ): React.ReactElement {
+  const styles = useTheme(styleSheet);
   const { parseArrayJson }: UseTagInputReturnType = useTagInput(handlePress);
   const localSelectionProps = {
     ...selectionProps,

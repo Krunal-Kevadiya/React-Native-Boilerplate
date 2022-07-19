@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { useHeaderHeight, useStatusBarHeight } from '@hooks';
 import type { HeaderPropsType } from './Header.type';
 import BothSide from './Both/BothSide';
@@ -26,7 +26,7 @@ export default function Header({
   isLeftAlign,
   ...inputProps
 }: HeaderPropsType): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const [widthLeft, setWidthLeft] = useState<number>(0);
   const [widthRight, setWidthRight] = useState<number>(0);
   const statusBarHeight: number = useStatusBarHeight();

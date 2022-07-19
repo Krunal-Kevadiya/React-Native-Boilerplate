@@ -2,11 +2,10 @@ import { CustomStyleSheet } from 'rn-custom-style-sheet';
 import { Fonts } from '@assets';
 import { ApplicationStyles, Colors } from '@themes';
 import { colorOpacity } from '@utils';
-import type { StylePropsType } from './SignInForm.type';
-import type { ThemeType } from 'rn-custom-style-sheet';
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
-export default function styleSheet(themeType: ThemeType) {
-  return CustomStyleSheet.createScaledTheme<StylePropsType>(
+export default function styleSheet(option?: StyleSheetOption) {
+  return CustomStyleSheet.create(
     {
       ...ApplicationStyles.viewStyle,
       ...ApplicationStyles.buttonStyle,
@@ -56,6 +55,6 @@ export default function styleSheet(themeType: ThemeType) {
         colorDark: colorOpacity(Colors.white, 0.3)
       }
     },
-    themeType
+    option
   );
 }

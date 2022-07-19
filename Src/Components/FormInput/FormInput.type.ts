@@ -1,7 +1,6 @@
 import React from 'react';
 import { TextInput, TextStyle, ViewStyle } from 'react-native';
 import { XmlProps } from 'react-native-svg';
-import { LineStylePropsType } from '@themes';
 import type { FormikErrors } from 'formik';
 
 type DictionaryType = {
@@ -75,14 +74,3 @@ export const defaultProps = {
   isDisableError: false,
   rightIconSize: 24
 };
-
-export type StylePropsType = {
-  errorMsg: TextStyle;
-  container: ViewStyle;
-  inputContainer: ViewStyle;
-  inputContainerActive: ViewStyle;
-  inputContainerError: ViewStyle;
-  textLabel: TextStyle;
-  input: TextStyle;
-  foregroundColor: TextStyle;
-} & LineStylePropsType;

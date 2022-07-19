@@ -1,6 +1,6 @@
 import { SENTRY_URL, SEGMENT_KEY, API_URL, ENVIRONMENT } from 'react-native-dotenv';
 
-const appVersion = 'v2.0(1)';
+const appVersion = 'v2.1(2)';
 const PREFIXES: string[] = ['reactNativeStructure://', 'beta.reactNativeStructure.com//'];
 
 const AppConst = Object.freeze({

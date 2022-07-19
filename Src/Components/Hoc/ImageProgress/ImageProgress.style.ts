@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import type { StylePropsType } from './ImageProgress.type';
 
-export default StyleSheet.create<StylePropsType>({
+export default StyleSheet.create({
   centered: {
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',

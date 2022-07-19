@@ -15,8 +15,3 @@ export type FabButtonPropsType = Partial<{
   isLoading: boolean;
 }> &
   (SvgIconPropsStyle | ImageIconPropsStyle | OtherIconPropsStyle);
-
-export type StylePropsType = {
-  container: ViewStyle;
-  buttonContainer: ViewStyle;
-};

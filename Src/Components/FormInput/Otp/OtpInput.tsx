@@ -7,10 +7,11 @@ import {
   TextInputKeyPressEventData,
   StyleSheet
 } from 'react-native';
+import { useTheme } from 'rn-custom-style-sheet';
 import { isNotNullOrEmpty } from '@utils';
 import type { OtpInputPropsType, UseOtpInputReturnType, OneInputFieldPropsType } from './OtpInput.type';
 import { fieldList, useOtpInput } from './OtpInput.hook';
-import styles from './OtpInput.style';
+import styleSheet from './OtpInput.style';
 import { defaultProps } from './OtpInput.type';
 import { handleChangeText, handleKeyPressTextInput, isAutoFillSupported } from './OtpInput.util';
 
@@ -31,6 +32,7 @@ function OneInputField({
   setSelectedIndex,
   ...otherProps
 }: OneInputFieldPropsType): React.ReactElement {
+  const styles = useTheme(styleSheet);
   const { color: defaultPlaceholderTextColor } = { ...styles.defaultTextFieldStyle, ...codeInputFieldStyle };
   const inputValue: string | undefined = !clearInputs ? digits[index] : '';
   const isFilledValue: boolean = isNotNullOrEmpty(inputValue);
@@ -84,6 +86,7 @@ export function OtpInput({
   onCodeChanged,
   ...otherProps
 }: OtpInputPropsType): React.ReactElement {
+  const styles = useTheme(styleSheet);
   const { digits, setDigits, digitsMemo, selectedIndex, setSelectedIndex, handlePress }: UseOtpInputReturnType =
     useOtpInput({
       code,

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, StyleSheet, ViewStyle } from 'react-native';
-import { moderateScale, useMyTheme } from 'rn-custom-style-sheet';
+import { moderateScale, useTheme } from 'rn-custom-style-sheet';
 import type { CirclePropsType } from './Circle.type';
 import ProfileAvatar from '../../ProfileAvatar';
 import styleSheet from './Circle.style';
@@ -13,7 +13,7 @@ export default function Circle({
   face,
   delay
 }: CirclePropsType): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const fadeAnim = useRef<Animated.Value>(new Animated.Value(0)).current;
   const localSize: number = moderateScale(circleSize);
 

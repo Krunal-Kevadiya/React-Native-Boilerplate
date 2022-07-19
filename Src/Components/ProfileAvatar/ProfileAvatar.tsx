@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
-import { ImageStyle, Pressable, StyleSheet, View, ViewStyle } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
+import { ImageStyle as FastImageStyle } from 'react-native-fast-image';
 import { isNotNullOrEmpty, isNullOrUndefined } from '@utils';
 import type ProfileAvatarPropsType from './ProfileAvatar.type';
 import { ImageOverlap } from './ImageOverlap';
@@ -24,8 +25,7 @@ export default function ProfileAvatar({
   const isImage: boolean = !isUrl && !isNullOrUndefined(image) && image !== -1;
   const isSource: boolean = !isNullOrUndefined(source);
   const isText: boolean = !isUrl && !isImage && isNotNullOrEmpty(text);
-  const localStyle: ImageStyle | ViewStyle =
-    isUrl && !load ? _.omit(StyleSheet.flatten(style), 'backgroundColor') : StyleSheet.flatten(style);
+  const localStyle = isUrl && !load ? _.omit(StyleSheet.flatten(style), 'backgroundColor') : StyleSheet.flatten(style);
 
   return (
     <Pressable onPress={onPress}>
@@ -33,8 +33,7 @@ export default function ProfileAvatar({
         {isUrl && (
           <ImageUrl
             url={url}
-            //@ts-ignore
-            imageStyle={localStyle}
+            imageStyle={localStyle as FastImageStyle}
             onLoading={(loading: boolean) => {
               setLoad(loading);
             }}

@@ -1,5 +1,3 @@
-import { ViewStyle } from 'react-native';
-
 export type SwitchPropsType = Required<{
   handleOnPress: (value: boolean) => void;
   activeTrackColor: string;
@@ -14,10 +12,4 @@ export type SwitchPropsType = Required<{
 export const defaultProps = {
   disabled: false,
   value: false
-};
-
-export type StylePropsType = {
-  circleStyle: ViewStyle;
-  containerStyle: ViewStyle;
-  shadowValue: ViewStyle;
 };

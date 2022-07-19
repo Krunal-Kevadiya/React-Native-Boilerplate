@@ -1,10 +1,9 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
 import { Colors } from '@themes';
-import type { StylePropsType } from './Circle.type';
-import type { ThemeType } from 'rn-custom-style-sheet';
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
-export default function styleSheet(themeType: ThemeType) {
-  return CustomStyleSheet.createScaledTheme<StylePropsType>(
+export default function styleSheet(option?: StyleSheetOption) {
+  return CustomStyleSheet.create(
     {
       overflow: {
         alignItems: 'center',
@@ -21,6 +20,6 @@ export default function styleSheet(themeType: ThemeType) {
         backgroundColor: Colors.secondary
       }
     },
-    themeType
+    option
   );
 }

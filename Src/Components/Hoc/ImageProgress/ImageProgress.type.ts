@@ -24,7 +24,3 @@ export type ImageProgressStateType = {
   progress: number;
   thresholdReached?: boolean;
 };
-
-export type StylePropsType = {
-  centered: ViewStyle;
-};

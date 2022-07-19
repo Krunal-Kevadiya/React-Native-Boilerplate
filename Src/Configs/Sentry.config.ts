@@ -16,7 +16,7 @@ export function sentryCaptureMessage(eventName: string, request: object | null, 
       Request: JSON.stringify(request ?? {}),
       Error: JSON.stringify(error ?? {})
     });
-    Sentry.captureMessage(eventName, Sentry.Severity.Log);
+    Sentry.captureMessage(eventName);
   });
 }
 
