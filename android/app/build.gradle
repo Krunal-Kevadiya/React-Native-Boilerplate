@@ -139,7 +139,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
-        versionName "2.1"
+        versionName "2.2"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
@@ -220,13 +220,13 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('../../Scripts/Configs/Keystore/Dev/debug.keystore')
+            storeFile file('../../scripts/Configs/Keystore/Dev/debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
         release {
-            storeFile file('../../Scripts/Configs/Keystore/Prod/release.jks')
+            storeFile file('../../scripts/Configs/Keystore/Prod/release.jks')
             storePassword 'password'
             keyAlias 'androidreleasekey'
             keyPassword 'password'

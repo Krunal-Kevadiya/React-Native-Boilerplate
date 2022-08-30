@@ -28,16 +28,17 @@ This application is useful for setup basic structure of new project.
 
 To get started,
 
-<a href="./Wiki/0.-Pre-Requisites.md">1. Pre requisites</a>
-1. [Pre requisites](./Wiki/0.-Pre-Requisites.md)
-1. [How to setup project](./Wiki/1.-Project-Setup.md)
-1. [How to set environment configuration](./Wiki/2.-Environment-Setup.md)
-1. [How to run a project](./Wiki/3.-Run-Project.md)
-1. [How to generate release build](./Wiki/4.-Release-Build.md)
-1. [Apply coding style](./Wiki/5.-Coding-Style.md)
-1. [Dependencies list](./Wiki/6.-Package.md)
-1. [Accounts details](./Wiki/7.-Accounts.md)
-1. [Git Process](./Wiki/8.-Git-Process.md)
+<a href="./wiki/0.-Pre-Requisites.md">1. Pre requisites</a>
+
+1. [Pre requisites](./wiki/0.-Pre-Requisites.md)
+1. [How to setup project](./wiki/1.-Project-Setup.md)
+1. [How to set environment configuration](./wiki/2.-Environment-Setup.md)
+1. [How to run a project](./wiki/3.-Run-Project.md)
+1. [How to generate release build](./wiki/4.-Release-Build.md)
+1. [Apply coding style](./wiki/5.-Coding-Style.md)
+1. [Dependencies list](./wiki/6.-Package.md)
+1. [Accounts details](./wiki/7.-Accounts.md)
+1. [Git Process](./wiki/8.-Git-Process.md)
 
 ## Troubleshoot Notes
 

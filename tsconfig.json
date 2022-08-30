@@ -26,45 +26,45 @@
     // "useDefineForClassFields": true,                  /* Emit ECMAScript-standard-compliant class fields. */
 
     /* Modules */
-    "module": "commonjs" /* Specify what module code is generated. */,
+    "module": "es2015" /* Specify what module code is generated. */,
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
     "baseUrl": "." /* Specify the base directory to resolve non-relative module names. */,
     "paths": {
-      "@assets-font": ["./Src/Assets/Font"],
-      "@assets-icon": ["./Src/Assets/Icon"],
-      "@assets-image": ["./Src/Assets/Image"],
-      "@assets-mockData": ["./Src/Assets/MockData"],
-      "@assets": ["./Src/Assets"],
-      "@components": ["./Src/Components"],
-      "@configs": ["./Src/Configs"],
-      "@constants": ["./Src/Constants"],
-      "@hooks-util": ["./Src/Hooks/HookUtil"],
-      "@hooks": ["./Src/Hooks"],
-      "@modules-auth": ["./Src/Modules/Auth"],
-      "@modules-home": ["./Src/Modules/Home"],
-      "@modules-launch": ["./Src/Modules/Launch"],
-      "@modules": ["./Src/Modules"],
-      "@navigators": ["./Src/Navigators"],
-      "@models-form": ["./Src/Models/Form"],
-      "@models-other": ["./Src/Models/Other"],
-      "@models-util": ["./Src/Models/ModelUtil"],
-      "@models-request": ["./Src/Models/Request"],
-      "@models-response": ["./Src/Models/Response"],
-      "@models-schema": ["./Src/Models/Schema"],
-      "@models": ["./Src/Models"],
-      "@stores-redux-middleware": ["./Src/Stores/Redux/Middleware"],
-      "@stores-redux": ["./Src/Stores/Redux"],
-      "@stores-saga": ["./Src/Stores/Saga"],
-      "@stores-service": ["./Src/Stores/Service"],
-      "@stores-util": ["./Src/Stores/StoreUtil"],
-      "@stores": ["./Src/Stores"],
-      "@themes": ["./Src/Themes"],
-      "@translations": ["./Src/Translations"],
-      "@utils": ["./Src/Utils"]
+      "@assets-font": ["src/assets/font"],
+      "@assets-icon": ["src/assets/icon"],
+      "@assets-image": ["src/assets/image"],
+      "@assets-mockData": ["src/assets/mock_data"],
+      "@assets": ["src/assets"],
+      "@components": ["src/components"],
+      "@configs": ["src/configs"],
+      "@constants": ["src/constants"],
+      "@hooks-util": ["src/hooks/hook_util"],
+      "@hooks": ["src/hooks"],
+      "@modules-auth": ["src/modules/auth"],
+      "@modules-home": ["src/modules/home"],
+      "@modules-launch": ["src/modules/launch"],
+      "@modules": ["src/modules"],
+      "@navigators": ["src/navigators"],
+      "@models-form": ["src/models/form"],
+      "@models-other": ["src/models/other"],
+      "@models-util": ["src/models/model_util"],
+      "@models-request": ["src/models/request"],
+      "@models-response": ["src/models/response"],
+      "@models-schema": ["src/models/schema"],
+      "@models": ["src/models"],
+      "@stores-redux-middleware": ["src/stores/redux/middleware"],
+      "@stores-redux": ["src/stores/redux"],
+      "@stores-saga": ["src/stores/saga"],
+      "@stores-service": ["src/stores/service"],
+      "@stores-util": ["src/stores/store_util"],
+      "@stores": ["src/stores"],
+      "@themes": ["src/themes"],
+      "@translations": ["src/translations"],
+      "@utils": ["src/utils"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
-    "typeRoots": ["./Src/Types"] /* Specify multiple folders that act like `./node_modules/@types`. */,
+    "typeRoots": ["src/types"] /* Specify multiple folders that act like `./node_modules/@types`. */,
     // "types": [],                                      /* Specify type package names to be included without being referenced in a source file. */
     // "allowUmdGlobalAccess": true,                     /* Allow accessing UMD globals from modules. */
     "resolveJsonModule": true /* Enable importing .json files */,
@@ -98,7 +98,7 @@
     // "noEmitOnError": true,                            /* Disable emitting files if any type checking errors are reported. */
     // "preserveConstEnums": true,                       /* Disable erasing `const enum` declarations in generated code. */
     // "declarationDir": "./",                           /* Specify the output directory for generated declaration files. */
-    // "preserveValueImports": true,                     /* Preserve unused imported values in the JavaScript output that would otherwise be removed. */
+    "preserveValueImports": true /* Preserve unused imported values in the JavaScript output that would otherwise be removed. */,
 
     /* Interop Constraints */
     "isolatedModules": true /* Ensure that each file can be safely transpiled without relying on other imports. */,
@@ -123,7 +123,7 @@
     // "noImplicitReturns": true,                        /* Enable error reporting for codepaths that do not explicitly return in a function. */
     // "noFallthroughCasesInSwitch": true,               /* Enable error reporting for fallthrough cases in switch statements. */
     // "noUncheckedIndexedAccess": true,                 /* Include 'undefined' in index signature results */
-    // "noImplicitOverride": true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */
+    // "noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an override modifier. */,
     // "noPropertyAccessFromIndexSignature": true,       /* Enforces using indexed accessors for keys declared using an indexed type */
     // "allowUnusedLabels": true,                        /* Disable error reporting for unused labels. */
     // "allowUnreachableCode": true,                     /* Disable error reporting for unreachable code. */
@@ -132,7 +132,7 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["Src"],
+  "include": ["src"],
   "filesGlob": ["typings/index.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
 }
