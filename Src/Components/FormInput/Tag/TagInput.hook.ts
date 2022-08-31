@@ -1,15 +1,17 @@
 import { useCallback, useMemo } from 'react';
+import { useTheme } from 'rn-custom-style-sheet';
 import { StringConst } from '@constants';
 import { useClipboard } from '@hooks';
 import { Colors } from '@themes';
 import type { ParseType, UseTagInputReturnType } from './TagInput.type';
 import { ToastHolder } from '../../Toast';
-import styles from './TagInput.style';
+import styleSheet from './TagInput.style';
 import { PatternsEnum } from './TagInput.type';
 import { callActions, PATTERNS } from './TagInput.util';
 
 export default function useTagInput(handlePress?: (type: string, value: string) => void): UseTagInputReturnType {
   const [, setStringToClipboard] = useClipboard();
+  const styles = useTheme(styleSheet);
 
   const handlePhonePress = useCallback<(phone: string) => void>((phone) => {
     callActions(phone, PatternsEnum.phone);
@@ -107,7 +109,15 @@ export default function useTagInput(handlePress?: (type: string, value: string) 
       { type: PatternsEnum.newLine, pattern: PATTERNS[PatternsEnum.newLine], style: {} },
       { type: PatternsEnum.lineBreak, pattern: PATTERNS[PatternsEnum.lineBreak], style: {} }
     ],
-    [handleEmailPress, handlePhonePress, handleUrlPress, handleHashtagPress, handleUnderlinePress, handleUrlLongPress]
+    [
+      styles,
+      handleEmailPress,
+      handlePhonePress,
+      handleUrlPress,
+      handleHashtagPress,
+      handleUnderlinePress,
+      handleUrlLongPress
+    ]
   );
 
   return { parseArrayJson };

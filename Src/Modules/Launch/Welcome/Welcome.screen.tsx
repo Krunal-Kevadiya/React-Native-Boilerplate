@@ -1,7 +1,7 @@
 import { RouteProp, useRoute } from '@react-navigation/core';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { AppRouteEnum } from '@constants';
 import { navigateWithReset } from '@navigators';
 import { Colors } from '@themes';
@@ -10,7 +10,7 @@ import type { WelcomeRouteParamList } from './Welcome.type';
 import styleSheet from './Welcome.style';
 
 export default function WelcomeScreen(): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const route = useRoute<RouteProp<WelcomeRouteParamList, 'Welcome'>>();
 
   useEffect(() => {

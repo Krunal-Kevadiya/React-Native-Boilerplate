@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, ViewStyle } from 'react-native';
 import Animated, { interpolateColors, spring } from 'react-native-reanimated';
+import { useTheme } from 'rn-custom-style-sheet';
 import type { SwitchPropsType } from './Switch.type';
-import styles, { SwitchWidth } from './Switch.style';
+import styleSheet, { SwitchWidth } from './Switch.style';
 import { defaultProps } from './Switch.type';
 
 export default function Switch({
@@ -14,6 +15,7 @@ export default function Switch({
   value,
   disabled
 }: SwitchPropsType): React.ReactElement {
+  const styles = useTheme(styleSheet);
   const [switchTranslate] = useState<Animated.Value<number>>(new Animated.Value(0));
 
   useEffect(() => {

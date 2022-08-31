@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { Colors } from '@themes';
 import { isNotNullOrEmpty } from '@utils';
 import type { FabButtonPropsType } from './FabButton.type';
@@ -18,7 +18,7 @@ export default function FabButton({
   ...OtherProps
 }: FabButtonPropsType): React.ReactElement {
   const loading: boolean = isLoading === true ? true : false;
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const handlePress = useCallback<() => void>(() => {
     if (!loading) {
       onPress?.();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { StringConst } from '@constants';
 import { useDebouncedCallback } from '@hooks';
 import type { ImagePickerType } from './ImagePicker.type';
@@ -12,7 +12,7 @@ export default function ImagePicker({
   handleTakePhoto,
   handleChooseLibrary
 }: ImagePickerType): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const handlePress = useDebouncedCallback<() => void>(
     () => {
       switch (item) {

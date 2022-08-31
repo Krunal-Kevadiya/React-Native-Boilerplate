@@ -1,5 +1,5 @@
 import { Dimensions, Platform } from 'react-native';
-import { screenWidth as windowWidth, screenHeight as windowHeight } from 'rn-custom-style-sheet';
+import { windowWidth, windowHeight } from 'rn-custom-style-sheet';
 
 export const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
 

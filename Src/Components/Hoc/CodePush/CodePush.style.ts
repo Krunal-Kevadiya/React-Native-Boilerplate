@@ -1,10 +1,9 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
 import { Colors } from '@themes';
-import type { StylePropsType } from './CodePush.type';
-import type { ThemeType } from 'rn-custom-style-sheet';
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
-export default function styleSheet(themeType: ThemeType) {
-  return CustomStyleSheet.createScaledTheme<StylePropsType>(
+export default function styleSheet(option?: StyleSheetOption) {
+  return CustomStyleSheet.create(
     {
       container: {
         width: '100%',
@@ -37,6 +36,6 @@ export default function styleSheet(themeType: ThemeType) {
         colorDark: Colors.primary
       }
     },
-    themeType
+    option
   );
 }

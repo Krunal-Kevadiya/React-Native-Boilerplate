@@ -1,10 +1,9 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
 import { ApplicationStyles, Colors } from '@themes';
-import type { StylePropsType } from './Welcome.type';
-import type { ThemeType } from 'rn-custom-style-sheet';
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
-export default function styleSheet(themeType: ThemeType) {
-  return CustomStyleSheet.createScaledTheme<StylePropsType>(
+export default function styleSheet(option?: StyleSheetOption) {
+  return CustomStyleSheet.create(
     {
       ...ApplicationStyles.viewStyle,
       screenView: {
@@ -12,6 +11,6 @@ export default function styleSheet(themeType: ThemeType) {
         backgroundColorDark: Colors.primary
       }
     },
-    themeType
+    option
   );
 }

@@ -7,8 +7,3 @@ export type OverflowCirclePropsType = {
   overflowLabelStyle?: TextStyle;
   circleSize: number;
 };
-
-export type StylePropsType = {
-  overflow: ViewStyle;
-  overflowLabel: TextStyle;
-};

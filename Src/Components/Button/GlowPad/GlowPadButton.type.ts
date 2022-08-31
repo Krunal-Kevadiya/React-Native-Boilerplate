@@ -42,8 +42,3 @@ export type RingViewPropsType = {
   duration: number;
   pulse: PulseType;
 };
-
-export type StylePropsType = {
-  centerView: ViewStyle;
-  pulse: ViewStyle;
-};

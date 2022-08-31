@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImageStyle, TextInput, TextStyle, ViewStyle } from 'react-native';
 import { XmlProps } from 'react-native-svg';
-import type { LineStylePropsType } from '@themes';
 import { SvgIconPropsStyle, ImageIconPropsStyle, OtherIconPropsStyle } from '../Icon';
 
 type TextInputPropsType = React.ComponentProps<typeof TextInput>;
@@ -41,9 +40,3 @@ export const defaultProps = {
   isBottomLine: true,
   isLeftAlign: true
 };
-
-export type StylePropsType = {
-  subContainer: ViewStyle;
-  container: ViewStyle;
-  rightView: ViewStyle;
-} & LineStylePropsType;

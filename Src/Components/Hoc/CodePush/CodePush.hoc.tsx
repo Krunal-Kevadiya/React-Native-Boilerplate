@@ -25,7 +25,7 @@ function MovableView({ message, isBtnVisible }: MovableViewPropsType): React.Rea
   const [appTheme] = useAsyncStorage<string>(MMKVStorageKey.appTheme, 'system');
   const [systemTheme] = useAsyncStorage<string>(MMKVStorageKey.systemTheme, 'system');
   const styles = useMemo(
-    () => styleSheet(getCurrentTheme(systemTheme as AppThemeType, appTheme as AppThemeType)),
+    () => styleSheet({ type: getCurrentTheme(systemTheme as AppThemeType, appTheme as AppThemeType) }),
     [appTheme, systemTheme]
   );
 
@@ -71,7 +71,7 @@ function MovableView({ message, isBtnVisible }: MovableViewPropsType): React.Rea
 
   return (
     <PanGestureHandler maxPointers={1} onGestureEvent={onGestureEvent}>
-      <Animated.View style={StyleSheet.compose(styles.container, style)} onLayout={onLayout}>
+      <Animated.View style={StyleSheet.flatten([styles.container, style])} onLayout={onLayout}>
         <Text style={styles.textHeader}>{message}</Text>
         {isBtnVisible && (
           <Pressable

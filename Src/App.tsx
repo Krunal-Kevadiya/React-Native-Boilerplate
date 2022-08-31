@@ -39,7 +39,7 @@ function App(): React.ReactElement {
     <GestureHandlerRootView style={ApplicationStyles.viewStyle.screen}>
       <Provider store={Store.store}>
         <PersistGate loading={null} persistor={Store.persistor}>
-          <ThemeProvider isSupportLandscape>
+          <ThemeProvider>
             <SafeAreaProvider style={ApplicationStyles.viewStyle.screen}>
               <StatusBar animated hidden={false} />
               <AppNavigator />

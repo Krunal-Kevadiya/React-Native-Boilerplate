@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 
 export type ImageOverlapPropsType = {
@@ -6,9 +6,4 @@ export type ImageOverlapPropsType = {
   size?: number;
   style: ViewStyle;
   svgStyle?: XmlProps;
-};
-
-export type StylePropsType = {
-  imageOverlap: ViewStyle;
-  svgColor: TextStyle;
 };

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Progress from 'react-native-progress';
-import { scale, screenWidth, useMyCurrentTheme } from 'rn-custom-style-sheet';
+import { scale, windowWidth, useCurrentTheme } from 'rn-custom-style-sheet';
 import { useStatusBarHeight } from '@hooks';
 import { Colors } from '@themes';
 import { colorOpacity } from '@utils';
@@ -15,7 +15,7 @@ function CustomHorizontalProgress(
   ref: React.Ref<HorizontalProgressHandleType>
 ): React.ReactElement {
   const [progress, setProgress] = useState<number>(0);
-  const themeType: ThemeType = useMyCurrentTheme();
+  const themeType: ThemeType = useCurrentTheme();
   const statusBarHeight: number = useStatusBarHeight();
   const isDarkTheme: boolean = _.isEqual(themeType, 'dark');
 
@@ -36,7 +36,7 @@ function CustomHorizontalProgress(
     <View style={StyleSheet.flatten([styles.containerStyle, styles.centerAlign, { top: statusBarHeight }])}>
       <Progress.Bar
         progress={progress}
-        width={screenWidth - scale(5)}
+        width={windowWidth - scale(5)}
         height={scale(5)}
         color={colorOpacity(Colors.secondary, 0.5)}
         unfilledColor={colorOpacity(isDarkTheme ? Colors.white : Colors.primary, 0.5)}

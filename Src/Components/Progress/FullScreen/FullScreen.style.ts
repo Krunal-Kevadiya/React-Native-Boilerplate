@@ -1,11 +1,10 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
 import { Colors, ApplicationStyles } from '@themes';
 import { colorOpacity } from '@utils';
-import type { StylePropsType } from './FullScreen.type';
-import type { ThemeType } from 'rn-custom-style-sheet';
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
-export default function styleSheet(themeType: ThemeType) {
-  return CustomStyleSheet.createScaledTheme<StylePropsType>(
+export default function styleSheet(option?: StyleSheetOption) {
+  return CustomStyleSheet.create(
     {
       ...ApplicationStyles.viewStyle,
       containerStyle: {
@@ -18,6 +17,6 @@ export default function styleSheet(themeType: ThemeType) {
         backgroundColorDark: colorOpacity(Colors.primary, 0.9)
       }
     },
-    themeType
+    option
   );
 }

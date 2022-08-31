@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import type { StylePropsType } from './ProfileAvatarPile.type';
 
-export default StyleSheet.create<StylePropsType>({
+export default StyleSheet.create({
   container: {
     alignItems: 'center',
     alignSelf: 'center',

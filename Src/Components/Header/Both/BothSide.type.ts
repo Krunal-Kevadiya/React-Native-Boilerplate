@@ -13,9 +13,3 @@ export type BothSidePropsType = Partial<{
   onLayout: (event: LayoutChangeEvent) => void;
 }> &
   (SvgIconPropsStyle | ImageIconPropsStyle | OtherIconPropsStyle);
-
-export type StylePropsType = {
-  addMargin: ViewStyle;
-  bothSide: ViewStyle;
-  textLabel: TextStyle;
-};

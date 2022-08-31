@@ -67,9 +67,3 @@ export type UseOtpInputReturnType = {
   setSelectedIndex: React.Dispatch<React.SetStateAction<number>>;
   handlePress: () => void;
 };
-
-export type StylePropsType = {
-  defaultTextFieldStyle: TextStyle;
-  touchableContainer: ViewStyle;
-  viewContainer: ViewStyle;
-};

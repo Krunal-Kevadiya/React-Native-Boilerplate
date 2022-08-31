@@ -1,8 +1,13 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
-import type { StylePropsType } from './ImagePicker.type';
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
-export default CustomStyleSheet.createScaled<StylePropsType>({
-  listContainer: {
-    paddingHorizontal: '20@s'
-  }
-});
+export default function styleSheet(option?: StyleSheetOption) {
+  return CustomStyleSheet.create(
+    {
+      listContainer: {
+        paddingHorizontal: '20@s'
+      }
+    },
+    option
+  );
+}

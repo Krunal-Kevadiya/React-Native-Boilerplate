@@ -8,9 +8,3 @@ export type CirclePropsType = {
   face?: UserResponse;
   delay?: number;
 };
-
-export type StylePropsType = {
-  overflow: ViewStyle;
-  overflowLabel: TextStyle;
-  container: ViewStyle;
-};

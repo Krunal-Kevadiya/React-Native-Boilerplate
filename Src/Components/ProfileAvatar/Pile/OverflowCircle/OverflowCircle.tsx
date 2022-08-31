@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { moderateScale, useMyTheme } from 'rn-custom-style-sheet';
+import { moderateScale, useTheme } from 'rn-custom-style-sheet';
 import type { OverflowCirclePropsType } from './OverflowCircle.type';
 import styleSheet from './OverflowCircle.style';
 
@@ -11,7 +11,7 @@ export default function OverflowCircle({
   overflowLabelStyle,
   circleSize
 }: OverflowCirclePropsType) {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const localSize: number = moderateScale(circleSize);
 
   const localCircleStyle: ViewStyle = {
@@ -20,7 +20,7 @@ export default function OverflowCircle({
   };
 
   return (
-    <View style={StyleSheet.compose(localCircleStyle, circleStyle)}>
+    <View style={StyleSheet.flatten([localCircleStyle, circleStyle])}>
       <View
         style={StyleSheet.flatten([styles.overflow, localCircleStyle, { borderRadius: localSize / 2 }, overflowStyle])}
       >

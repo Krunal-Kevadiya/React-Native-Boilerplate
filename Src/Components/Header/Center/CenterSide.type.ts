@@ -12,12 +12,3 @@ export type CenterSidePropsType = Partial<{
   isLeftAlign: boolean;
 }> &
   (SvgIconPropsStyle | ImageIconPropsStyle | OtherIconPropsStyle);
-
-export type StylePropsType = {
-  centerSide: ViewStyle;
-  imageTitle: ImageStyle;
-  centerContainerSide: ViewStyle;
-  centerImageTitle: ImageStyle;
-  textTitle: TextStyle;
-  centerTextTitle: TextStyle;
-};

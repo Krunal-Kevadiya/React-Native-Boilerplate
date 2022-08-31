@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import SpinnerButton from 'react-native-spinner-button';
 import { useSelector } from 'react-redux';
-import { useMyTheme } from 'rn-custom-style-sheet';
+import { useTheme } from 'rn-custom-style-sheet';
 import { FormInput } from '@components';
 import { StringConst } from '@constants';
 import { AppRequestSelectors } from '@stores';
@@ -13,7 +13,7 @@ import { isRemainingToFillForm } from '../SignIn.util';
 import styleSheet from './SignInForm.style';
 
 export default function SignInForm(props: SignInFormPropsType): React.ReactElement {
-  const styles = useMyTheme(styleSheet);
+  const styles = useTheme(styleSheet);
   const inputPasswordRef: React.LegacyRef<TextInput> = React.createRef();
   const loading: boolean = useSelector<RootStateType, boolean>(AppRequestSelectors.getLoading);
   const { handleSubmit, values, errors } = props;

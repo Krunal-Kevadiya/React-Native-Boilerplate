@@ -49,7 +49,7 @@ function RingView({ delay, color, duration, pulse }: RingViewPropsType): React.R
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <Animated.View style={StyleSheet.compose(styles.pulse, ringStyle)} />;
+  return <Animated.View style={StyleSheet.flatten([styles.pulse, ringStyle])} />;
 }
 
 export default function GlowPadButton({

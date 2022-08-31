@@ -1,13 +1,11 @@
-import { ImageStyle } from 'react-native';
+import { ImageStyle, ViewStyle } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 
-export type SvgIconPropsStyle = { type?: 'svg'; source?: string };
-export type ImageIconPropsStyle = { type?: 'image'; source?: number };
-export type OtherIconPropsStyle = { type?: never; source?: never };
+export type SvgIconPropsStyle = { type?: 'svg'; source?: string; style?: ViewStyle; svgStyle?: XmlProps };
+export type ImageIconPropsStyle = { type?: 'image'; source?: number; style?: ImageStyle; svgStyle?: never };
+export type OtherIconPropsStyle = { type?: never; source?: never; style?: ViewStyle; svgStyle?: never };
 
 export type IconPropsType = Partial<{
   size: number;
-  style: ImageStyle;
-  svgStyle: XmlProps;
 }> &
   (SvgIconPropsStyle | ImageIconPropsStyle | OtherIconPropsStyle);

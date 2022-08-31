@@ -28,6 +28,7 @@ This application is useful for setup basic structure of new project.
 
 To get started,
 
+<a href="./Wiki/0.-Pre-Requisites.md">1. Pre requisites</a>
 1. [Pre requisites](./Wiki/0.-Pre-Requisites.md)
 1. [How to setup project](./Wiki/1.-Project-Setup.md)
 1. [How to set environment configuration](./Wiki/2.-Environment-Setup.md)

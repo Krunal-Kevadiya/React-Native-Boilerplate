@@ -60,17 +60,3 @@ export type MatchPartType = {
 export type UseTagInputReturnType = Required<{
   parseArrayJson: ParseType[];
 }>;
-
-export type StylePropsType = {
-  blockquote: TextStyle;
-  italic: TextStyle;
-  email: TextStyle;
-  hashtag: TextStyle;
-  phone: TextStyle;
-  strikethrough: TextStyle;
-  underline: TextStyle;
-  bold: TextStyle;
-  url: TextStyle;
-  username: TextStyle;
-  placeholder: TextStyle;
-};
