@@ -1,0 +1,43 @@
+{
+  "codePush": {
+    "textCheckingForUpdate": "Checking for update.",
+    "textAwaitingUserAction": "Awaiting user action.",
+    "textInstallingUpdate": "Installing update.",
+    "textAppUpToDate": "App up to date.",
+    "textUpdateCancelledByUser": "Update cancelled by user.",
+    "textUpdateInstalledAndWillBeAppliedOnRestart": "Update installed and will be applied on restart.",
+    "textAnUnknownErrorOccurred": "An unknown error occurred.",
+    "textDownloadingPackage": "Downloading package. {0}%",
+    "btnRestart": "Restart"
+  },
+  "apiError": {
+    "msgNetworkError": "No internet connection, Please try again after sometime",
+    "msgServerError": "Server is not available",
+    "msgSomethingWentWrong": "Something went wrong. Try again!",
+    "msgCancelSagaError": "Cancel api queue request and move forward",
+    "msgProcessingVideo": "Video is processing...stand by",
+    "msgProcessingError": "An error occured while processing this video"
+  },
+  "yupError": {
+    "msgRequireEmail": "Please enter email address",
+    "msgValidEmail": "Please enter valid email address",
+    "msgRequirePassword": "Please enter password"
+  },
+  "message": {
+    "copyLinkSuccess": "Copy link successfully"
+  },
+  "imagePicker": {
+    "textSelectAPhoto": "Select a Photo",
+    "listItemTakePhoto": "Take Photo",
+    "listItemChooseFromLibrary": "Choose from Library",
+    "listItemCancel": "Cancel"
+  },
+  "signIn": {
+    "textEmail": "Email",
+    "inputEmail": "janedoe@email.com",
+    "textPassword": "Password",
+    "inputPassword": "****",
+    "btnSignIn": "Sign In",
+    "textSignInDesc": "By continuing, you agree to our ~Terms and Conditions~ and ~Privacy Policy~."
+  }
+}
