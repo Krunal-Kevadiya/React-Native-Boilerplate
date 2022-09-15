@@ -9,7 +9,7 @@ module.exports = {
         moduleName: 'react-native-dotenv',
         path: '.env',
         blacklist: ['ENV'],
-        allowlist: ['SENTRY_URL', 'SEGMENT_KEY', 'API_URL', 'ENVIRONMENT'],
+        allowlist: ['SENTRY_URL', 'SEGMENT_KEY', 'API_URL', 'ENVIRONMENT', 'ENCRYPTION_KEY'],
         safe: true,
         allowUndefined: false
       }
@@ -19,9 +19,9 @@ module.exports = {
       {
         extensions: ['.js', '.ts', '.tsx', '.jsx'],
         alias: {
-          '@assets-font': './src/assets/font',
-          '@assets-icon': './src/assets/icon',
-          '@assets-image': './src/assets/image',
+          '@assets-fonts': './src/assets/fonts',
+          '@assets-icons': './src/assets/icons',
+          '@assets-images': './src/assets/images',
           '@assets-mockData': './src/assets/mock_data',
           '@assets': './src/assets',
           '@components': './src/components',

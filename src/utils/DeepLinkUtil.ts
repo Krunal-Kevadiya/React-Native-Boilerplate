@@ -1,10 +1,13 @@
 import filter from 'lodash/filter';
 import has from 'lodash/has';
 import { Linking } from 'react-native';
+
 import { ToastHolder } from '@components';
 import { DeepLinkEnum, RegexConst, AppConst, AppRouteEnum } from '@constants';
-import type { LinkingOptions } from '@react-navigation/native';
+
 import { isPresentValue } from './StringUtil';
+
+import type { LinkingOptions } from '@react-navigation/native';
 
 function isToastMessage(routeName: DeepLinkEnum, params: Record<string, any>): boolean {
   const isMeeting = routeName === DeepLinkEnum.MEETING && params;

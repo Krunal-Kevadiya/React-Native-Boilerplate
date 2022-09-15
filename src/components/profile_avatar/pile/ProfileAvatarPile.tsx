@@ -1,11 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import { UserResponse } from '@models';
-import type { ProfileAvatarPilePropsType } from './ProfileAvatarPileType';
-import styles from './ProfileAvatarPileStyle';
-import { defaultProps } from './ProfileAvatarPileType';
+
 import { Circle } from './circle';
 import { OverflowCircle } from './overflow_circle';
+import styles from './ProfileAvatarPileStyle';
+import { defaultProps } from './ProfileAvatarPileTypes';
+
+import type { ProfileAvatarPilePropsType } from './ProfileAvatarPileTypes';
 
 export default function ProfileAvatarPile({
   faces,

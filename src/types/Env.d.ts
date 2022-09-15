@@ -3,4 +3,5 @@ declare module 'react-native-dotenv' {
   export const SEGMENT_KEY: string;
   export const API_URL: string;
   export const ENVIRONMENT: string;
+  export const ENCRYPTION_KEY: string;
 }

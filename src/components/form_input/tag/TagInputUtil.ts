@@ -1,9 +1,12 @@
 import { Linking } from 'react-native';
+
 import { sentryCaptureException } from '@configs';
 import { isIos } from '@themes';
 import { isEmailFields, isPhoneFields } from '@utils';
-import type { MatchPartType, ParseType } from './TagInputType';
-import { PatternsEnum } from './TagInputType';
+
+import { PatternsEnum } from './TagInputTypes';
+
+import type { MatchPartType, ParseType } from './TagInputTypes';
 
 export const PATTERNS = Object.freeze({
   [PatternsEnum.phone]: /[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,7}/,

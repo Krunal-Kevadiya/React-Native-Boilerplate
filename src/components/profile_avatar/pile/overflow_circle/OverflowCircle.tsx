@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { moderateScale, useTheme } from 'rn-custom-style-sheet';
-import type { OverflowCirclePropsType } from './OverflowCircleType';
+
 import styleSheet from './OverflowCircleStyle';
+
+import type { OverflowCirclePropsType } from './OverflowCircleTypes';
 
 export default function OverflowCircle({
   overflow,

@@ -15,7 +15,7 @@ const isDensity926: boolean = windowHeight === 926 || windowWidth === 926;
 const iphoneXDisplay: boolean = isDensity780 || isDensity812 || isDensity844 || isDensity896 || isDensity926;
 export function isIphoneX(): boolean {
   if (Platform.OS === 'ios') {
-    return !Platform.isPad && !Platform.isTVOS && iphoneXDisplay;
+    return !Platform.isPad && !Platform.isTV && iphoneXDisplay;
   }
   return false;
 }

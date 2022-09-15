@@ -1,6 +1,7 @@
-import type { ConfigPropsType, SwipeHandlerPropsType } from './GestureRecognizerType';
+import { SwipeDirectionsEnum } from './GestureRecognizerTypes';
+
+import type { ConfigPropsType, SwipeHandlerPropsType } from './GestureRecognizerTypes';
 import type { GestureResponderEvent, PanResponderGestureState } from 'react-native';
-import { SwipeDirectionsEnum } from './GestureRecognizerType';
 
 export const swipeConfig: ConfigPropsType = Object.freeze({
   velocityThreshold: 0.3,

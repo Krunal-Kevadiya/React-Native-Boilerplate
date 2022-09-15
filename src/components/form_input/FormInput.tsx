@@ -1,14 +1,18 @@
 import React, { forwardRef, memo, useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { useDeepCompareCallback } from '@hooks';
 import { isPresentValue } from '@utils';
-import type { FormInputPropsType } from './FormInputType';
+
 import { Icon } from '../icon';
+
 import styleSheet from './FormInputStyle';
-import { defaultProps } from './FormInputType';
+import { defaultProps } from './FormInputTypes';
 import { getChangeValue } from './FormInputUtil';
 import TagInput from './tag/TagInput';
+
+import type { FormInputPropsType } from './FormInputTypes';
 
 function CustomInput(
   {

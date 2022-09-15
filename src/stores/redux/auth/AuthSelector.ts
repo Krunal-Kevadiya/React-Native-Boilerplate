@@ -1,5 +1,7 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit';
+
 import { UserResponse } from '@models';
+
 import type { AuthStateType } from './AuthInitial';
 import type { RootStateType } from '@stores-redux';
 

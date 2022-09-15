@@ -8,12 +8,15 @@ import {
   StyleSheet
 } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { isPresentValue } from '@utils';
-import type { OtpInputPropsType, UseOtpInputReturnType, OneInputFieldPropsType } from './OtpInputType';
-import { fieldList, useOtpInput } from './OtpInputHook';
+
 import styleSheet from './OtpInputStyle';
-import { defaultProps } from './OtpInputType';
+import { defaultProps } from './OtpInputTypes';
 import { handleChangeText, handleKeyPressTextInput, isAutoFillSupported } from './OtpInputUtil';
+import { fieldList, useOtpInput } from './useOtpInput';
+
+import type { OtpInputPropsType, UseOtpInputReturnType, OneInputFieldPropsType } from './OtpInputTypes';
 
 function OneInputField({
   index,

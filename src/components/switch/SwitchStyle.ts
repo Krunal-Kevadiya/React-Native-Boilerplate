@@ -1,4 +1,5 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export const SwitchWidth: number = 60;

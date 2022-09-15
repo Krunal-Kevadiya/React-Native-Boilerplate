@@ -1,7 +1,9 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { Platform, TextInput } from 'react-native';
+
 import { isIos } from '@themes';
-import { fieldList } from './OtpInputHook';
+
+import { fieldList } from './useOtpInput';
 
 const majorVersionIOS: number = parseInt(String(Platform.Version), 10);
 export const isAutoFillSupported: boolean = isIos && majorVersionIOS >= 12;

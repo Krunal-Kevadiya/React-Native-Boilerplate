@@ -386,10 +386,12 @@ if [[ "$TYPE_OF_OPERATION" == "setup" || "$TYPE_OF_OPERATION" == "setupWithBuild
     TS_SENTRY_URL=$(echo $TS_JSON_DATA | python -c "import sys, json; print json.load(sys.stdin)['sentryUrl']")
     TS_SEGMENT_KEY=$(echo $TS_JSON_DATA | python -c "import sys, json; print json.load(sys.stdin)['segment']")
     TS_API_URL=$(echo $TS_JSON_DATA | python -c "import sys, json; print json.load(sys.stdin)['apiUrl']")
+    TS_ENCRYPTION_KEY=$(echo $TS_JSON_DATA | python -c "import sys, json; print json.load(sys.stdin)['encryptionKey']")
   else
     TS_SENTRY_URL=$(echo $TS_JSON_DATA | python3 -c "import sys, json; print(json.load(sys.stdin)['sentryUrl'])")
     TS_SEGMENT_KEY=$(echo $TS_JSON_DATA | python3 -c "import sys, json; print(json.load(sys.stdin)['segment'])")
     TS_API_URL=$(echo $TS_JSON_DATA | python3 -c "import sys, json; print(json.load(sys.stdin)['apiUrl'])")
+    TS_ENCRYPTION_KEY=$(echo $TS_JSON_DATA | python3 -c "import sys, json; print(json.load(sys.stdin)['encryptionKey'])")
   fi
   
   # Change typescript config
@@ -416,6 +418,12 @@ if [[ "$TYPE_OF_OPERATION" == "setup" || "$TYPE_OF_OPERATION" == "setupWithBuild
     echoHeaderValue "Ts environment" $ENV
   else
     echoHeaderValue "Ts environment" "Environment not available!"
+  fi
+  if [ ! -z "$TS_ENCRYPTION_KEY" -a "$TS_ENCRYPTION_KEY" != " " ]; then
+    sed -i '' -e 's~ENCRYPTION_KEY.*~ENCRYPTION_KEY = '"${TS_ENCRYPTION_KEY}"'~' .env
+    echoHeaderValue "Ts encryptionKey" $TS_ENCRYPTION_KEY
+  else
+    echoHeaderValue "Ts encryptionKey" "Encryption key not available!"
   fi
 fi  
 

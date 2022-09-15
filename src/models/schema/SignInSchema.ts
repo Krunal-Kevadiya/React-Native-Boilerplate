@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+
 import { StringConst } from '@constants';
 
 export const SignInFormSchema = Yup.object().shape({

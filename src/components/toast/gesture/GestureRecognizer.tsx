@@ -1,7 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import type { GestureRecognizerPropsType, UseGestureRecognizerReturnType } from './GestureRecognizerType';
-import useGestureRecognizer from './GestureRecognizerHook';
+
+import useGestureRecognizer from './useGestureRecognizer';
+
+import type { GestureRecognizerPropsType, UseGestureRecognizerReturnType } from './GestureRecognizerTypes';
 
 export default function GestureRecognizer({
   config,

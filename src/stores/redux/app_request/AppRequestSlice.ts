@@ -1,8 +1,12 @@
 import { createSlice, type PayloadAction, type Draft } from '@reduxjs/toolkit';
+
 import { ErrorResponse } from '@models';
-import type { AppRequestStateType } from './AppRequestInitial';
+
 import { cleanAction } from '../auth';
+
 import INITIAL_STATE from './AppRequestInitial';
+
+import type { AppRequestStateType } from './AppRequestInitial';
 
 function cleanSuccess(state: Draft<AppRequestStateType>): void {
   state.loading = INITIAL_STATE.loading;

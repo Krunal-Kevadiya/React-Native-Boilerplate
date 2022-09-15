@@ -1,6 +1,7 @@
 import { StringConst } from '@constants';
 import { isPresentValue } from '@utils';
-import type { ToastHandleType } from './ToastType';
+
+import type { ToastHandleType } from './ToastTypes';
 
 export default class ToastHolder {
   static DEFAULT_TIMEOUT: number = 2000;

@@ -1,6 +1,8 @@
 import { SocketWrapper } from '@utils';
-import type { RootStateType } from '../Store';
+
 import { AppRequestActions } from '../app_request';
+
+import type { RootStateType } from '../Store';
 
 export function socketMiddleware(argStore: RootStateType) {
   //@ts-ignore

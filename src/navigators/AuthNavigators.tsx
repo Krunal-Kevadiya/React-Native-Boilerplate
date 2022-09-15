@@ -1,9 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+
 import { AppRouteEnum } from '@constants';
 import { SignInScreen } from '@modules';
-import type { AppNavigatorParams } from './AppNavigator';
+
 import { rightToLeftAnimation } from './NavigatorUtil';
+
+import type { AppNavigatorParams } from './AppNavigator';
 
 export type AuthNavigatorParams = AppNavigatorParams & {
   [AppRouteEnum.SIGN_IN]: undefined;

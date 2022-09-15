@@ -1,5 +1,7 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Colors } from '@themes';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
@@ -24,8 +26,8 @@ export default function styleSheet(option: StyleSheetOption) {
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: Colors.secondary,
-        shadowColor: Colors.gray
+        backgroundColor: Colors[option.theme]?.secondary,
+        shadowColor: Colors[option.theme]?.gray
       }
     },
     option

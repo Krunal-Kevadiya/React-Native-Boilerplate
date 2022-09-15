@@ -1,7 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+
 import { AppRouteEnum } from '@constants';
 import { SignInScreen } from '@modules';
+
 import { rightToLeftAnimation } from './NavigatorUtil';
 
 export type HomeNavigatorParams = {

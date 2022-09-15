@@ -1,6 +1,7 @@
 import React from 'react';
 import { runOnJS } from 'react-native-reanimated';
-import type { InternalDataPropsType } from './ToastType';
+
+import type { InternalDataPropsType } from './ToastTypes';
 
 export function callback(
   isFinished: boolean | undefined,

@@ -1,13 +1,17 @@
 import React from 'react';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { StringConst } from '@constants';
 import { useImageSelection } from '@hooks';
 import { ImageSelectionOther } from '@models';
-import type { BottomSheetHandleType } from '../../bottom_sheet';
-import type { ListRenderItemInfo } from 'react-native';
+
 import { BottomSheet } from '../../bottom_sheet';
 import { ImagePicker } from '../../common';
+
 import styleSheet from './ImagePickerStyle';
+
+import type { BottomSheetHandleType } from '../../bottom_sheet';
+import type { ListRenderItemInfo } from 'react-native';
 
 export const bottomSheetRef: React.RefObject<BottomSheetHandleType> = React.createRef<BottomSheetHandleType>();
 

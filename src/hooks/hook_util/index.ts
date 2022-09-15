@@ -1,3 +1,3 @@
-export { default as useCreateHandlerSetter } from './CreateHandlerSetterHook';
-export { default as useDeepCompareMemoize, checkDeps } from './DeepCompareMemoizeHook';
+export { default as useCreateHandlerSetter } from './useCreateHandlerSetter';
+export { default as useDeepCompareMemoize, checkDeps } from './useDeepCompareMemoize';
 export type { DependencyList } from './Types';

@@ -2,15 +2,18 @@ import { type RouteProp, useRoute } from '@react-navigation/core';
 import React, { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { AppRouteEnum } from '@constants';
 import { navigateWithReset } from '@navigators';
 import { Colors } from '@themes';
 import { isPresentValue } from '@utils';
-import type { WelcomeRouteParamList } from './WelcomeType';
+
 import styleSheet from './WelcomeStyle';
 
+import type { WelcomeRouteParamList } from './WelcomeTypes';
+
 export default function WelcomeScreen(): React.ReactElement {
-  const { styles } = useTheme(styleSheet);
+  const { styles, theme } = useTheme(styleSheet);
   const route = useRoute<RouteProp<WelcomeRouteParamList, 'Welcome'>>();
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export default function WelcomeScreen(): React.ReactElement {
 
   return (
     <View style={StyleSheet.flatten([styles.screen, styles.centerAlign, styles.screenView])}>
-      <ActivityIndicator size="large" color={Colors.secondary} />
+      <ActivityIndicator size="large" color={Colors[theme]?.secondary} />
     </View>
   );
 }

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
-import type { ImageProgressPropsType, ImageProgressStateType } from './ImageProgressType';
-import type { OnProgressEvent, OnLoadEvent, ImageStyle } from 'react-native-fast-image';
+
 import styleSheet from './ImageProgressStyle';
+
 import { getSourceKey } from './ImageProgressUtil';
+
+import type { ImageProgressPropsType, ImageProgressStateType } from './ImageProgressTypes';
+import type { OnProgressEvent, OnLoadEvent, ImageStyle } from 'react-native-fast-image';
 
 const DefaultIndicator = ActivityIndicator;
 

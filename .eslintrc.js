@@ -145,6 +145,18 @@ module.exports = {
         message: 'Unexpected property on console object was called'
       }
     ],
+    'require-jsdoc': [
+      OFF,
+      {
+        require: {
+          FunctionDeclaration: true,
+          MethodDefinition: true,
+          ClassDeclaration: true,
+          ArrowFunctionExpression: true,
+          FunctionExpression: true
+        }
+      }
+    ],
     eqeqeq: [WARN, 'always'],
     quotes: [ERROR, 'single', { avoidEscape: true, allowTemplateLiterals: false }],
     // typescript
@@ -178,10 +190,13 @@ module.exports = {
     'import/order': [
       ERROR,
       {
-        groups: ['builtin', 'external', 'internal', 'index', 'type', 'object', 'parent', 'sibling'],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
         alphabetize: {
-          order: 'asc'
-        }
+          order: 'asc',
+          caseInsensitive: true
+        },
+        warnOnUnassignedImports: true,
+        'newlines-between': 'always-and-inside-groups'
       }
     ],
     'import/no-unresolved': [ERROR, { commonjs: true, amd: true }],

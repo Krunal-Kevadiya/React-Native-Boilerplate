@@ -1,5 +1,7 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Colors } from '@themes';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
@@ -11,8 +13,7 @@ export default function styleSheet(option: StyleSheetOption) {
         right: 0
       },
       imageTitle: {
-        tintColor: Colors.primary,
-        tintColorDark: Colors.white
+        tintColor: Colors[option.theme]?.black
       },
       centerContainerSide: {
         alignItems: 'center',
@@ -23,8 +24,7 @@ export default function styleSheet(option: StyleSheetOption) {
       },
       textTitle: {
         fontSize: '16@ms',
-        color: Colors.primary,
-        colorDark: Colors.white
+        color: Colors[option.theme]?.black
       },
       centerTextTitle: {
         textAlign: 'center'

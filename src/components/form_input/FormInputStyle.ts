@@ -1,13 +1,15 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Fonts } from '@assets';
 import { ApplicationStyles, Colors } from '@themes';
 import { colorOpacity } from '@utils';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
   return CustomStyleSheet.create(
     {
-      ...ApplicationStyles.lineStyle,
+      ...ApplicationStyles.lineStyle(option),
       errorMsg: {
         fontFamily: Fonts.regular,
         fontSize: '14@ms',
@@ -25,35 +27,29 @@ export default function styleSheet(option: StyleSheetOption) {
         alignItems: 'center',
         borderRadius: '20@ms',
         borderWidth: 1,
-        borderColor: colorOpacity(Colors.primary, 0.2),
-        borderColorDark: colorOpacity(Colors.white, 0.2)
+        borderColor: colorOpacity(Colors[option.theme]?.black, 0.2)
       },
       inputContainerActive: {
-        borderColor: colorOpacity(Colors.primary, 0.4),
-        borderColorDark: colorOpacity(Colors.white, 0.4)
+        borderColor: colorOpacity(Colors[option.theme]?.black, 0.4)
       },
       inputContainerError: {
-        borderColor: Colors.red,
-        borderColorDark: Colors.red
+        borderColor: Colors[option.theme]?.red
       },
       textLabel: {
         fontFamily: Fonts.semibold,
         fontSize: '14@ms',
         marginRight: '12@s',
-        color: Colors.primary,
-        colorDark: Colors.white
+        color: Colors[option.theme]?.black
       },
       input: {
         flex: 1,
         fontFamily: Fonts.regular,
         fontSize: '14@ms',
         padding: 0,
-        color: Colors.primary,
-        colorDark: Colors.white
+        color: Colors[option.theme]?.black
       },
       foregroundColor: {
-        color: Colors.primary,
-        colorDark: Colors.white
+        color: Colors[option.theme]?.black
       }
     },
     option

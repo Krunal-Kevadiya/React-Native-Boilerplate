@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, StyleSheet, type ViewStyle } from 'react-native';
 import { moderateScale, useTheme } from 'rn-custom-style-sheet';
-import type { CirclePropsType } from './CircleType';
+
 import ProfileAvatar from '../../ProfileAvatar';
+
 import styleSheet from './CircleStyle';
+
+import type { CirclePropsType } from './CircleTypes';
 
 export default function Circle({
   circleStyle,

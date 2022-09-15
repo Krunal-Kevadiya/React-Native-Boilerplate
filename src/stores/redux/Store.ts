@@ -3,9 +3,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createNetworkMiddleware, reducer as NetworkReducer } from 'react-native-offline';
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
+
 import { AppConst } from '@constants';
 import rootSaga from '@stores-saga';
-import { ReduxStorage } from '@utils';
+import { storage } from '@utils';
+
 import { AppRequestReducer } from './app_request';
 import { AuthReducer } from './auth';
 import { socketMiddleware } from './middleware';
@@ -17,7 +19,7 @@ const networkMiddleware = createNetworkMiddleware({
 const persistConfig = {
   key: '@ReactNativeStructure',
   version: 1,
-  storage: ReduxStorage,
+  storage: storage,
   whitelist: ['auth'], // Whitelist (Save Specific Reducers)
   blacklist: ['nav', 'navigation', 'appRequest', 'network'] // Blacklist (Don't Save Specific Reducers)
 };

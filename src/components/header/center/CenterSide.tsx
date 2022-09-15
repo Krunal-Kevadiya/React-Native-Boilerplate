@@ -1,10 +1,14 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { isPresentValue } from '@utils';
-import type { CenterSidePropsType } from './CenterSideType';
+
 import { Icon } from '../../icon';
+
 import styleSheet from './CenterSideStyle';
+
+import type { CenterSidePropsType } from './CenterSideTypes';
 
 export default function CenterSide({
   label,

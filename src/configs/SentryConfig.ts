@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/react-native';
+
 import { AppConst } from '@constants';
 import { UserResponse } from '@models';
 
