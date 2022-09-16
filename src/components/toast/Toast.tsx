@@ -2,13 +2,17 @@ import React, { forwardRef } from 'react';
 import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated, { withSpring, useAnimatedStyle } from 'react-native-reanimated';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { isPresentValue } from '@utils';
-import type { ToastHandleType, ToastPropsType, UseToastReturnType } from './ToastType';
+
 import { Icon } from '../icon';
-import useToast from './ToastHook';
-import styleSheet from './ToastStyle';
-import { defaultProps } from './ToastType';
+
 import { GestureRecognizer } from './gesture';
+import styleSheet from './ToastStyle';
+import { defaultProps } from './ToastTypes';
+import useToast from './useToast';
+
+import type { ToastHandleType, ToastPropsType, UseToastReturnType } from './ToastTypes';
 
 function CustomToast(
   { translucent = defaultProps.translucent, numberOfLines = defaultProps.numberOfLines, toastPosition }: ToastPropsType,

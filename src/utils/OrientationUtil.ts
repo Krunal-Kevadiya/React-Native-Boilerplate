@@ -1,4 +1,5 @@
 import Orientation, { OrientationType } from 'react-native-orientation-locker';
+
 import { isAndroid } from '@themes';
 
 export function changeScreenOrientation(isLockPortrait: boolean): void {

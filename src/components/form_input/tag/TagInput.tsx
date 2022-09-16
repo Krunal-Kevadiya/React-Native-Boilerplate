@@ -1,13 +1,16 @@
 import React, { forwardRef } from 'react';
 import { View, Text, TextInput, type TextProps, StyleSheet, type TextStyle, type StyleProp } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { Colors, isAndroid, isIos } from '@themes';
 import { colorOpacity, isPresentValue } from '@utils';
-import type { MatchPartType, ParseType, TagInputPropsType, UseTagInputReturnType } from './TagInputType';
-import useTagInput from './TagInputHook';
+
 import styleSheet from './TagInputStyle';
-import { defaultProps } from './TagInputType';
+import { defaultProps } from './TagInputTypes';
 import { removePrefixOrPostfixText, textExtraction, removeHtmlTags } from './TagInputUtil';
+import useTagInput from './useTagInput';
+
+import type { MatchPartType, ParseType, TagInputPropsType, UseTagInputReturnType } from './TagInputTypes';
 
 function getParsedText(
   parse: ParseType[],
@@ -65,12 +68,12 @@ function CustomTabInput(
   }: TagInputPropsType,
   ref: React.LegacyRef<TextInput> | undefined
 ): React.ReactElement {
-  const { styles } = useTheme(styleSheet);
+  const { styles, theme } = useTheme(styleSheet);
   const { parseArrayJson }: UseTagInputReturnType = useTagInput(handlePress);
   const localSelectionProps = {
     ...selectionProps,
     selectable: !!(isAndroid || isPlayerUI),
-    selectionColor: colorOpacity(Colors.secondary, 0.4)
+    selectionColor: colorOpacity(Colors[theme]?.secondary, 0.4)
   };
   const newValues: string = removeHtmlTags(values, isCollapse);
 

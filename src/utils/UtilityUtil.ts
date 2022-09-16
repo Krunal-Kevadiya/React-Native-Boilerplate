@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import isObject from 'lodash/isObject';
 import transform from 'lodash/transform';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+
 import { isPresentValue } from './StringUtil';
 
 function cleanArray(o: any) {

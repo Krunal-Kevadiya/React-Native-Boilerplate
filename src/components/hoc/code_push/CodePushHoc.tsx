@@ -3,13 +3,17 @@ import { Text, Pressable } from 'react-native';
 import CodePush, { type DownloadProgress, type SyncOptions } from 'react-native-code-push';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { getCurrentTheme } from 'rn-custom-style-sheet';
+
 import { MMKVStorageKey, StringConst } from '@constants';
 import { useAsyncStorage, useHeaderHeight, useStatusBarHeight } from '@hooks';
 import { format } from '@utils';
-import type { MovableViewPropsType } from './CodePushType';
-import type { AppThemeType } from 'rn-custom-style-sheet';
+
 import { Draggable } from '../../common';
+
 import styleSheet from './CodePushStyle';
+
+import type { MovableViewPropsType } from './CodePushTypes';
+import type { AppThemeType } from 'rn-custom-style-sheet';
 
 function MovableView({ message, isBtnVisible }: MovableViewPropsType): React.ReactElement {
   const statusBarHeight: number = useStatusBarHeight();

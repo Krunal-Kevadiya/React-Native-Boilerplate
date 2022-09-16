@@ -2,9 +2,12 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { StatusBar, Text, View, FlatList, StyleSheet, type LayoutChangeEvent } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { isPresentValue } from '@utils';
-import type { BottomSheetHandleType, BottomSheetPropsType } from './BottomSheetType';
+
 import styleSheet from './BottomSheetStyle';
+
+import type { BottomSheetHandleType, BottomSheetPropsType } from './BottomSheetTypes';
 
 function CustomBottomSheet<T>(
   { title, message, onSwipeComplete, onBackButtonPress, children, ...extraFlatListProps }: BottomSheetPropsType<T>,

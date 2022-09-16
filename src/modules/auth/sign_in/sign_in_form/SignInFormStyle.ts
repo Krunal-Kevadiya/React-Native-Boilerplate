@@ -1,7 +1,9 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Fonts } from '@assets';
 import { ApplicationStyles, Colors } from '@themes';
 import { colorOpacity } from '@utils';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
@@ -9,7 +11,7 @@ export default function styleSheet(option: StyleSheetOption) {
     {
       ...ApplicationStyles.viewStyle,
       ...ApplicationStyles.buttonStyle,
-      ...ApplicationStyles.lineStyle,
+      ...ApplicationStyles.lineStyle(option),
       formContainer: {
         width: '100%',
         paddingHorizontal: '20@s'
@@ -25,15 +27,13 @@ export default function styleSheet(option: StyleSheetOption) {
         marginTop: '12@vs'
       },
       button: {
-        backgroundColor: Colors.primary,
-        backgroundColorDark: Colors.white
+        backgroundColor: Colors[option.theme]?.black
       },
       disabledButton: {
-        backgroundColor: Colors.gray
+        backgroundColor: Colors[option.theme]?.gray
       },
       buttonText: {
-        color: Colors.white,
-        colorDark: Colors.primary
+        color: Colors[option.theme]?.white
       },
       signUpDescContainer: {
         borderWidth: 0,
@@ -51,8 +51,7 @@ export default function styleSheet(option: StyleSheetOption) {
         fontFamily: Fonts.regular,
         fontSize: '14@ms',
         textAlign: 'center',
-        color: colorOpacity(Colors.primary, 0.3),
-        colorDark: colorOpacity(Colors.white, 0.3)
+        color: colorOpacity(Colors[option.theme]?.black, 0.3)
       }
     },
     option

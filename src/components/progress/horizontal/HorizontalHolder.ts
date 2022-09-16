@@ -1,4 +1,4 @@
-import type { HorizontalProgressHandleType } from './HorizontalType';
+import type { HorizontalProgressHandleType } from './HorizontalTypes';
 
 export default class HorizontalProgressHolder {
   static i: number = 0.0;

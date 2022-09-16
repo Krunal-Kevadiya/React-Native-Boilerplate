@@ -1,5 +1,6 @@
 import { I18nManager } from 'react-native';
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {

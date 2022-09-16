@@ -2,6 +2,7 @@ import { createNavigationContainerRef } from '@react-navigation/core';
 import { CommonActions, DrawerActions, StackActions, TabActions } from '@react-navigation/routers';
 import React from 'react';
 import { Animated } from 'react-native';
+
 import type {
   StackCardInterpolatedStyle,
   StackCardInterpolationProps,
@@ -128,10 +129,10 @@ function cardStyleInterpolatorCalculation(
   currentOutputRange: [number, number],
   nextOutputRange: [number, number],
   current: {
-    progress: Animated.AnimatedInterpolation;
+    progress: Animated.AnimatedInterpolation<number>;
   },
   next?: {
-    progress: Animated.AnimatedInterpolation;
+    progress: Animated.AnimatedInterpolation<number>;
   }
 ): StackCardInterpolatedStyle {
   const translateXForCurrent = current.progress.interpolate({
@@ -171,10 +172,10 @@ function headerStyleInterpolatorCalculation(
   currentOutputRange: [number, number],
   nextOutputRange: [number, number],
   current: {
-    progress: Animated.AnimatedInterpolation;
+    progress: Animated.AnimatedInterpolation<number>;
   },
   next?: {
-    progress: Animated.AnimatedInterpolation;
+    progress: Animated.AnimatedInterpolation<number>;
   }
 ): StackHeaderInterpolatedStyle {
   const translateXForCurrent = current.progress.interpolate({

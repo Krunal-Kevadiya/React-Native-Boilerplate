@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
+
 import { useCreateHandlerSetter } from '@hooks-util';
 import { navigationRef } from '@navigators';
+
 import type { DependencyList } from '@hooks-util';
 
 /**

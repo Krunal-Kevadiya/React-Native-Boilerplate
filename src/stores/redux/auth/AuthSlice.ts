@@ -1,7 +1,10 @@
 import { createAction, createSlice, type PayloadAction, type Draft } from '@reduxjs/toolkit';
+
 import { UserResponse, SignInRequest } from '@models';
-import type { AuthStateType } from './AuthInitial';
+
 import INITIAL_STATE from './AuthInitial';
+
+import type { AuthStateType } from './AuthInitial';
 
 export const cleanAction = createAction<void, 'cleanAction'>('cleanAction');
 

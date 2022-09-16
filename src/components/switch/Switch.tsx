@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, type ViewStyle } from 'react-native';
 import Animated, { interpolateColors, spring } from 'react-native-reanimated';
 import { useTheme } from 'rn-custom-style-sheet';
-import type { SwitchPropsType } from './SwitchType';
+
 import styleSheet, { SwitchWidth } from './SwitchStyle';
-import { defaultProps } from './SwitchType';
+import { defaultProps } from './SwitchTypes';
+
+import type { SwitchPropsType } from './SwitchTypes';
 
 export default function Switch({
   handleOnPress,

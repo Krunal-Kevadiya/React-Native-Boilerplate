@@ -1,10 +1,14 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { isPresentValue } from '@utils';
-import type { BothSidePropsType } from './BothSideType';
+
 import { Icon } from '../../icon';
+
 import styleSheet from './BothSideStyle';
+
+import type { BothSidePropsType } from './BothSideTypes';
 
 export default function BothSide({
   label,

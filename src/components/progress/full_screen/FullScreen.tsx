@@ -1,16 +1,19 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { Colors } from '@themes';
-import type { FullScreenProgressHandleType } from './FullScreenType';
+
 import styleSheet from './FullScreenStyle';
+
+import type { FullScreenProgressHandleType } from './FullScreenTypes';
 
 function CustomFullScreenProgress(
   props: Record<string, any>,
   ref: React.Ref<FullScreenProgressHandleType>
 ): React.ReactElement {
   const [visible, setVisible] = useState<boolean>(false);
-  const { styles } = useTheme(styleSheet);
+  const { styles, theme } = useTheme(styleSheet);
   useImperativeHandle(ref, () => ({
     show: (): void => {
       setVisible(true);
@@ -26,7 +29,7 @@ function CustomFullScreenProgress(
 
   return (
     <View style={StyleSheet.flatten([styles.containerStyle, styles.centerAlign])}>
-      <ActivityIndicator size="large" color={Colors.secondary} {...props} />
+      <ActivityIndicator size="large" color={Colors[theme]?.secondary} {...props} />
     </View>
   );
 }

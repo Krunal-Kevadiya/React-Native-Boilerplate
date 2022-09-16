@@ -1,5 +1,7 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Colors } from '@themes';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
@@ -13,27 +15,23 @@ export default function styleSheet(option: StyleSheetOption) {
         paddingVertical: '8@s',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.primary,
-        backgroundColorDark: Colors.white
+        backgroundColor: Colors[option.theme]?.black
       },
       textHeader: {
         flex: 1,
         fontSize: '16@ms',
-        color: Colors.white,
-        colorDark: Colors.primary
+        color: Colors[option.theme]?.white
       },
       buttonView: {
         marginLeft: '5@s',
         borderRadius: '5@ms',
         paddingHorizontal: '8@s',
         paddingVertical: '8@s',
-        backgroundColor: Colors.white,
-        backgroundColorDark: Colors.primary
+        backgroundColor: Colors[option.theme]?.white
       },
       textButton: {
         fontSize: '12@ms',
-        color: Colors.primary,
-        colorDark: Colors.white
+        color: Colors[option.theme]?.black
       }
     },
     option

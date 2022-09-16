@@ -2,7 +2,8 @@ import React from 'react';
 import { Image, type ImageStyle, StyleSheet } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { moderateScale } from 'rn-custom-style-sheet';
-import type { IconPropsType } from './IconType';
+
+import type { IconPropsType } from './IconTypes';
 
 export default function Icon({ type, size, source, style, svgStyle }: IconPropsType): React.ReactElement {
   const { width, height } = style ?? { width: 0, height: 0 };

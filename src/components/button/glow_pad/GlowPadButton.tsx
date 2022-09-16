@@ -9,11 +9,14 @@ import Animated, {
   withTiming
 } from 'react-native-reanimated';
 import { moderateScale } from 'rn-custom-style-sheet';
+
 import { Icon } from '@components';
 import { isPresentValue } from '@utils';
-import type { GlowPadButtonPropsType, RingViewPropsType, PulseType } from './GlowPadButtonType';
+
 import styles from './GlowPadButtonStyle';
-import { defaultProps } from './GlowPadButtonType';
+import { defaultProps } from './GlowPadButtonTypes';
+
+import type { GlowPadButtonPropsType, RingViewPropsType, PulseType } from './GlowPadButtonTypes';
 
 function RingView({ delay, color, duration, pulse }: RingViewPropsType): React.ReactElement {
   const ring = useSharedValue<number>(0);

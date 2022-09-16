@@ -98,8 +98,8 @@ PODS:
   - libwebp/mux (1.2.3):
     - libwebp/demux
   - libwebp/webp (1.2.3)
-  - MMKV (1.2.14):
-    - MMKVCore (~> 1.2.14)
+  - MMKV (1.2.13):
+    - MMKVCore (~> 1.2.13)
   - MMKVCore (1.2.14)
   - OpenSSL-Universal (1.1.1100)
   - Permission-Camera (3.6.1):
@@ -334,8 +334,8 @@ PODS:
     - glog
   - react-native-flipper (0.163.0):
     - React-Core
-  - react-native-mmkv (2.4.3):
-    - MMKV (>= 1.2.13)
+  - react-native-mmkv-storage (0.8.0):
+    - MMKV (= 1.2.13)
     - React-Core
   - react-native-netinfo (9.3.0):
     - React-Core
@@ -543,7 +543,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
-  - react-native-mmkv (from `../node_modules/react-native-mmkv`)
+  - react-native-mmkv-storage (from `../node_modules/react-native-mmkv-storage`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-orientation-locker (from `../node_modules/react-native-orientation-locker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -657,8 +657,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-flipper:
     :path: "../node_modules/react-native-flipper"
-  react-native-mmkv:
-    :path: "../node_modules/react-native-mmkv"
+  react-native-mmkv-storage:
+    :path: "../node_modules/react-native-mmkv-storage"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-orientation-locker:
@@ -744,7 +744,7 @@ SPEC CHECKSUMS:
   JWT: ef71dfb03e1f842081e64dc42eef0e164f35d251
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   libwebp: 60305b2e989864154bd9be3d772730f08fc6a59c
-  MMKV: 9c4663aa7ca255d478ff10f2f5cb7d17c1651ccd
+  MMKV: aac95d817a100479445633f2b3ed8961b4ac5043
   MMKVCore: 89f5c8a66bba2dcd551779dea4d412eeec8ff5bb
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   Permission-Camera: bf6791b17c7f614b6826019fcfdcc286d3a107f6
@@ -765,7 +765,7 @@ SPEC CHECKSUMS:
   React-jsinspector: e385fb7a1440ae3f3b2cd1a139ca5aadaab43c10
   React-logger: 15c734997c06fe9c9b88e528fb7757601e7a56df
   react-native-flipper: 2d552a8178d839ef378220101fb7f0cd5b2a8003
-  react-native-mmkv: 1265a348a4711097ba29c8bcefd5971f48220f2b
+  react-native-mmkv-storage: 8ba3c0216a6df283ece11205b442a3e435aec4e5
   react-native-netinfo: 129bd99f607a2dc5bb096168f3e5c150fd1f1c95
   react-native-orientation-locker: 851f6510d8046ea2f14aa169b1e01fcd309a94ba
   react-native-safe-area-context: b456e1c40ec86f5593d58b275bd0e9603169daca

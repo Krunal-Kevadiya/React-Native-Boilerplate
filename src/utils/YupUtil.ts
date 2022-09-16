@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+
 import { RegexConst } from '@constants';
 
 export function isEmailFields(value?: string | null): boolean {

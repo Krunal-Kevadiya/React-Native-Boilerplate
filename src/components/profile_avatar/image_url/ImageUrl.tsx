@@ -2,19 +2,23 @@ import React, { useCallback, useState } from 'react';
 import FastImage from 'react-native-fast-image';
 import * as Progress from 'react-native-progress';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { Icons } from '@assets';
 import { Colors } from '@themes';
-import type { ImageUrlPropsType } from './ImageUrlType';
-import type { LayoutChangeEvent } from 'react-native';
+
 import { withImageProgress } from '../../hoc';
 import { Icon } from '../../icon';
+
 import styleSheet from './ImageUrlStyle';
+
+import type { ImageUrlPropsType } from './ImageUrlTypes';
+import type { LayoutChangeEvent } from 'react-native';
 
 const FastImageProgress = withImageProgress(FastImage);
 
 export default function ImageUrl({ url, style, imageStyle, onLoading }: ImageUrlPropsType): React.ReactElement {
   const [indicatorSize, setIndicatorSize] = useState<number>(0);
-  const { styles } = useTheme(styleSheet);
+  const { styles, theme } = useTheme(styleSheet);
 
   const handleLayout = useCallback<(event: LayoutChangeEvent) => void>((event) => {
     const { width, height } = event.nativeEvent.layout;
@@ -39,9 +43,9 @@ export default function ImageUrl({ url, style, imageStyle, onLoading }: ImageUrl
         showsText: true,
         indeterminate: false,
         strokeCap: 'round',
-        color: Colors.secondary,
-        unfilledColor: Colors.white,
-        borderColor: Colors.secondary,
+        color: Colors[theme]?.secondary,
+        unfilledColor: Colors[theme]?.white,
+        borderColor: Colors[theme]?.secondary,
         borderWidth: 2
       }}
       renderError={() => {

@@ -2,6 +2,7 @@ import isEmpty from 'lodash/isEmpty';
 import isNaN from 'lodash/isNaN';
 import isNil from 'lodash/isNil';
 import isNull from 'lodash/isNull';
+
 import { RegexConst } from '@constants';
 
 export function format(fmt: string, ...args: any[]): string {

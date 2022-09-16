@@ -1,7 +1,9 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Fonts } from '@assets';
 import { ApplicationStyles, Colors } from '@themes';
 import { colorOpacity } from '@utils';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
@@ -11,23 +13,20 @@ export default function styleSheet(option: StyleSheetOption) {
       ...ApplicationStyles.textStyle,
       ...ApplicationStyles.buttonStyle,
       screenView: {
-        backgroundColor: Colors.white,
-        backgroundColorDark: Colors.primary
+        backgroundColor: Colors[option.theme]?.white
       },
       logo: {
         height: '38@s',
         width: '115@s',
         marginTop: '-84@vs',
         marginBottom: '18@vs',
-        tintColor: Colors.primary,
-        tintColorDark: Colors.white
+        tintColor: Colors[option.theme]?.black
       },
       logoSvg: {
         resizeMode: 'contain'
       },
       headerLeftImage: {
-        color: Colors.primary,
-        colorDark: Colors.white,
+        color: Colors[option.theme]?.black,
         height: '22@ms',
         width: '22@ms',
         marginLeft: '8@s',
@@ -40,21 +39,18 @@ export default function styleSheet(option: StyleSheetOption) {
       },
       fabButton: {
         borderRadius: '20@s',
-        backgroundColor: Colors.primary,
-        backgroundColorDark: Colors.white
+        backgroundColor: Colors[option.theme]?.black
       },
       fabText: {
         fontSize: '16@ms',
         marginLeft: '8@s',
         fontFamily: Fonts.regular,
-        color: Colors.white,
-        colorDark: Colors.primary
+        color: Colors[option.theme]?.white
       },
       icon: {
         width: '22@s',
         height: '22@s',
-        tintColor: Colors.white,
-        tintColorDark: Colors.primary
+        tintColor: Colors[option.theme]?.white
       },
       orText: {
         marginTop: '12@vs'
@@ -63,8 +59,7 @@ export default function styleSheet(option: StyleSheetOption) {
         fontFamily: Fonts.regular,
         fontSize: '14@ms',
         textAlign: 'center',
-        color: colorOpacity(Colors.primary, 0.3),
-        colorDark: colorOpacity(Colors.white, 0.3)
+        color: colorOpacity(Colors[option.theme]?.black, 0.3)
       },
       policyDescContainer: {
         borderWidth: 0,

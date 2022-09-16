@@ -1,5 +1,6 @@
 declare module 'react-native-spinner-button' {
   import React from 'react';
+
   import type { StyleProp, ViewStyle } from 'react-native';
 
   type SpinnerButtonProps = {

@@ -1,5 +1,7 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Colors } from '@themes';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
@@ -20,7 +22,7 @@ export default function styleSheet(option: StyleSheetOption) {
         marginHorizontal: '15@s',
         minHeight: '70@vs',
         paddingHorizontal: '15@s',
-        backgroundColor: Colors.secondary
+        backgroundColor: Colors[option.theme]?.secondary
       },
       imageStyle: {
         height: '24@ms',
@@ -32,10 +34,10 @@ export default function styleSheet(option: StyleSheetOption) {
         fontSize: '14@ms',
         paddingRight: '5@s',
         textAlign: 'center',
-        color: Colors.primary
+        color: Colors[option.theme]?.black
       },
       tintColor: {
-        tintColor: Colors.primary
+        tintColor: Colors[option.theme]?.black
       }
     },
     option

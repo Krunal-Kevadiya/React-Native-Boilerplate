@@ -1,13 +1,16 @@
 import omit from 'lodash/omit';
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
+
 import { isPresentValue } from '@utils';
-import type ProfileAvatarPropsType from './ProfileAvatarType';
-import type { ImageStyle as FastImageStyle } from 'react-native-fast-image';
+
 import { ImageOverlap } from './image_overlap';
 import { ImageStatic } from './image_static';
 import { ImageText } from './image_text';
 import { ImageUrl } from './image_url';
+
+import type ProfileAvatarPropsType from './ProfileAvatarTypes';
+import type { ImageStyle as FastImageStyle } from 'react-native-fast-image';
 
 export default function ProfileAvatar({
   url,

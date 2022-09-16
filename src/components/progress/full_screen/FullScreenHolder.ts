@@ -1,4 +1,4 @@
-import type { FullScreenProgressHandleType } from './FullScreenType';
+import type { FullScreenProgressHandleType } from './FullScreenTypes';
 
 export default class FullScreenProgressHolder {
   static fullScreenProgress: FullScreenProgressHandleType | null = null;

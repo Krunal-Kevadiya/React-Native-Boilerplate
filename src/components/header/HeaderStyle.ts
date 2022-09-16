@@ -1,11 +1,13 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Colors, ApplicationStyles } from '@themes';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
   return CustomStyleSheet.create(
     {
-      ...ApplicationStyles.lineStyle,
+      ...ApplicationStyles.lineStyle(option),
       subContainer: {
         alignItems: 'center',
         flex: 1,
@@ -14,8 +16,7 @@ export default function styleSheet(option: StyleSheetOption) {
       },
       container: {
         width: '100%',
-        backgroundColor: Colors.white,
-        backgroundColorDark: Colors.primary
+        backgroundColor: Colors[option.theme]?.white
       },
       rightView: {
         flexDirection: 'row'

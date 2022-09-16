@@ -2,15 +2,18 @@ import { Formik, type FormikProps } from 'formik';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { Icons } from '@assets';
 import { Header, Icon } from '@components';
 import { SignInFormModel, SignInFormSchema } from '@models';
 import { navigateBack } from '@navigators';
-import type { UseSignInReturnType } from './SignInType';
-import type { XmlProps } from 'react-native-svg';
-import useSignIn from './SignInHook';
-import styleSheet from './SignInStyle';
+
 import SignInForm from './sign_in_form/SignInForm';
+import styleSheet from './SignInStyle';
+import useSignIn from './useSignIn';
+
+import type { UseSignInReturnType } from './SignInTypes';
+import type { XmlProps } from 'react-native-svg';
 
 export default function SignInScreen(): React.ReactElement {
   const { styles } = useTheme(styleSheet);

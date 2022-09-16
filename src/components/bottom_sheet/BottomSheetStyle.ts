@@ -1,6 +1,8 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Colors } from '@themes';
 import { colorOpacity } from '@utils';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {
@@ -13,8 +15,8 @@ export default function styleSheet(option: StyleSheetOption) {
       },
       customBackdrop: {
         flex: 1,
-        backgroundColorDark: colorOpacity(Colors.white, 0.1),
-        backgroundColor: colorOpacity(Colors.primary, 0.99)
+        backgroundColorDark: colorOpacity(Colors[option.theme]?.white, 0.1),
+        backgroundColor: colorOpacity(Colors[option.theme]?.black, 0.99)
       },
       list: {
         width: '100%'
@@ -27,8 +29,7 @@ export default function styleSheet(option: StyleSheetOption) {
         marginBottom: '10@vs',
         paddingHorizontal: '20@s',
         textAlign: 'center',
-        color: Colors.primary,
-        colorDark: Colors.white
+        color: Colors[option.theme]?.black
       },
       popupContainerStyle: {
         alignItems: 'center',
@@ -36,8 +37,7 @@ export default function styleSheet(option: StyleSheetOption) {
         borderTopRightRadius: '15@s',
         paddingTop: '20@vs',
         width: '100%',
-        backgroundColor: Colors.white,
-        backgroundColorDark: Colors.primary
+        backgroundColor: Colors[option.theme]?.white
       },
       popupDismissLine: {
         alignSelf: 'center',
@@ -46,15 +46,14 @@ export default function styleSheet(option: StyleSheetOption) {
         marginBottom: '15@vs',
         opacity: 0.5,
         width: '55@s',
-        backgroundColor: Colors.primary,
-        backgroundColorDark: Colors.white
+        backgroundColor: Colors[option.theme]?.black
       },
       popupStyle: {
         alignItems: 'flex-end',
         height: '93%',
         justifyContent: 'flex-end',
         width: '100%',
-        backgroundColor: Colors.transparentBlack
+        backgroundColor: Colors[option.theme]?.transparentBlack
       },
       popupView: {
         height: '100%',
@@ -69,8 +68,7 @@ export default function styleSheet(option: StyleSheetOption) {
         marginBottom: '10@vs',
         paddingHorizontal: '20@s',
         textAlign: 'center',
-        color: Colors.primary,
-        colorDark: Colors.white
+        color: Colors[option.theme]?.black
       }
     },
     option

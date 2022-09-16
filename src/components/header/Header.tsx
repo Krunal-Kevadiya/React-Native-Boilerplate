@@ -1,13 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { type LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { useHeaderHeight, useStatusBarHeight } from '@hooks';
-import type { HeaderPropsType } from './HeaderType';
-import styleSheet from './HeaderStyle';
-import { defaultProps } from './HeaderType';
+
 import BothSide from './both/BothSide';
 import CenterSide from './center/CenterSide';
+import styleSheet from './HeaderStyle';
+import { defaultProps } from './HeaderTypes';
 import Search from './search/Search';
+
+import type { HeaderPropsType } from './HeaderTypes';
 
 export default function Header({
   left,

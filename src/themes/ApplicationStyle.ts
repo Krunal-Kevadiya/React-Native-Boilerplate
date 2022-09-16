@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native';
+
 import { Fonts } from '@assets';
 import { colorOpacity } from '@utils';
+
 import Colors from './Colors';
 import { isIos } from './Metrics';
+
+import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 const viewStyle = StyleSheet.create({
   centerAlign: {
@@ -20,19 +24,17 @@ const viewStyle = StyleSheet.create({
   }
 });
 
-const lineStyle = {
+const lineStyle = (option: StyleSheetOption) => ({
   bottomLine: {
     borderBottomWidth: '0.8@s',
-    borderBottomColor: colorOpacity(Colors.primary, 0.3),
-    borderBottomColorDark: colorOpacity(Colors.white, 0.3)
+    borderBottomColor: colorOpacity(Colors[option.theme]?.black, 0.3)
   },
   normalLine: {
     height: '0.8@s',
     width: '100%',
-    backgroundColor: colorOpacity(Colors.primary, 0.2),
-    backgroundColorDark: colorOpacity(Colors.white, 0.2)
+    backgroundColor: colorOpacity(Colors[option.theme]?.black, 0.2)
   }
-};
+});
 
 const textStyle = {};
 

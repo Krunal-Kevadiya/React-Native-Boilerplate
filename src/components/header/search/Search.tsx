@@ -1,12 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Pressable, Text, TextInput, View, StyleSheet } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { Icons } from '@assets';
 import { useDebounce, useWillUnmount } from '@hooks';
 import { Colors } from '@themes';
-import type { SearchPropsType } from './SearchType';
+
 import { Icon } from '../../icon';
+
 import styleSheet from './SearchStyle';
+
+import type { SearchPropsType } from './SearchTypes';
 
 export default function Search({
   isLowerCase,
@@ -15,7 +19,7 @@ export default function Search({
   handleCancel,
   ...inputProps
 }: SearchPropsType): React.ReactElement {
-  const { styles } = useTheme(styleSheet);
+  const { styles, theme } = useTheme(styleSheet);
   const [searchText, setSearchText] = useState<string>('');
 
   const handleChange = useCallback<(value: string) => void>(
@@ -61,9 +65,9 @@ export default function Search({
           //value={searchText}
           returnKeyType="search"
           style={StyleSheet.flatten([styles.inputSearch, inputProps.style])}
-          placeholderTextColor={Colors.gray}
+          placeholderTextColor={Colors[theme]?.gray}
           keyboardType="default"
-          selectionColor={Colors.secondary}
+          selectionColor={Colors[theme]?.secondary}
           onChangeText={handleChange}
           onBlur={handleBlur}
           onSubmitEditing={handleBlur}

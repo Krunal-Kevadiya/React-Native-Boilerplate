@@ -1,10 +1,13 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { StringConst } from '@constants';
 import { useDebouncedCallback } from '@hooks';
-import type { ImagePickerPropsType } from './ImagePickerType';
+
 import styleSheet from './ImagePickerStyle';
+
+import type { ImagePickerPropsType } from './ImagePickerTypes';
 
 export default function ImagePicker({
   item,

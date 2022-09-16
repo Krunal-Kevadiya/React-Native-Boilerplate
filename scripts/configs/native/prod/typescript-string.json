@@ -1,5 +1,6 @@
 {
   "sentryUrl": "",
   "apiUrl": "https://reqres.in",
-  "segment": ""
+  "segment": "",
+  "encryptionKey": "encryptionKey"
 }

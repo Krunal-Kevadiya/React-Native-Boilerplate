@@ -12,23 +12,21 @@
 Welcome to the **React Native Structure
 Mobile**!
 
-This application is useful for setup basic structure of new project.
+This application is useful for kickstart or setup basic structure of new project with below features
 
-- Fully typescript support.
-- Config Eslint and prettier for code formatting.
-- Added custom module for importing local directory.
-- Disable system font scaling.
-- Added microsoft appcenter codePush feature support.
-- Added some basic custom component like BottomSheet, Button, FormInput, Header, Icon, ProfileAvatar, Progress, Switch, Toast etc.
 - Support SVG images.
-- Configure Sentry, Formik, Multiple Language Translation, Redux-Toolkit, saga, Socket.io, apisauce with auto canceling feature.
-- Predefine custom hooks like Keyboard, Permission, Debounce, Timeout, AppState, AsyncStorage etc.
+- Fully typescript support.
+- Disable system font scaling.
 - Predefine support for Light - Dark theme mode.
 - Config react navigation with deep link support.
+- Config Eslint and prettier for code formatting.
+- Added custom module for importing local directory.
+- Added microsoft appcenter codePush feature support.
+- Predefine custom hooks like Keyboard, Permission, Debounce, Timeout, AppState, AsyncStorage etc.
+- Configure Sentry, Formik, Multiple Language Translation, Redux-Toolkit, saga, Socket.io, apisauce with auto canceling feature.
+- Added some basic custom component like BottomSheet, Button, FormInput, Header, Icon, ProfileAvatar, Progress, Switch, Toast etc.
 
 To get started,
-
-<a href="./wiki/0.-Pre-Requisites.md">1. Pre requisites</a>
 
 1. [Pre requisites](./wiki/0.-Pre-Requisites.md)
 1. [How to setup project](./wiki/1.-Project-Setup.md)
@@ -40,11 +38,11 @@ To get started,
 1. [Accounts details](./wiki/7.-Accounts.md)
 1. [Git Process](./wiki/8.-Git-Process.md)
 
-## Troubleshoot Notes
+# Troubleshoot Notes
 
 - There are no known issues for a run or build process right now.
 
-## Use React Native Typescript Boilerplate
+# How it can be reused?
 
 - Clone this repository to local and move to directory
 - Install **React-Native-Rename** global using
@@ -74,7 +72,3 @@ To get started,
   ```
   $ npx react-native-rename "Travel App" -b com.junedomingo.travelapp
   ```
-
-## Notes
-
-- This project has implemented CI/CD process for ios and android build releases. Microsoft Appcenter is used for it, and the branch from which the builds are being generated is **DevelopBranch**.

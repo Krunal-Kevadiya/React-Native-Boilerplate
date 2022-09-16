@@ -1,2 +1,2 @@
 export { default as Icon } from './Icon';
-export type { SvgIconPropsStyle, ImageIconPropsStyle, OtherIconPropsStyle } from './IconType';
+export type { SvgIconPropsStyle, ImageIconPropsStyle, OtherIconPropsStyle } from './IconTypes';

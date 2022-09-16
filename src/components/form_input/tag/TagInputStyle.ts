@@ -1,5 +1,7 @@
 import { CustomStyleSheet } from 'rn-custom-style-sheet';
+
 import { Fonts } from '@assets';
+
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 export default function styleSheet(option: StyleSheetOption) {

@@ -8,7 +8,8 @@ import Animated, {
   runOnJS
 } from 'react-native-reanimated';
 import { windowHeight, windowWidth } from 'rn-custom-style-sheet';
-import type { DraggablePropsType } from './DraggableType';
+
+import type { DraggablePropsType } from './DraggableTypes';
 
 export default function DraggableView({
   children,

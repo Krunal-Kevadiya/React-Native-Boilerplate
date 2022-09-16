@@ -3,17 +3,21 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import SpinnerButton from 'react-native-spinner-button';
 import { useSelector } from 'react-redux';
 import { useTheme } from 'rn-custom-style-sheet';
+
 import { FormInput } from '@components';
 import { StringConst } from '@constants';
 import { AppRequestSelectors } from '@stores';
 import { Colors } from '@themes';
-import type { SignInFormPropsType } from './SignInFormType';
-import type { RootStateType } from '@stores';
+
 import { isRemainingToFillForm } from '../SignInUtil';
+
 import styleSheet from './SignInFormStyle';
 
+import type { SignInFormPropsType } from './SignInFormTypes';
+import type { RootStateType } from '@stores';
+
 export default function SignInForm(props: SignInFormPropsType): React.ReactElement {
-  const { styles } = useTheme(styleSheet);
+  const { styles, theme } = useTheme(styleSheet);
   const inputPasswordRef: React.LegacyRef<TextInput> = React.createRef();
   const loading: boolean = useSelector<RootStateType, boolean>(AppRequestSelectors.getLoading);
   const { handleSubmit, values, errors } = props;
@@ -27,12 +31,12 @@ export default function SignInForm(props: SignInFormPropsType): React.ReactEleme
         returnKeyType="next"
         label={StringConst.signIn.textEmail}
         placeholder={StringConst.signIn.inputEmail}
-        placeholderTextColor={Colors.gray}
+        placeholderTextColor={Colors[theme]?.gray}
         keyboardType="email-address"
-        selectionColor={Colors.secondary}
+        selectionColor={Colors[theme]?.secondary}
         style={styles.textInput}
         containerStyle={styles.textInputContainer}
-        errorColor={Colors.error}
+        errorColor={Colors[theme]?.error}
         {...props}
         onSubmitEditing={() => {
           inputPasswordRef.current?.focus();
@@ -45,11 +49,11 @@ export default function SignInForm(props: SignInFormPropsType): React.ReactEleme
         returnKeyType="done"
         label={StringConst.signIn.textPassword}
         placeholder={StringConst.signIn.inputPassword}
-        placeholderTextColor={Colors.gray}
-        selectionColor={Colors.secondary}
+        placeholderTextColor={Colors[theme]?.gray}
+        selectionColor={Colors[theme]?.secondary}
         style={styles.textInput}
         containerStyle={styles.textInputContainer}
-        errorColor={Colors.error}
+        errorColor={Colors[theme]?.error}
         {...props}
         onSubmitEditing={handleSubmit}
       />
@@ -67,7 +71,7 @@ export default function SignInForm(props: SignInFormPropsType): React.ReactEleme
         disableStyle={styles.disabledButton}
         animatedDuration={150}
         spinnerType="UIActivityIndicator"
-        spinnerColor={Colors.secondary}
+        spinnerColor={Colors[theme]?.secondary}
         disabled={disabled}
         isLoading={loading}
         onPress={handleSubmit}
