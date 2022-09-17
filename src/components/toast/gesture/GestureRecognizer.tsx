@@ -5,6 +5,11 @@ import useGestureRecognizer from './useGestureRecognizer';
 
 import type { GestureRecognizerPropsType, UseGestureRecognizerReturnType } from './GestureRecognizerTypes';
 
+/**
+ * A React component that wraps a View and adds gesture recognition.
+ * @param {GestureRecognizerPropsType} props - the props to pass to the GestureRecognizer component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function GestureRecognizer({
   config,
   onSwipe,

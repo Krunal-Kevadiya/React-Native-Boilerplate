@@ -1,1 +1,1 @@
-export * from './ReduxUtil';
+export * from './ReduxUtils';

@@ -5,10 +5,16 @@ import { useTheme } from 'rn-custom-style-sheet';
 
 import { isPresentValue } from '@utils';
 
-import styleSheet from './BottomSheetStyle';
+import styleSheet from './BottomSheetStyles';
 
 import type { BottomSheetHandleType, BottomSheetPropsType } from './BottomSheetTypes';
 
+/**
+ * A custom bottom sheet component.
+ * @param {BottomSheetPropsType<T>} props - the props to pass to the bottom sheet.
+ * @param {React.Ref<BottomSheetHandleType>} ref - the ref to pass to the bottom sheet.
+ * @returns {React.ReactElement} A React Element.
+ */
 function CustomBottomSheet<T>(
   { title, message, onSwipeComplete, onBackButtonPress, children, ...extraFlatListProps }: BottomSheetPropsType<T>,
   ref: React.Ref<BottomSheetHandleType>

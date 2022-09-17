@@ -1,3 +1,9 @@
+/**
+ * A cancelable async hook that takes in a promise and returns a cancelable promise.
+ * @param {Promise<T>} promise - the promise to wrap
+ * @param {boolean} [cancelHandle=false] - whether or not to handle the cancelation
+ * @returns {Promise<T>} - the cancelable promise
+ */
 export default function usedCancelableAsync<T>(
   promise: Promise<T>,
   cancelHandle: boolean = false
@@ -27,6 +33,10 @@ export default function usedCancelableAsync<T>(
 
   return {
     promise: wrappedPromise,
+    /**
+     * Cancels the current inversion process.
+     * @returns None
+     */
     cancel() {
       hasCanceled = true;
     }

@@ -20,8 +20,14 @@ import { useTranslationsLanguage, useLifecycle } from '@hooks';
 import { AppNavigator } from '@navigators';
 import { Store } from '@stores';
 import { ApplicationStyles } from '@themes';
-import { changeScreenOrientation } from '@utils';
+import { changeScreenOrientation, getStorageString, setStorageString } from '@utils';
 
+/**
+ * The main App component.
+ * We're using the Provider component from react-redux to wrap our AppNavigator component, which is the
+ * component that contains all of our routes
+ * @returns The App component is being returned
+ */
 function App(): React.ReactElement {
   useTranslationsLanguage();
 
@@ -40,7 +46,7 @@ function App(): React.ReactElement {
     <GestureHandlerRootView style={ApplicationStyles.viewStyle.screen}>
       <Provider store={Store.store}>
         <PersistGate loading={null} persistor={Store.persistor}>
-          <ThemeProvider>
+          <ThemeProvider getStorageString={getStorageString} setStorageString={setStorageString}>
             <SafeAreaProvider style={ApplicationStyles.viewStyle.screen}>
               <StatusBar animated hidden={false} />
               <AppNavigator />

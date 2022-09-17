@@ -3,11 +3,16 @@ import { Pressable, StyleSheet, type ViewStyle } from 'react-native';
 import Animated, { interpolateColors, spring } from 'react-native-reanimated';
 import { useTheme } from 'rn-custom-style-sheet';
 
-import styleSheet, { SwitchWidth } from './SwitchStyle';
+import styleSheet, { SwitchWidth } from './SwitchStyles';
 import { defaultProps } from './SwitchTypes';
 
 import type { SwitchPropsType } from './SwitchTypes';
 
+/**
+ * A Switch component that can be used to toggle between two values.
+ * @param {SwitchPropsType} props - The props for the Switch component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function Switch({
   handleOnPress,
   activeTrackColor,

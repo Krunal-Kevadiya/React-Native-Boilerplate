@@ -13,11 +13,16 @@ import { moderateScale } from 'rn-custom-style-sheet';
 import { Icon } from '@components';
 import { isPresentValue } from '@utils';
 
-import styles from './GlowPadButtonStyle';
+import styles from './GlowPadButtonStyles';
 import { defaultProps } from './GlowPadButtonTypes';
 
 import type { GlowPadButtonPropsType, RingViewPropsType, PulseType } from './GlowPadButtonTypes';
 
+/**
+ * A custom ring view component
+ * @param {RingViewPropsType} props - the props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 function RingView({ delay, color, duration, pulse }: RingViewPropsType): React.ReactElement {
   const ring = useSharedValue<number>(0);
 
@@ -55,6 +60,11 @@ function RingView({ delay, color, duration, pulse }: RingViewPropsType): React.R
   return <Animated.View style={StyleSheet.flatten([styles.pulse, ringStyle])} />;
 }
 
+/**
+ * A custom glow button with pulses.
+ * @param {GlowPadButtonPropsType} props - The props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function GlowPadButton({
   style,
   image,

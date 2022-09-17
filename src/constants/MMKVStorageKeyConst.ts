@@ -1,5 +1,9 @@
-const MMKVStorageKey = Object.freeze({
+/**
+ * A constant freezing object that contains the keys to the local storage.
+ * @type {Object}
+ */
+export default Object.freeze({
   appTheme: 'appTheme',
-  systemTheme: 'systemTheme'
+  systemTheme: 'systemTheme',
+  redux: 'ReactNativeStructure'
 });
-export default MMKVStorageKey;

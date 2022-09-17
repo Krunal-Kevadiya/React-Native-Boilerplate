@@ -146,7 +146,7 @@ module.exports = {
       }
     ],
     'require-jsdoc': [
-      OFF,
+      ERROR,
       {
         require: {
           FunctionDeclaration: true,

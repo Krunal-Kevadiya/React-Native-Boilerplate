@@ -11,12 +11,22 @@ import {
   clearAllFields,
   codeToArray,
   focusField
-} from './OtpInputUtil';
+} from './OtpInputUtils';
 
 import type { UseOtpInputPropsType, UseOtpInputReturnType } from './OtpInputTypes';
 
 export const fieldList: React.LegacyRef<TextInput>[] | undefined[] = [];
 
+/**
+ * A otp input hook that returns the UseOtpInputPropsType type.
+ * @param {string} code - the code to format
+ * @param {boolean} autoFocusOnLoad - whether to focus the first field
+ * @param {boolean} clearInputs - whether to clear the inputs
+ * @param {number} pinCount - the number of pins
+ * @param {(digits: string[]) => void} onCodeFilled - the function to call when the code is filled
+ * @param {(digits: string[]) => void} onCodeChanged - the function to call when the code is changed
+ * @returns {UseOtpInputReturnType} the digits, setDigits, and selectedIndex etc
+ */
 export function useOtpInput({
   code,
   autoFocusOnLoad,

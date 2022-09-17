@@ -67,7 +67,7 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.1",
     "reflect-metadata": "^0.1.13",
-    "rn-custom-style-sheet": "^3.0.0",
+    "rn-custom-style-sheet": "^3.1.0",
     "socket.io-client": "^4.5.2",
     "tinycolor2": "^1.4.2",
     "yup": "^0.32.11"

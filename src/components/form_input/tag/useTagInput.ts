@@ -13,6 +13,10 @@ import { callActions, PATTERNS } from './TagInputUtil';
 
 import type { ParseType, UseTagInputReturnType } from './TagInputTypes';
 
+/**
+ * A custom tag input hook that returns an array of objects that can be used to parse text.
+ * @returns {ParseType[]} - An array of objects that can be used to parse text.
+ */
 export default function useTagInput(handlePress?: (type: string, value: string) => void): UseTagInputReturnType {
   const [, setStringToClipboard] = useClipboard();
   const { styles, theme } = useTheme(styleSheet);

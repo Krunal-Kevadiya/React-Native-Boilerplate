@@ -11,6 +11,16 @@ import { windowHeight, windowWidth } from 'rn-custom-style-sheet';
 
 import type { DraggablePropsType } from './DraggableTypes';
 
+/**
+ * A draggable view that can be used to move around a view.
+ * @param {React.ReactNode} children - The children to render.
+ * @param {number} [maxHeight=windowHeight] - The maximum height of the view.
+ * @param {number} [minHeight=0] - The minimum height of the view.
+ * @param {number} [maxWidth=windowWidth] - The maximum width of the view.
+ * @param {number} [minWidth=0] - The minimum width of the view.
+ * @param {number} [padding=0] - The padding to apply to the view.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function DraggableView({
   children,
   maxHeight = windowHeight,

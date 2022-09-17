@@ -3,19 +3,28 @@ import { AppState, type AppStateStatus } from 'react-native';
 
 import { isAndroid } from '@themes';
 
+/**
+ * A app state hook prop type.
+ * @param {UseAppStatePropsType} props - the props to pass to the hook
+ */
 type UseAppStatePropsType = {
   onChange?: (status: AppStateStatus) => void;
   onForeground?: () => void;
   onBackground?: () => void;
 };
 
+/**
+ * A app state hook that returns the current app state.
+ * @param {UseAppStatePropsType} [settings] - the settings for the hook
+ * @returns {AppStateStatus} - the current app state
+ */
 export default function useAppState(settings?: UseAppStatePropsType): AppStateStatus {
   const { onChange, onForeground, onBackground }: UseAppStatePropsType = settings ?? {};
   const [firstTime, setFirstTime] = useState<boolean>(isAndroid);
   const [appState, setAppState] = useState<AppStateStatus>(AppState.currentState);
 
   useEffect(() => {
-    const handleAppStateChange = (nextAppState: AppStateStatus): void => {
+    const subscription = AppState.addEventListener('change', (nextAppState: AppStateStatus): void => {
       if (nextAppState === 'active' && appState !== 'active') {
         onForeground?.();
       } else if (appState === 'active' && nextAppState.match(/inactive|background/)) {
@@ -23,9 +32,7 @@ export default function useAppState(settings?: UseAppStatePropsType): AppStateSt
       }
       setAppState(nextAppState);
       onChange?.(nextAppState);
-    };
-
-    const subscription = AppState.addEventListener('change', handleAppStateChange);
+    });
     return () => subscription.remove();
   }, [onChange, onForeground, onBackground, appState]);
 

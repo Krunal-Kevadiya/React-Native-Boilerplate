@@ -14,6 +14,12 @@ import useToast from './useToast';
 
 import type { ToastHandleType, ToastPropsType, UseToastReturnType } from './ToastTypes';
 
+/**
+ * A custom toast component that can be used to display messages to the user.
+ * @param {ToastPropsType} props - The props for the toast component.
+ * @param {React.Ref<ToastHandleType>} ref - The ref for the toast component.
+ * @returns {React.ReactElement} A React Element.
+ */
 function CustomToast(
   { translucent = defaultProps.translucent, numberOfLines = defaultProps.numberOfLines, toastPosition }: ToastPropsType,
   ref: React.Ref<ToastHandleType>
@@ -62,7 +68,6 @@ function CustomToast(
               //@ts-ignore
               <Icon
                 type="svg"
-                //@ts-ignore
                 style={StyleSheet.flatten([styles.imageStyle, tintStyle ?? styles.tintColor])}
                 source={data?.image}
               />

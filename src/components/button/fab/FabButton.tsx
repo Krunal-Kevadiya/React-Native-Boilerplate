@@ -7,10 +7,15 @@ import { isPresentValue } from '@utils';
 
 import { Icon } from '../../icon';
 
-import styleSheet from './FabButtonStyle';
+import styleSheet from './FabButtonStyles';
 
 import type { FabButtonPropsType } from './FabButtonTypes';
 
+/**
+ * A custom fab button component
+ * @param {FabButtonPropsType} props - The props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function FabButton({
   onPress,
   style,

@@ -8,13 +8,21 @@ import { ImageSelectionOther } from '@models';
 import { BottomSheet } from '../../bottom_sheet';
 import { ImagePicker } from '../../common';
 
-import styleSheet from './ImagePickerStyle';
+import styleSheet from './ImagePickerStyles';
 
 import type { BottomSheetHandleType } from '../../bottom_sheet';
 import type { ListRenderItemInfo } from 'react-native';
 
-export const bottomSheetRef: React.RefObject<BottomSheetHandleType> = React.createRef<BottomSheetHandleType>();
+/* Creating a ref object for the bottom sheet. */
+export const imagePickerBottomSheetRef: React.RefObject<BottomSheetHandleType> =
+  React.createRef<BottomSheetHandleType>();
 
+/**
+ * It takes a component as an argument and returns a new component that wraps the original component
+ * with the image picker
+ * @param Component - React.ComponentType<T>
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function withImagePicker<T>(Component: React.ComponentType<T>): (props: T) => React.ReactElement {
   return function ImagePickerWrapper(props: T): React.ReactElement {
     const { styles } = useTheme(styleSheet);
@@ -23,13 +31,13 @@ export default function withImagePicker<T>(Component: React.ComponentType<T>): (
       <>
         <Component {...props} source={source} />
         <BottomSheet<string>
-          ref={bottomSheetRef}
-          title={StringConst.imagePicker.textSelectAPhoto}
-          data={StringConst.imagePicker.listSelectAPhoto}
+          ref={imagePickerBottomSheetRef}
+          title={StringConst.components.textSelectAPhoto}
+          data={StringConst.components.listSelectAPhoto}
           renderItem={({ item }: ListRenderItemInfo<string>) => (
             <ImagePicker
               item={item}
-              bottomSheetRef={bottomSheetRef}
+              bottomSheetRef={imagePickerBottomSheetRef}
               handleTakePhoto={handleTakePhoto}
               handleChooseLibrary={handleChooseLibrary}
             />

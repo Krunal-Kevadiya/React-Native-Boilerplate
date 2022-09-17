@@ -10,6 +10,17 @@ import { callback } from './ToastUtil';
 import type { ToastHandleType, InternalDataPropsType, UseToastReturnType, ToastPosition } from './ToastTypes';
 import type { LayoutChangeEvent, LayoutRectangle, PanResponderGestureState } from 'react-native';
 
+/**
+ * Gets the minimum height of the toast based on the position of the toast.
+ * @param {ToastPosition} toastPosition - the position of the toast
+ * @param {number} headerHeight - the height of the header
+ * @param {number} statusBarHeight - the height of the status bar
+ * @param {number} keyboardHeight - the height of the keyboard
+ * @param {LayoutRectangle} layout - the layout of the view
+ * @param {boolean} shown - whether the toast is shown
+ * @param {boolean} translucent - whether the status bar is translucent
+ * @returns {number} the minimum height of the
+ */
 function getMinHeight(
   toastPosition: ToastPosition,
   headerHeight: number,
@@ -29,6 +40,13 @@ function getMinHeight(
   return minHeight;
 }
 
+/**
+ * A custom toast hook that returns the data and offset values for the toast.
+ * @param {boolean} translucent - Whether the toast is translucent or not.
+ * @param {ToastPosition} toastPosition - The position of the toast.
+ * @param {React.Ref<ToastHandleType>} ref - The ref to the toast.
+ * @returns {UseToastReturnType} - The data and offset values for the toast.
+ */
 export default function useToast(
   translucent: boolean,
   toastPosition: ToastPosition,

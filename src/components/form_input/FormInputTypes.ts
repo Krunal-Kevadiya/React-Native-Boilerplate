@@ -9,8 +9,16 @@ type DictionaryType = {
 };
 
 type LocalTextInputPropsType = React.ComponentProps<typeof TextInput>;
+
 type TextInputPropsType = Omit<LocalTextInputPropsType, 'ref'>;
 
+/**
+ * A type alias for the props that can be passed to the Label component.
+ * @typedef {object} LabelPropsType
+ * @property {string} [label] - The text to display in the label.
+ * @property {TextStyle} [labelStyle] - The style of the label.
+ * @property {string} [labelColor] - The color of the label.
+ */
 type LabelPropsType =
   | {
       label?: string;
@@ -22,6 +30,14 @@ type LabelPropsType =
       labelStyle?: never;
       labelColor?: never;
     };
+
+/**
+ * A type for the props of the left icon.
+ * @typedef {object} LeftIconPropsType
+ * @property {string} [leftIconSource] - The source of the icon.
+ * @property {number} [leftIconSize] - The size of the icon.
+ * @property {XmlProps} [leftSvgStyle] - The style of the icon.
+ */
 type LeftIconPropsType =
   | {
       leftIconSource?: string;
@@ -33,6 +49,14 @@ type LeftIconPropsType =
       leftIconSize?: never;
       leftSvgStyle?: never;
     };
+
+/**
+ * A type for the props of the right icon.
+ * @param {RightIconPropsType} props - The props for the component.
+ * @property {string} [rightIconSource] - The source of the icon.
+ * @property {number} [rightIconSize] - The size of the icon.
+ * @property {XmlProps} [rightSvgStyle] - The style of the icon.
+ */
 type RightIconPropsType =
   | {
       rightIconSource?: string;
@@ -47,6 +71,11 @@ type RightIconPropsType =
       rightIconPress?: never;
     };
 
+/**
+ * A type that represents the form input.
+ * @param {LocalFormInputType} props - The props for the component.
+ * @returns A custom input component that can be used in a form.
+ */
 type LocalFormInputType = {
   id: string;
   errorColor?: string;

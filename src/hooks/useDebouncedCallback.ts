@@ -1,14 +1,29 @@
 import { useEffect, useMemo, useRef } from 'react';
 
+/**
+ * A debounce config type.
+ * @param {CallOptions} options - the options for the function call
+ */
 export type CallOptions = {
   leading?: boolean;
   trailing?: boolean;
 };
 
+/**
+ * A debounce config type.
+ * @param {number} [maxWait=5000] - the maximum amount of time to wait for the function call.
+ */
 export type Options = {
   maxWait?: number;
 } & CallOptions;
 
+/**
+ * A debounce config type.
+ * @typedef {Object} ControlFunctions
+ * @property {Function} cancel - A function that cancels the filter.
+ * @property {Function} flush - A function that flushes the filter.
+ * @property {Function} isPending - A function that returns whether the filter is pending.
+ */
 export type ControlFunctions = {
   cancel: () => void;
   flush: () => void;
@@ -135,6 +150,11 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
   // And the last reason, that the code without lots of useCallback with deps is easier to read.
   // You have only one place for that.
   const debounced = useMemo(() => {
+    /**
+     * Invokes the function that was passed in.
+     * @param {number} time - the time to invoke the function at.
+     * @returns The result of the function.
+     */
     const invokeFunc = (time: number) => {
       const args = lastArgs.current;
       const thisArg = lastThis.current;
@@ -145,6 +165,12 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
       return (result.current = funcRef.current.apply(thisArg, args));
     };
 
+    /**
+     * Starts a timer that will call the given function after the given amount of time.
+     * @param {() => void} pendingFunc - the function to call after the given amount of time.
+     * @param {number} argWait - the amount of time to wait before calling the function.
+     * @returns None
+     */
     const startTimer = (pendingFunc: () => void, argWait: number) => {
       if (useRAF && timerId.current !== undefined) {
         cancelAnimationFrame(timerId.current);
@@ -152,6 +178,11 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
       timerId.current = useRAF ? requestAnimationFrame(pendingFunc) : setTimeout(pendingFunc, argWait);
     };
 
+    /**
+     * Determines if the function should be invoked based on the time since the last call.
+     * @param {number} time - the current time since the epoch
+     * @returns {boolean} - true if the function should be invoked, false otherwise
+     */
     const shouldInvoke = (time: number) => {
       if (!mounted.current) {
         return false;
@@ -171,6 +202,11 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
       );
     };
 
+    /**
+     * Invokes the function with the given arguments.
+     * @param {number} time - the time to invoke the function with.
+     * @returns The result of the function.
+     */
     const trailingEdge = (time: number) => {
       timerId.current = undefined;
 
@@ -184,6 +220,10 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
       return result.current;
     };
 
+    /**
+     * A function that is called when the timer expires.
+     * @returns None
+     */
     const timerExpired = () => {
       const time = Date.now();
       if (shouldInvoke(time)) {
@@ -203,6 +243,15 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
       startTimer(timerExpired, remainingWait);
     };
 
+    /**
+     * A debounced version of the function.
+     * @param {T} func - The function to debounce.
+     * @param {number} wait - The amount of time to wait before invoking the function.
+     * @param {boolean} [leading=false] - Whether to invoke the function on the leading edge of the wait.
+     * @param {boolean} [maxing=false] - Whether to invoke the function on the trailing edge of the wait.
+     * @param {boolean} [trailing=true] - Whether to invoke the function on the trailing edge of the wait.
+     * @returns A debounced version of the function.
+     */
     const localFunc: DebouncedState<T> = (...args: Parameters<T>): ReturnType<T> | undefined => {
       const time = Date.now();
       const isInvoking = shouldInvoke(time);

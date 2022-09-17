@@ -8,10 +8,14 @@ import { navigateWithReset } from '@navigators';
 import { Colors } from '@themes';
 import { isPresentValue } from '@utils';
 
-import styleSheet from './WelcomeStyle';
+import styleSheet from './WelcomeStyles';
 
 import type { WelcomeRouteParamList } from './WelcomeTypes';
 
+/**
+ * The welcome screen.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function WelcomeScreen(): React.ReactElement {
   const { styles, theme } = useTheme(styleSheet);
   const route = useRoute<RouteProp<WelcomeRouteParamList, 'Welcome'>>();

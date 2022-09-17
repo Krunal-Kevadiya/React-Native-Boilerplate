@@ -1,38 +1,41 @@
 import { type RouteProp, useRoute } from '@react-navigation/core';
-import { useCallback, useRef } from 'react';
+import { useFormik, type FormikProps } from 'formik';
 import { useDispatch } from 'react-redux';
 
 import { useLifecycle } from '@hooks';
-import { SignInFormModel, SignInRequest } from '@models';
+import { SignInFormModel, SignInFormSchema, SignInRequest } from '@models';
 import { AuthActions } from '@stores';
 
-import type { SignInRouteParamList, UseSignInReturnType } from './SignInTypes';
+import type { SignInRouteParamList } from './SignInTypes';
 import type { AppDispatchType } from '@stores';
-import type { FormikProps } from 'formik';
 
-export default function useSignIn(): UseSignInReturnType {
+/**
+ * Hook that returns the ref to the sign in form and the function to submit the form.
+ * @returns {FormikProps<SignInFormModel>} - formik props.
+ */
+export default function useSignIn(): FormikProps<SignInFormModel> {
   const dispatch = useDispatch<AppDispatchType>();
-  const refSignIn = useRef<FormikProps<SignInFormModel>>(null);
   const route = useRoute<RouteProp<SignInRouteParamList, 'SignIn'>>();
 
-  const onFormSubmit = useCallback<(values: SignInFormModel) => void>((values: SignInFormModel) => {
-    dispatch(AuthActions.signInRequest(SignInRequest.withInit(values.email, values.password)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  /* Creating a formik object that is used to submit the form. */
+  const formik: FormikProps<SignInFormModel> = useFormik<SignInFormModel>({
+    initialValues: SignInFormModel.empty(),
+    validationSchema: SignInFormSchema,
+    onSubmit: (values: SignInFormModel) => {
+      dispatch(AuthActions.signInRequest(SignInRequest.withInit(values.email, values.password)));
+    }
+  });
 
   useLifecycle(
     () => {
-      refSignIn.current?.setFieldValue('email', route.params?.email);
-      refSignIn.current?.setFieldValue('email', 'eve.holt@reqres.in');
-      refSignIn.current?.setFieldValue('password', 'cityslicka');
+      formik?.setFieldValue('email', route.params?.email);
+      formik?.setFieldValue('email', 'eve.holt@reqres.in');
+      formik?.setFieldValue('password', 'cityslicka');
     },
     () => {
       dispatch(AuthActions.signInRequestCancel());
     }
   );
 
-  return {
-    refSignIn,
-    onFormSubmit
-  };
+  return formik;
 }

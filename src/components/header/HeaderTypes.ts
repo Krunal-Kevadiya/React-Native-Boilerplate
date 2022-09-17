@@ -6,6 +6,10 @@ import type { XmlProps } from 'react-native-svg';
 
 type TextInputPropsType = React.ComponentProps<typeof TextInput>;
 
+/**
+ * A type for the props of the icon.
+ * @param {IconPropsType} props - the props for the component.
+ */
 type IconPropsType = Partial<{
   label: string;
   isAddMargin: boolean;
@@ -17,6 +21,10 @@ type IconPropsType = Partial<{
 }> &
   (SvgIconPropsStyle | ImageIconPropsStyle | OtherIconPropsStyle);
 
+/**
+ * A type for the props of the header component.
+ * @param {LocalHeaderPropsType} props - the props for the component.
+ */
 type LocalHeaderPropsType = {
   left: IconPropsType;
   center: IconPropsType;

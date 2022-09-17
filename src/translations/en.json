@@ -11,12 +11,15 @@
     "btnRestart": "Restart"
   },
   "apiError": {
-    "msgNetworkError": "No internet connection, Please try again after sometime",
-    "msgServerError": "Server is not available",
-    "msgSomethingWentWrong": "Something went wrong. Try again!",
     "msgCancelSagaError": "Cancel api queue request and move forward",
-    "msgProcessingVideo": "Video is processing...stand by",
-    "msgProcessingError": "An error occured while processing this video"
+    "msgClientError": "Client can not provided proper data.",
+    "msgServerError": "Server side error.",
+    "msgTimeoutError": "Server didn't respond in time.",
+    "msgConnectionError": "Server not available, bad dns.",
+    "msgNetworkError": "No internet connection, Please try again after sometime.",
+    "msgCancelError": "Request has been cancelled. Only possible if `cancelToken` is provided in config, see axios `Cancellation`.",
+    "msgSomethingWentWrong": "Something went wrong. Try again!",
+    "msgUnexpectedError": "An unexpected error occurred."
   },
   "yupError": {
     "msgRequireEmail": "Please enter email address",
@@ -24,15 +27,22 @@
     "msgRequirePassword": "Please enter password"
   },
   "message": {
-    "copyLinkSuccess": "Copy link successfully"
+    "copyLinkSuccess": "Copy link successfully",
+    "fetchMustBeFunction": "fetch must be a function",
+    "defaultsMustBeObject": "defaults must be an object",
+    "retriesMustBePositiveInteger": "retries must be a positive integer",
+    "retryDelayMustNePositiveInteger": "retryDelay must be a positive integer or a function returning a positive integer",
+    "retryOnPropertyExpectsArrayOrFunction": "retryOn property expects an array or function",
+    "stringInvalidFormat": "String invalid format string.",
+    "stringArgumentIndexOutOfRangeInFormat": "String argument index is out of range in format"
   },
-  "imagePicker": {
+  "components": {
     "textSelectAPhoto": "Select a Photo",
     "listItemTakePhoto": "Take Photo",
     "listItemChooseFromLibrary": "Choose from Library",
     "listItemCancel": "Cancel"
   },
-  "signIn": {
+  "auth": {
     "textEmail": "Email",
     "inputEmail": "janedoe@email.com",
     "textPassword": "Password",

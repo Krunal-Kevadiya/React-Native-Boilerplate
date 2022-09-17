@@ -1,4 +1,7 @@
-export enum DeepLinkEnum {
+/**
+ * An enum of the possible paths in the application deeplink.
+ */
+enum DeepLinkEnum {
   // reactNativeStructure://m/<meeting id>
   MEETING = 'm',
   // reactNativeStructure://new&lang=en
@@ -6,5 +9,4 @@ export enum DeepLinkEnum {
   // reactNativeStructure://?toastMessage=<message content>
   TOAST_MESSAGE = 'toastMessage'
 }
-
 export default DeepLinkEnum;

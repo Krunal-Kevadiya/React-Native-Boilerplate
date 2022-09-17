@@ -1,9 +1,13 @@
 import { SENTRY_URL, SEGMENT_KEY, API_URL, ENVIRONMENT, ENCRYPTION_KEY } from 'react-native-dotenv';
 
-const appVersion = 'v2.1(2)';
+const appVersion = 'v1.0(1)';
 const PREFIXES: string[] = ['reactNativeStructure://', 'beta.reactNativeStructure.com//'];
 
-const AppConst = Object.freeze({
+/**
+ * A constant freezing object that contains the app value.
+ * @type {Object}
+ */
+export default Object.freeze({
   mobile: 'Mobile',
   isDevelopment: ENVIRONMENT === 'Dev',
   environment: ENVIRONMENT,
@@ -15,4 +19,3 @@ const AppConst = Object.freeze({
   deepLinkPrefixes: PREFIXES,
   pingServerUrl: 'https://www.google.com/'
 });
-export default AppConst;

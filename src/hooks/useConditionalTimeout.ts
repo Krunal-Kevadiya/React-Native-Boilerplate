@@ -11,6 +11,11 @@ const defaultOptions = {
 /**
  * An async-utility hook that accepts a callback function and a delay time (in milliseconds), then delays the
  * execution of the given function by the defined time from when the condition verifies.
+ * @param {() => void} fn - The function to run when the timeout is triggered.
+ * @param {number} milliseconds - The number of milliseconds to wait before running the function.
+ * @param {any} condition - The condition that must be true for the timeout to run.
+ * @param {TimeoutOptions} [options={}] - The options for the timeout.
+ * @returns A tuple containing the isCleared state and a function to clear the timeout.
  */
 export default function useConditionalTimeout(
   fn: () => void,

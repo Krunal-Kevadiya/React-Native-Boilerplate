@@ -12,27 +12,47 @@ import { ErrorResponse, UserResponse } from '@models';
 import { AppRequestSelectors, AuthSelectors, AppRequestActions } from '@stores';
 import { getLinkConfiguration } from '@utils';
 
-import AuthNavigator from './AuthNavigators';
+import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
 import LaunchNavigator from './LaunchNavigator';
 import { navigationRef, rightToLeftAnimation, routeNameRef } from './NavigatorUtil';
 
 import type { AppDispatchType, RootStateType } from '@stores';
 
+/**
+ * The type of the navigation prop for the RootStack.
+ * @typedef {object} AppNavigatorParams is an object type with keys that are the route names
+ * and values that are the route params
+ * @property {undefined} [LAUNCH] - The launch stack.
+ * @property {undefined} [AUTH] - The auth stack.
+ * @property {undefined} [HOME] - The home stack.
+ */
 export type AppNavigatorParams = {
   [AppRouteEnum.LAUNCH]: undefined;
   [AppRouteEnum.AUTH]: undefined;
   [AppRouteEnum.HOME]: undefined;
 };
 
+/**
+ * Creating a stack navigator with the type of AppNavigatorParams.
+ * @returns {StackNavigator} - The root stack navigator.
+ */
 const Stack = createStackNavigator<AppNavigatorParams>();
 
+/**
+ * Initializes the React Navigation DevTools.
+ * @returns None
+ */
 function InitializeReactNavigationDevTools(): void {
   const { useFlipper, useReduxDevToolsExtension } = require('@react-navigation/devtools');
   useFlipper(navigationRef);
   useReduxDevToolsExtension(navigationRef);
 }
 
+/**
+ * Initializes the app.
+ * @returns None
+ */
 function InitializeApp(): React.ReactElement | null {
   const dispatch = useDispatch<AppDispatchType>();
   const error = useSelector<RootStateType, ErrorResponse>(AppRequestSelectors.getError);
@@ -56,11 +76,19 @@ function InitializeApp(): React.ReactElement | null {
   return null;
 }
 
+/**
+ * Initializes the app with the user's preferences.
+ * @returns None
+ */
 function InitializeAppWithUser(): React.ReactElement | null {
   useExceptionHandler();
   return null;
 }
 
+/**
+ * The main App container.
+ * @returns {React.ReactElement} The main App container.
+ */
 export default function AppNavigator(): React.ReactElement {
   const user = useSelector<RootStateType, UserResponse>(AuthSelectors.getUser);
 
