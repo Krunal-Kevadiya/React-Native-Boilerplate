@@ -10,11 +10,16 @@ import { format } from '@utils';
 
 import { Draggable } from '../../common';
 
-import styleSheet from './CodePushStyle';
+import styleSheet from './CodePushStyles';
 
 import type { MovableViewPropsType } from './CodePushTypes';
 import type { AppThemeType } from 'rn-custom-style-sheet';
 
+/**
+ * A React component that displays a movable view that can be dragged up and down.
+ * @param {MovableViewPropsType} props - The props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 function MovableView({ message, isBtnVisible }: MovableViewPropsType): React.ReactElement {
   const statusBarHeight: number = useStatusBarHeight();
   const headerHeight: number = useHeaderHeight();
@@ -44,8 +49,23 @@ function MovableView({ message, isBtnVisible }: MovableViewPropsType): React.Rea
   );
 }
 
+/**
+ * It wraps the root component of the app with a CodePush component, which checks for updates on mount,
+ * and displays a message to the user if an update is available
+ * @param RootComponent - The component that you want to wrap with CodePush.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function withCodePush<T>(RootComponent: React.ComponentType<T>): React.ReactElement {
+  /**
+   * A component that wraps the RootComponent and displays a message if there is an update available.
+   * @returns None
+   */
   class RootComponentWithCodePush extends PureComponent<T, { message?: string; isBtnVisible: boolean }> {
+    /**
+     * The constructor for the class.
+     * @param {T} props - The props for the class.
+     * @returns None
+     */
     constructor(props: T) {
       super(props);
 
@@ -55,10 +75,18 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
       };
     }
 
+    /**
+     * Checks for an update to the extension.
+     * @returns None
+     */
     async componentDidMount() {
       await this.checkForUpdate();
     }
 
+    /**
+     * If there's an update, and it's mandatory, then sync immediately. Otherwise, sync
+     * @returns The return value is the result of the sync operation.
+     */
     async checkForUpdate(): Promise<CodePush.SyncStatus | undefined> {
       const update = await CodePush.checkForUpdate();
       if (update) {
@@ -70,6 +98,14 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
       return undefined;
     }
 
+    /**
+     * "When the status of the CodePush update changes, update the message and button visibility
+     * accordingly."
+     *
+     * The function is called by the CodePush.sync() function, which is called by the syncImmediate()
+     * function
+     * @param syncStatus - The current status of the sync operation.
+     */
     codePushStatusDidChange(syncStatus: CodePush.SyncStatus): void {
       switch (syncStatus) {
         case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
@@ -104,6 +140,11 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
       }
     }
 
+    /**
+     * Called when the code push download progress changes.
+     * @param {DownloadProgress} downloadProgress - the download progress object.
+     * @returns None
+     */
     codePushDownloadDidProgress(downloadProgress: DownloadProgress): void {
       const progress = (downloadProgress.receivedBytes / downloadProgress.totalBytes) * 100;
       this.setState({ message: format(StringConst.codePush.textDownloadingPackage, progress), isBtnVisible: false });
@@ -129,6 +170,10 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
       );
     }
 
+    /**
+     * Renders the root component.
+     * @returns None
+     */
     render() {
       const { message, isBtnVisible } = this.state;
       return (

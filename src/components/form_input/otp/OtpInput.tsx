@@ -11,13 +11,18 @@ import { useTheme } from 'rn-custom-style-sheet';
 
 import { isPresentValue } from '@utils';
 
-import styleSheet from './OtpInputStyle';
+import styleSheet from './OtpInputStyles';
 import { defaultProps } from './OtpInputTypes';
-import { handleChangeText, handleKeyPressTextInput, isAutoFillSupported } from './OtpInputUtil';
+import { handleChangeText, handleKeyPressTextInput, isAutoFillSupported } from './OtpInputUtils';
 import { fieldList, useOtpInput } from './useOtpInput';
 
 import type { OtpInputPropsType, UseOtpInputReturnType, OneInputFieldPropsType } from './OtpInputTypes';
 
+/**
+ * A component that renders a single input field for the OneInputField component.
+ * @param {OneInputFieldPropsType} props - The props for the OneInputField component.
+ * @returns {React.ReactElement} A React Element.
+ */
 function OneInputField({
   index,
   pinCount,
@@ -79,6 +84,11 @@ function OneInputField({
   );
 }
 
+/**
+ * The OtpInput component is a component that takes in a code and displays it as a series of input fields.
+ * @param {OtpInputPropsType} props - the props for the OtpInput component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export function OtpInput({
   code,
   style,

@@ -6,10 +6,20 @@ import { isPresentValue } from '@utils';
 
 import { Icon } from '../../icon';
 
-import styleSheet from './BothSideStyle';
+import styleSheet from './BothSideStyles';
 
 import type { BothSidePropsType } from './BothSideTypes';
 
+/**
+ * A header left and right side component that renders a button with a label and an icon.
+ * @param {string} label - the label to display on the button.
+ * @param {Function} onPress - the function to call when the button is pressed.
+ * @param {ViewStyle} viewStyle - the style to apply to the button.
+ * @param {TextStyle} textStyle - the style to apply to the label.
+ * @param {boolean} isAddMargin - whether or not to add a margin to the button.
+ * @param {Function} onLayout - the function to call when the button is laid out.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function BothSide({
   label,
   onPress,

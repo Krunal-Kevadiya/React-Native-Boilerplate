@@ -5,6 +5,11 @@ import { moderateScale } from 'rn-custom-style-sheet';
 
 import type { IconPropsType } from './IconTypes';
 
+/**
+ * A component that renders an icon.
+ * @param {IconPropsType} props - the props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function Icon({ type, size, source, style, svgStyle }: IconPropsType): React.ReactElement {
   const { width, height } = style ?? { width: 0, height: 0 };
   const widthIsString = typeof width === 'string';

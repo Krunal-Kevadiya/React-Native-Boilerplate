@@ -6,10 +6,20 @@ import { isPresentValue } from '@utils';
 
 import { Icon } from '../../icon';
 
-import styleSheet from './CenterSideStyle';
+import styleSheet from './CenterSideStyles';
 
 import type { CenterSidePropsType } from './CenterSideTypes';
 
+/**
+ * A header centered component.
+ * @param {string} label - The label to display on the button.
+ * @param {Function} onPress - The function to call when the button is pressed.
+ * @param {ViewStyle} viewStyle - The style to apply to the view.
+ * @param {TextStyle} textStyle - The style to apply to the text.
+ * @param {ViewStyle} svgStyle - The style to apply to the icon.
+ * @param {ImageStyle} imageStyle - The style to apply to the image.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function CenterSide({
   label,
   onPress,

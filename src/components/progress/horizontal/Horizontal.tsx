@@ -7,11 +7,18 @@ import { useStatusBarHeight } from '@hooks';
 import { Colors } from '@themes';
 import { colorOpacity } from '@utils';
 
-import styles from './HorizontalStyle';
+import styles from './HorizontalStyles';
 
 import type { HorizontalProgressHandleType } from './HorizontalTypes';
 import type { ThemeType } from 'rn-custom-style-sheet';
 
+/**
+ * A custom horizontal progress bar that can be used to display a progress bar in the
+ * status bar.
+ * @param {Record<string, any>} props - the props to pass to the progress bar
+ * @param {React.Ref<HorizontalProgressHandleType>} ref - the ref to pass to the progress bar
+ * @returns {React.ReactElement} A React Element.
+ */
 function CustomHorizontalProgress(
   props: Record<string, any>,
   ref: React.Ref<HorizontalProgressHandleType>

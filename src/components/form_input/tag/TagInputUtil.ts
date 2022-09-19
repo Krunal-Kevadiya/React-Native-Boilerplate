@@ -8,6 +8,10 @@ import { PatternsEnum } from './TagInputTypes';
 
 import type { MatchPartType, ParseType } from './TagInputTypes';
 
+/**
+ * A list of all the patterns that are used in the tag.
+ * @type {PatternsEnum}
+ */
 export const PATTERNS = Object.freeze({
   [PatternsEnum.phone]: /[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,7}/,
   [PatternsEnum.email]: /\S+@\S+\.\S+/,
@@ -26,6 +30,12 @@ export const PATTERNS = Object.freeze({
   [PatternsEnum.lineBreak]: /<br>|<br >|<br\/>|<br \/>|<Br>|<Br >|<Br\/>|<Br \/>|<BR>|<BR >|<BR\/>|<BR \/>/
 });
 
+/**
+ * It removes HTML tags from a string, replacing them with Markdown equivalents
+ * @param {string | undefined} values - The string to be processed.
+ * @param {boolean} [isCollapse] - If true, it will collapse multiple new lines into a single space.
+ * @returns remove string.
+ */
 export function removeHtmlTags(values: string | undefined, isCollapse?: boolean): string {
   let newValues: string = (values ?? '').replace(/<(?!br|b|i|s|\/?(!br|b|i|s))[^>]+>/gi, '');
   newValues = newValues?.replace(/<(br\s*\/?)[^>]+>/gi, '\n');
@@ -39,6 +49,13 @@ export function removeHtmlTags(values: string | undefined, isCollapse?: boolean)
   return newValues;
 }
 
+/**
+ * It checks if the text is a valid markdown syntax
+ * @param {PatternsEnum} type - The type of pattern we're looking for.
+ * @param {string} text - The text that is being checked
+ * @param {string} textLeft - The text to the left of the current text.
+ * @returns A boolean or a string.
+ */
 function isInfixText(type: PatternsEnum, text: string, textLeft: string): boolean | string {
   switch (type) {
     case PatternsEnum.boldWith2Star:
@@ -68,6 +85,14 @@ function isInfixText(type: PatternsEnum, text: string, textLeft: string): boolea
   }
 }
 
+/**
+ * It takes a matched pattern, the text, the matches, and the index, and returns a match part type
+ * @param {ParseType} matchedPattern - ParseType - The matched pattern object
+ * @param {string} text - The text that we're parsing
+ * @param {RegExpExecArray | null} matches - The result of the regex match.
+ * @param {number} index - The index of the match in the text.
+ * @returns A MatchPartType object
+ */
 function getMatchedPart(
   matchedPattern: ParseType,
   text: string,
@@ -93,6 +118,13 @@ function getMatchedPart(
   };
 }
 
+/**
+ * It takes a string and a list of patterns, and returns a list of parts of the string that match the
+ * patterns
+ * @param {string} text - The text to parse
+ * @param {ParseType[]} patterns - An array of objects that contain a pattern and a type.
+ * @returns An array of objects with a children key.
+ */
 export function textExtraction(text: string, patterns: ParseType[]): MatchPartType[] {
   let parsedTexts: MatchPartType[] = [{ children: text }];
 
@@ -154,6 +186,12 @@ export function textExtraction(text: string, patterns: ParseType[]): MatchPartTy
   return parsedTexts.filter((t) => !!t.children);
 }
 
+/**
+ * Removes the prefix or postfix tag characters from the given text.
+ * @param {PatternsEnum | undefined} type - the type of prefix or postfix text to remove.
+ * @param {string} text - the text to remove the prefix or postfix text from.
+ * @returns {string} the text with the prefix or postfix text removed.
+ */
 export function removePrefixOrPostfixText(type: PatternsEnum | undefined, text: string): string {
   switch (type) {
     case PatternsEnum.boldWith2Star:
@@ -181,6 +219,11 @@ export function removePrefixOrPostfixText(type: PatternsEnum | undefined, text: 
   }
 }
 
+/**
+ * Calls the given phone number.
+ * @param {string} phone - the phone number to call
+ * @returns None
+ */
 function callNumber(phone: string): void {
   let phoneNumber: string = phone;
   if (isIos) {
@@ -197,6 +240,10 @@ function callNumber(phone: string): void {
     .catch((err: Error) => sentryCaptureException(err));
 }
 
+/**
+ * The function callEmail takes an email address as a string and opens the email app on the device
+ * @param {string} email - string - The email address to send the email to.
+ */
 function callEmail(email: string): void {
   const eMail: string = `mailto:${email}`;
   Linking.canOpenURL(eMail)
@@ -208,6 +255,11 @@ function callEmail(email: string): void {
     .catch((err: Error) => sentryCaptureException(err));
 }
 
+/**
+ * Calls the given URL and open browser.
+ * @param {string} url - the URL to call
+ * @returns None
+ */
 function callUrl(url: string): void {
   const urls: string = url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
   Linking.canOpenURL(urls)
@@ -219,6 +271,12 @@ function callUrl(url: string): void {
     .catch((err: Error) => sentryCaptureException(err));
 }
 
+/**
+ * Calls the appropriate action for the given value.
+ * @param {string} value - the value to call the action for
+ * @param {PatternsEnum} type - the type of pattern to call the action for
+ * @returns None
+ */
 export function callActions(value: string, type: PatternsEnum): void {
   switch (type) {
     case PatternsEnum.url:

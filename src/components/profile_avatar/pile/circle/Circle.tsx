@@ -4,10 +4,15 @@ import { moderateScale, useTheme } from 'rn-custom-style-sheet';
 
 import ProfileAvatar from '../../ProfileAvatar';
 
-import styleSheet from './CircleStyle';
+import styleSheet from './CircleStyles';
 
 import type { CirclePropsType } from './CircleTypes';
 
+/**
+ * It renders a circle with a profile image and a label
+ * @param {CirclePropsType}  - `circleStyle` - the style of the circle
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function Circle({
   circleStyle,
   imageStyle,

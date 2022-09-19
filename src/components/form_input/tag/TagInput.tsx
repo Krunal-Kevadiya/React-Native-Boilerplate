@@ -12,6 +12,12 @@ import useTagInput from './useTagInput';
 
 import type { MatchPartType, ParseType, TagInputPropsType, UseTagInputReturnType } from './TagInputTypes';
 
+/**
+ * Takes in a string of code and parses it for the given parse type.
+ * @param {string} values - the string of code to parse
+ * @param {ParseType[]} parse - the parse type to use
+ * @returns {MatchPartType[]} - the parsed text
+ */
 function getParsedText(
   parse: ParseType[],
   childrenProps: TextProps,
@@ -50,6 +56,12 @@ function getParsedText(
   return components;
 }
 
+/**
+ * A custom input with tag that can be used to enter tags.
+ * @param {TagInputPropsType} props - The props for the component.
+ * @param {React.LegacyRef<TextInput> | undefined} ref - The ref for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 function CustomTabInput(
   {
     editable = defaultProps.editable,

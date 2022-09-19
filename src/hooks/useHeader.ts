@@ -2,11 +2,20 @@ import { Platform } from 'react-native';
 import { type Rect, useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { verticalScale } from 'rn-custom-style-sheet';
 
+/**
+ * A status bar hook returns the height of the status bar.
+ * @returns {number} The height of the status bar.
+ */
 export function useStatusBarHeight(): number {
   const insets = useSafeAreaInsets();
   return insets.top;
 }
 
+/**
+ * A header returns the height of the header.
+ * @param {boolean} [modalPresentation=false] - Whether the header is being used in a modal presentation.
+ * @returns {number} The height of the header.
+ */
 export function useHeaderHeight(modalPresentation: boolean = false): number {
   const frame: Rect = useSafeAreaFrame();
   const statusBarHeight: number = useStatusBarHeight();

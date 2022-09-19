@@ -4,10 +4,16 @@ import { useTheme } from 'rn-custom-style-sheet';
 
 import { Colors } from '@themes';
 
-import styleSheet from './FullScreenStyle';
+import styleSheet from './FullScreenStyles';
 
 import type { FullScreenProgressHandleType } from './FullScreenTypes';
 
+/**
+ * A full screen progress indicator that can be used to show the user that something is happening.
+ * @param {Record<string, any>} props - the props to pass to the ActivityIndicator
+ * @param {React.Ref<FullScreenProgressHandleType>} ref - the ref to pass to the ActivityIndicator
+ * @returns {React.ReactElement} A React Element.
+ */
 function CustomFullScreenProgress(
   props: Record<string, any>,
   ref: React.Ref<FullScreenProgressHandleType>

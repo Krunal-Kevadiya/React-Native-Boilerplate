@@ -1,23 +1,26 @@
-import { Formik, type FormikProps } from 'formik';
+import { type FormikProps } from 'formik';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
 
 import { Icons } from '@assets';
 import { Header, Icon } from '@components';
-import { SignInFormModel, SignInFormSchema } from '@models';
+import { SignInFormModel } from '@models';
 import { navigateBack } from '@navigators';
 
 import SignInForm from './sign_in_form/SignInForm';
-import styleSheet from './SignInStyle';
+import styleSheet from './SignInStyles';
 import useSignIn from './useSignIn';
 
-import type { UseSignInReturnType } from './SignInTypes';
 import type { XmlProps } from 'react-native-svg';
 
+/**
+ * The SignInScreen component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function SignInScreen(): React.ReactElement {
   const { styles } = useTheme(styleSheet);
-  const { refSignIn, onFormSubmit }: UseSignInReturnType = useSignIn();
+  const formik: FormikProps<SignInFormModel> = useSignIn();
 
   return (
     <View style={StyleSheet.flatten([styles.screen, styles.screenView])}>
@@ -32,17 +35,7 @@ export default function SignInScreen(): React.ReactElement {
       />
       <View style={StyleSheet.flatten([styles.screen, styles.centerAlign])}>
         <Icon type="svg" style={styles.logo} svgStyle={styles.logoSvg as XmlProps} source={Icons.icLogo} />
-        <Formik
-          innerRef={refSignIn}
-          validateOnChange={false}
-          validateOnBlur={false}
-          validateOnMount={false}
-          initialValues={SignInFormModel.empty()}
-          validationSchema={SignInFormSchema}
-          onSubmit={onFormSubmit}
-        >
-          {(props: FormikProps<SignInFormModel>) => <SignInForm {...props} />}
-        </Formik>
+        <SignInForm {...formik} />
       </View>
     </View>
   );

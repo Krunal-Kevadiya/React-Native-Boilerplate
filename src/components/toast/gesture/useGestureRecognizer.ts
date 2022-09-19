@@ -21,6 +21,11 @@ import type {
   UseGestureRecognizerReturnType
 } from './GestureRecognizerTypes';
 
+/**
+ * A hook that returns a PanResponder instance that can be used to handle swipe gestures.
+ * @param {GestureRecognizerPropsType} props - The props that are passed to the hook.
+ * @returns {UseGestureRecognizerReturnType} - The PanResponder instance.
+ */
 export default function useGestureRecognizer({
   config,
   onSwipe,

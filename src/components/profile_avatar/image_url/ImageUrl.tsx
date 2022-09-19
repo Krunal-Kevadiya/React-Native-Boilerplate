@@ -9,13 +9,18 @@ import { Colors } from '@themes';
 import { withImageProgress } from '../../hoc';
 import { Icon } from '../../icon';
 
-import styleSheet from './ImageUrlStyle';
+import styleSheet from './ImageUrlStyles';
 
 import type { ImageUrlPropsType } from './ImageUrlTypes';
 import type { LayoutChangeEvent } from 'react-native';
 
 const FastImageProgress = withImageProgress(FastImage);
 
+/**
+ * A component that renders an image with a progress indicator.
+ * @param {ImageUrlPropsType} props - the props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function ImageUrl({ url, style, imageStyle, onLoading }: ImageUrlPropsType): React.ReactElement {
   const [indicatorSize, setIndicatorSize] = useState<number>(0);
   const { styles, theme } = useTheme(styleSheet);

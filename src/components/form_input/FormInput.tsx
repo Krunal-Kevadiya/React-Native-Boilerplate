@@ -7,13 +7,19 @@ import { isPresentValue } from '@utils';
 
 import { Icon } from '../icon';
 
-import styleSheet from './FormInputStyle';
+import styleSheet from './FormInputStyles';
 import { defaultProps } from './FormInputTypes';
-import { getChangeValue } from './FormInputUtil';
+import { getChangeValue } from './FormInputUtils';
 import TagInput from './tag/TagInput';
 
 import type { FormInputPropsType } from './FormInputTypes';
 
+/**
+ * A custom input component that can be used in a form.
+ * @param {FormInputPropsType} props - the props for the component.
+ * @param {React.LegacyRef<TextInput> | undefined} ref - the ref for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 function CustomInput(
   {
     id,

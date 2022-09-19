@@ -5,11 +5,16 @@ import { UserResponse } from '@models';
 
 import { Circle } from './circle';
 import { OverflowCircle } from './overflow_circle';
-import styles from './ProfileAvatarPileStyle';
+import styles from './ProfileAvatarPileStyles';
 import { defaultProps } from './ProfileAvatarPileTypes';
 
 import type { ProfileAvatarPilePropsType } from './ProfileAvatarPileTypes';
 
+/**
+ * A component that renders a pile of profile avatars.
+ * @param {ProfileAvatarPilePropsType} props - the props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function ProfileAvatarPile({
   faces,
   overflow,

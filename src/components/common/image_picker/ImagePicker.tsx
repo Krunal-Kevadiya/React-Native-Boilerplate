@@ -5,10 +5,15 @@ import { useTheme } from 'rn-custom-style-sheet';
 import { StringConst } from '@constants';
 import { useDebouncedCallback } from '@hooks';
 
-import styleSheet from './ImagePickerStyle';
+import styleSheet from './ImagePickerStyles';
 
 import type { ImagePickerPropsType } from './ImagePickerTypes';
 
+/**
+ * A custom image picker flat list item component.
+ * @param {ImagePickerPropsType} props - The props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function ImagePicker({
   item,
   bottomSheetRef,
@@ -19,10 +24,10 @@ export default function ImagePicker({
   const handlePress = useDebouncedCallback<() => void>(
     () => {
       switch (item) {
-        case StringConst.imagePicker.listSelectAPhoto[0]:
+        case StringConst.components.listSelectAPhoto[0]:
           handleTakePhoto();
           break;
-        case StringConst.imagePicker.listSelectAPhoto[1]:
+        case StringConst.components.listSelectAPhoto[1]:
           handleChooseLibrary();
           break;
         default:

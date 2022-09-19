@@ -11,10 +11,25 @@ export const swipeConfig: ConfigPropsType = Object.freeze({
 
 let classSwipeConfig: ConfigPropsType = swipeConfig;
 
+/**
+ * Sets the class swipe config to the given config.
+ * @param {ConfigPropsType} config - the config to set the class swipe config to.
+ * @returns None
+ */
 export function setClassSwipeConfig(config: ConfigPropsType): void {
   classSwipeConfig = config;
 }
 
+/**
+ * If the velocity is greater than the velocity threshold and the directional offset is less than the
+ * directional offset threshold, then return true.
+ * @param {number} velocity - The velocity of the gesture.
+ * @param {number} velocityThreshold - The minimum velocity required to trigger a swipe.
+ * @param {number} directionalOffset - How far the user has swiped in the direction of the swipe.
+ * @param {number} directionalOffsetThreshold - The maximum distance from the start point the gesture
+ * can finish at for it to be considered a swipe.
+ * @returns A boolean value.
+ */
 function isValidSwipe(
   velocity: number,
   velocityThreshold: number,
@@ -24,6 +39,11 @@ function isValidSwipe(
   return Math.abs(velocity) > velocityThreshold && Math.abs(directionalOffset) < directionalOffsetThreshold;
 }
 
+/**
+ * If the distance the user has moved their finger is less than the threshold, then it's a click
+ * @param {PanResponderGestureState} gestureState - PanResponderGestureState
+ * @returns A boolean value.
+ */
 function gestureIsClick(gestureState: PanResponderGestureState): boolean {
   return (
     Math.abs(gestureState.dx) < classSwipeConfig.gestureIsClickThreshold &&
@@ -31,6 +51,11 @@ function gestureIsClick(gestureState: PanResponderGestureState): boolean {
   );
 }
 
+/**
+ * Determines whether the gesture is a click.
+ * @param {PanResponderGestureState} gestureState - the gesture state object
+ * @returns {boolean} - whether the gesture is a click.
+ */
 export function handleShouldSetPanResponder(
   evt: GestureResponderEvent,
   gestureState: PanResponderGestureState
@@ -38,6 +63,11 @@ export function handleShouldSetPanResponder(
   return evt.nativeEvent.touches.length === 1 && !gestureIsClick(gestureState);
 }
 
+/**
+ * Triggers the swipe handlers for the given swipe direction.
+ * @param {SwipeHandlerPropsType} props - The swipe handler props.
+ * @returns None
+ */
 function triggerSwipeHandlers({
   swipeDirection,
   gestureState,
@@ -66,18 +96,33 @@ function triggerSwipeHandlers({
   }
 }
 
+/**
+ * Determines if the gesture is a valid horizontal swipe.
+ * @param {PanResponderGestureState} gestureState - the gesture state object
+ * @returns {boolean} - true if the gesture is a valid horizontal swipe, false otherwise
+ */
 function isValidHorizontalSwipe(gestureState: PanResponderGestureState): boolean {
   const { vx, dy } = gestureState;
   const { velocityThreshold, directionalOffsetThreshold } = classSwipeConfig;
   return isValidSwipe(vx, velocityThreshold, dy, directionalOffsetThreshold);
 }
 
+/**
+ * Determines if the gesture is a valid vertical swipe.
+ * @param {PanResponderGestureState} gestureState - the gesture state object
+ * @returns {boolean} - true if the gesture is a valid vertical swipe, false otherwise
+ */
 function isValidVerticalSwipe(gestureState: PanResponderGestureState): boolean {
   const { vy, dx } = gestureState;
   const { velocityThreshold, directionalOffsetThreshold } = classSwipeConfig;
   return isValidSwipe(vy, velocityThreshold, dx, directionalOffsetThreshold);
 }
 
+/**
+ * Returns the direction of the swipe.
+ * @param {PanResponderGestureState} gestureState - the gesture state object
+ * @returns {SwipeDirectionsEnum | null} - the direction of the swipe
+ */
 function getSwipeDirection(gestureState: PanResponderGestureState): SwipeDirectionsEnum | null {
   const { SWIPE_LEFT, SWIPE_RIGHT, SWIPE_UP, SWIPE_DOWN } = SwipeDirectionsEnum;
   const { dx, dy } = gestureState;
@@ -90,6 +135,11 @@ function getSwipeDirection(gestureState: PanResponderGestureState): SwipeDirecti
   return null;
 }
 
+/**
+ * Handles the end of a swipe gesture.
+ * @param {SwipeHandlerPropsType} props - The props to use to handle the swipe.
+ * @returns None
+ */
 export function handlePanResponderEnd({
   gestureState,
   onSwipe,

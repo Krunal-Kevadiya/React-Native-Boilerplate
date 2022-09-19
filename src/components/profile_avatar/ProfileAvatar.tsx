@@ -12,6 +12,11 @@ import { ImageUrl } from './image_url';
 import type ProfileAvatarPropsType from './ProfileAvatarTypes';
 import type { ImageStyle as FastImageStyle } from 'react-native-fast-image';
 
+/**
+ * A component that renders an image from a URL, an image from a static source, or a text string.
+ * @param {ProfileAvatarPropsType} props - the props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function ProfileAvatar({
   url,
   image,

@@ -5,11 +5,16 @@ import { useTheme } from 'rn-custom-style-sheet';
 
 import { Icon } from '../../icon';
 
-import styleSheet from './ImageOverlapStyle';
+import styleSheet from './ImageOverlapStyles';
 
 import type { ImageOverlapPropsType } from './ImageOverlapTypes';
 import type { XmlProps } from 'react-native-svg';
 
+/**
+ * A component that overlays an image on top of another image.
+ * @param {ImageOverlapPropsType} props - the props for the component.
+ * @returns {React.ReactElement} A React Element..
+ */
 export default function ImageOverlap({ source, size, style, svgStyle }: ImageOverlapPropsType): React.ReactElement {
   const { styles } = useTheme(styleSheet);
   const localStyle: ViewStyle = omit(StyleSheet.flatten(style), 'marginTop');

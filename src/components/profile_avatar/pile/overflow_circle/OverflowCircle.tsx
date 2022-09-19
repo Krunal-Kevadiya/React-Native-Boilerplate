@@ -2,10 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { moderateScale, useTheme } from 'rn-custom-style-sheet';
 
-import styleSheet from './OverflowCircleStyle';
+import styleSheet from './OverflowCircleStyles';
 
 import type { OverflowCirclePropsType } from './OverflowCircleTypes';
 
+/**
+ * A component that displays the number of items that are overflowing.
+ * @param {OverflowCirclePropsType} props - the props for the component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function OverflowCircle({
   overflow,
   circleStyle,

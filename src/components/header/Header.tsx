@@ -6,12 +6,17 @@ import { useHeaderHeight, useStatusBarHeight } from '@hooks';
 
 import BothSide from './both/BothSide';
 import CenterSide from './center/CenterSide';
-import styleSheet from './HeaderStyle';
+import styleSheet from './HeaderStyles';
 import { defaultProps } from './HeaderTypes';
 import Search from './search/Search';
 
 import type { HeaderPropsType } from './HeaderTypes';
 
+/**
+ * The header component.
+ * @param {HeaderPropsType} props - the props for the header component.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function Header({
   left,
   center,

@@ -8,10 +8,19 @@ import { Colors } from '@themes';
 
 import { Icon } from '../../icon';
 
-import styleSheet from './SearchStyle';
+import styleSheet from './SearchStyles';
 
 import type { SearchPropsType } from './SearchTypes';
 
+/**
+ * A header search component
+ * @param {SearchPropsType}  - isLowerCase: boolean - If true, the search text will be converted to
+ * lower case.
+ * @param {String} labelCancel - search cancel button label.
+ * @param {(text: string) => void} onSearchQuery - callback function that is called when text is entered.
+ * @param {() => void} handleCancel - callback function that is called when cancel button is pressed.
+ * @returns {React.ReactElement} A React Element.
+ */
 export default function Search({
   isLowerCase,
   labelCancel,

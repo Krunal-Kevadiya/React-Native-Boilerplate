@@ -13,12 +13,27 @@ import type {
   TransitionSpec
 } from '@react-navigation/stack';
 
+/**
+ * A React.MutableRefObject that stores the name of the route that the user is currently on.
+ * @type {React.MutableRefObject<string | undefined>}
+ */
 export const routeNameRef: React.MutableRefObject<string | undefined> = {
   current: undefined
 };
 
+/**
+ * Creates a ref that can be used to navigate to a new screen.
+ * @returns {React.RefObject<NavigationContainerRef>} - A ref that can be used to navigate to a new screen.
+ */
 export const navigationRef = createNavigationContainerRef();
 
+/**
+ * Checks if the navigation is not ready, wait 50 milliseconds and try again, otherwise call the callback
+ * function.
+ * @param {() => void} moveCallback - This is the function that will be called when the navigation is
+ * ready.
+ * @returns None
+ */
 function navigationCheck(moveCallback: () => void): void {
   if (!navigationRef.isReady()) {
     setTimeout(() => navigationCheck(moveCallback), 50);
@@ -27,6 +42,12 @@ function navigationCheck(moveCallback: () => void): void {
   }
 }
 
+/**
+ * It pops the current screen from the navigation stack
+ * @param {number} [screenCount=0] - the number of screens to pop.
+ * @param {boolean} [isPopToTop=false] - If true, the navigation stack will be popped to the top.
+ * @returns None
+ */
 export function navigatePop(screenCount: number = 0, isPopToTop: boolean = false): void {
   navigationCheck(() => {
     const popAction = isPopToTop ? StackActions.popToTop() : StackActions.pop(screenCount);
@@ -34,6 +55,10 @@ export function navigatePop(screenCount: number = 0, isPopToTop: boolean = false
   });
 }
 
+/**
+ * Navigates back one screen in the navigation history.
+ * @returns None
+ */
 export function navigateBack(): void {
   navigationCheck(() => {
     const backAction = CommonActions.goBack();
@@ -41,6 +66,12 @@ export function navigateBack(): void {
   });
 }
 
+/**
+ * It will replace the current screen with the screen you want to navigate to
+ * @param {string} routeName - The name of the route to navigate to.
+ * @param {object} [params={}] - This is an object that contains the parameters you want to pass to the next screen.
+ * @returns None
+ */
 export function navigateWithReplace(routeName: string, params = {}): void {
   navigationCheck(() => {
     const replaceAction = StackActions.replace(routeName, params);
@@ -48,6 +79,14 @@ export function navigateWithReplace(routeName: string, params = {}): void {
   });
 }
 
+/**
+ * Navigates to the given routeName with the given params.
+ * @param {string} routeName - the name of the route to navigate to
+ * @param {object} [params={}] - This is the object that contains the parameters that you want to pass to the next
+ * screen
+ * @param {boolean} [merge=false] - whether or not to merge the params with the existing params
+ * @returns None
+ */
 export function navigateWithParam(routeName: string, params = {}, merge: boolean = false): void {
   navigationCheck(() => {
     const navigateAction = CommonActions.navigate({
@@ -59,6 +98,12 @@ export function navigateWithParam(routeName: string, params = {}, merge: boolean
   });
 }
 
+/**
+ * Navigate to a new route with a push action.
+ * @param {string} routeName - the name of the route to navigate to
+ * @param {object} [params={}] - This is an object that contains the parameters you want to pass to the next screen
+ * @returns None
+ */
 export function navigateWithPush(routeName: string, params = {}): void {
   navigationCheck(() => {
     const pushAction = StackActions.push(routeName, params);
@@ -66,6 +111,14 @@ export function navigateWithPush(routeName: string, params = {}): void {
   });
 }
 
+/**
+ * It resets the navigation stack to the given routeName with the given params.
+ * @param {string} stackName - The name of the stack you want to navigate to
+ * @param {string} routeName - the name of the route to navigate to
+ * @param {object} [params={}] - This is an object that contains the parameters that you want to pass to the next
+ * screen.
+ * @returns None
+ */
 export function navigateWithReset(stackName: string, routeName: string, params = {}): void {
   navigationCheck(() => {
     const resetAction = CommonActions.reset({
@@ -81,6 +134,10 @@ export function navigateWithReset(stackName: string, routeName: string, params =
   });
 }
 
+/**
+ * Opens the drawer.
+ * @returns None
+ */
 export function navigateOpenDrawer(): void {
   navigationCheck(() => {
     const openAction = DrawerActions.openDrawer();
@@ -88,6 +145,10 @@ export function navigateOpenDrawer(): void {
   });
 }
 
+/**
+ * Closes the drawer if it is open.
+ * @returns None
+ */
 export function navigateCloseDrawer(): void {
   navigationCheck(() => {
     const closeAction = DrawerActions.closeDrawer();
@@ -95,6 +156,10 @@ export function navigateCloseDrawer(): void {
   });
 }
 
+/**
+ * Toggles the drawer on the left side of the screen.
+ * @returns None
+ */
 export function navigateToggleDrawer(): void {
   navigationCheck(() => {
     const toggleAction = DrawerActions.toggleDrawer();
@@ -102,6 +167,12 @@ export function navigateToggleDrawer(): void {
   });
 }
 
+/**
+ * Navigates to the given route in the drawer.
+ * @param {string} routeName - the name of the route to navigate to
+ * @param {object} [params={}] - the params to pass to the route
+ * @returns None
+ */
 export function navigateJumpToDrawer(routeName: string, params = {}): void {
   navigationCheck(() => {
     const jumpToAction = DrawerActions.jumpTo(routeName, params);
@@ -109,6 +180,12 @@ export function navigateJumpToDrawer(routeName: string, params = {}): void {
   });
 }
 
+/**
+ * Navigates to the given tab.
+ * @param {string} routeName - the name of the tab to navigate to
+ * @param {object} [params={}] - the params to pass to the tab
+ * @returns None
+ */
 export function navigateJumpToTab(routeName: string, params = {}): void {
   navigationCheck(() => {
     const jumpToAction = TabActions.jumpTo(routeName, params);
@@ -125,6 +202,14 @@ const transitionSpec = {
   close: config
 };
 
+/**
+ * Calculates the interpolated style for the card in the stack.
+ * @param {[number, number]} currentOutputRange - the output range for the current card
+ * @param {[number, number]} nextOutputRange - the output range for the next card
+ * @param {object} current - the current card object
+ * @param {object} [next] - the next card object
+ * @returns {object} - the interpolated style for the card in the stack
+ */
 function cardStyleInterpolatorCalculation(
   currentOutputRange: [number, number],
   nextOutputRange: [number, number],
@@ -168,6 +253,14 @@ function cardStyleInterpolatorCalculation(
   }
 }
 
+/**
+ * Takes in the current and next output ranges and calculates the interpolated style for the header.
+ * @param {[number, number]} currentOutputRange - the current output range for the header
+ * @param {[number, number]} nextOutputRange - the next output range for the header
+ * @param {object} current - the current header object
+ * @param {object} [next] - the next header object
+ * @returns {object} - the interpolated style for the header
+ */
 function headerStyleInterpolatorCalculation(
   currentOutputRange: [number, number],
   nextOutputRange: [number, number],
@@ -221,6 +314,10 @@ function headerStyleInterpolatorCalculation(
   }
 }
 
+/**
+ * A preset for a transition that slides the screen from left to right.
+ * @returns {TransitionPreset}
+ */
 export const leftToRightAnimation: TransitionPreset = {
   transitionSpec,
   gestureDirection: 'horizontal',
@@ -236,6 +333,10 @@ export const leftToRightAnimation: TransitionPreset = {
   }
 };
 
+/**
+ * A preset for a transition that moves the card from the right to the left.
+ * @returns {TransitionPreset}
+ */
 export const rightToLeftAnimation: TransitionPreset = {
   transitionSpec,
   gestureDirection: 'horizontal',
@@ -251,6 +352,10 @@ export const rightToLeftAnimation: TransitionPreset = {
   }
 };
 
+/**
+ * A preset for a transition that slides the card from the top to the bottom.
+ * @returns {TransitionPreset}
+ */
 export const topToBottomAnimation: TransitionPreset = {
   transitionSpec,
   gestureDirection: 'vertical',
@@ -266,6 +371,10 @@ export const topToBottomAnimation: TransitionPreset = {
   }
 };
 
+/**
+ * A preset for a transition that slides the card from the bottom to the top.
+ * @returns {TransitionPreset}
+ */
 export const bottomToTopAnimation: TransitionPreset = {
   transitionSpec,
   gestureDirection: 'vertical',

@@ -30,7 +30,12 @@ type PermissionsOptions = {
   getWithCallback?: boolean;
 };
 
+/**
+ * A type that represents the permission status of a current permission.
+ * @enum {string}
+ */
 export type PermissionStatus = 'unavailable' | 'denied' | 'limited' | 'granted' | 'blocked';
+/* Defining a default value for the options RationaleOptions object. */
 const defaultOption: RationaleOptions = {
   title: '',
   message: '',
@@ -86,6 +91,21 @@ const [data, error, askPermission, getPermission] = useSinglePermissions(
     }
   );
 */
+
+/**
+ * used for single permission check and request control.
+ * @param {Permission} type - The permission you want to check.
+ * @param {RationaleOptions} requestInitial - for display initial permission alert before request.
+ * @param {RationaleOptions} requestRationale - This is the rationale that will be shown to the user if
+ * they have denied the permission.
+ * @param {RationaleOptions} requestBlocked - The rationale options to show when the permission is
+ * blocked.
+ * @param {PermissionsOptions} options - for initial configuration of hooks.
+ * @param {() => void} onGranted - A callback function that will be called when the permission is granted.
+ * @param {() => void} customDialogComplete - This is a callback function that is called when the custom dialog is
+ * closed.
+ * @returns An array of 4 items.
+ */
 export function useSinglePermissions(
   type: Permission,
   requestInitial: RationaleOptions = defaultOption,
@@ -106,6 +126,10 @@ export function useSinglePermissions(
     (withState, isDenied, option) => () => {
       const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = option;
       setWithCallback(true);
+      /**
+       * Checks the status of the permission.
+       * @returns {Promise<PermissionStatus>}
+       */
       const onPressGet = (): Promise<PermissionStatus> => {
         return check(type)
           .then((status: PermissionStatus) => {
@@ -123,6 +147,10 @@ export function useSinglePermissions(
             throw error1;
           });
       };
+      /**
+       * Checks the status of the permission.
+       * @returns {Promise<PermissionStatus>}
+       */
       const onPressAsk = (): Promise<PermissionStatus> => {
         if (isDenied) {
           return request(type)
@@ -154,7 +182,13 @@ export function useSinglePermissions(
       };
 
       return new Promise<PermissionStatus>((resolve) => {
+        /**
+         * It returns a function that resolves the promise returned by onPressGet().
+         */
         const onPressNegative = () => resolve(onPressGet());
+        /**
+         * It returns a function that resolves the promise returned by onPressAsk().
+         */
         const onPressPositive = () => resolve(onPressAsk());
 
         if (isPresentValue(customDialogView)) {
@@ -191,6 +225,10 @@ export function useSinglePermissions(
   const askPermissions = useDeepCompareCallback<() => Promise<PermissionStatus>>(() => {
     const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = requestInitial;
     setWithCallback(true);
+    /**
+     * Checks the status of the permission.
+     * @returns {Promise<PermissionStatus>}
+     */
     const onPressGet = (): Promise<PermissionStatus> => {
       return check(type)
         .then((status: PermissionStatus) => {
@@ -204,6 +242,10 @@ export function useSinglePermissions(
           throw error1;
         });
     };
+    /**
+     * Checks the status of the permission.
+     * @returns {Promise<PermissionStatus>}
+     */
     const onPressAsk = (): Promise<PermissionStatus> => {
       return request(type)
         .then((status: PermissionStatus) => {
@@ -227,7 +269,13 @@ export function useSinglePermissions(
     };
 
     return new Promise<PermissionStatus>((resolve) => {
+      /**
+       * It returns a function that resolves the promise returned by onPressGet().
+       */
       const onPressNegative = () => resolve(onPressGet());
+      /**
+       * It returns a function that resolves the promise returned by onPressAsk().
+       */
       const onPressPositive = () => resolve(onPressAsk());
       if (isPresentValue(customDialogView)) {
         customDialogView?.(onPressPositive, onPressNegative);
@@ -318,6 +366,13 @@ type getPermissionResultReturnType = {
   blockedList: Permission[];
 };
 
+/**
+ * Check and filter multiple permission status.
+ * @param {Permission[]} types - Permission[]: The list of permissions you want to check.
+ * @param {Permission[]} optionTypes - Permission[]:  The list of permissions you want to ignore.
+ * @param statuses - Record<Permission[number], PermissionStatus> - current permissions status.
+ * @returns An object with a status, deniedList, and blockedList property.
+ */
 function getPermissionResult(
   types: Permission[],
   optionTypes: Permission[],
@@ -397,6 +452,22 @@ const [data, error, askPermission, getPermission] = useMultiplePermissions(
     [PERMISSIONS.IOS.CAMERA]
   );
 */
+
+/**
+ * used for multiple permission check and request control.
+ * @param {Permission[]} type - The permission you want to check.
+ * @param {RationaleOptions} requestInitial - for display initial permission alert before request.
+ * @param {RationaleOptions} requestRationale - This is the rationale that will be shown to the user if
+ * they have denied the permission.
+ * @param {RationaleOptions} requestBlocked - The rationale options to show when the permission is
+ * blocked.
+ * @param {PermissionsOptions} options - for initial configuration of hooks.
+ * @param {() => void} onGranted - A callback function that will be called when the permission is granted.
+ * @param {() => void} customDialogComplete - This is a callback function that is called when the custom dialog is
+ * closed.
+ * @param {Permission[]} optionTypes - The permission you want to be ignored.
+ * @returns An array of 4 items.
+ */
 export function useMultiplePermissions(
   types: Permission[],
   requestInitial: RationaleOptions = defaultOption,
@@ -423,6 +494,10 @@ export function useMultiplePermissions(
     (withState, isDenied, option, requestList) => () => {
       const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = option;
       setWithCallback(true);
+      /**
+       * Checks the status of the permission.
+       * @returns {Promise<PermissionStatus>}
+       */
       const onPressGet = (): Promise<PermissionStatus> => {
         return checkMultiple(requestList ?? types)
           .then((statuses: Record<Permission[number], PermissionStatus>) => {
@@ -441,6 +516,11 @@ export function useMultiplePermissions(
             throw error1;
           });
       };
+
+      /**
+       * Checks the status of the permission.
+       * @returns {Promise<PermissionStatus>}
+       */
       const onPressAsk = (): Promise<PermissionStatus> => {
         if (isDenied) {
           return requestMultiple(requestList ?? types)
@@ -476,7 +556,13 @@ export function useMultiplePermissions(
       };
 
       return new Promise<PermissionStatus>((resolve) => {
+        /**
+         * It returns a function that resolves the promise returned by onPressGet().
+         */
         const onPressNegative = () => resolve(onPressGet());
+        /**
+         * It returns a function that resolves the promise returned by onPressAsk().
+         */
         const onPressPositive = () => resolve(onPressAsk());
 
         if (isPresentValue(customDialogView)) {
@@ -513,6 +599,10 @@ export function useMultiplePermissions(
   const askPermissions = useDeepCompareCallback<() => Promise<PermissionStatus>>(() => {
     const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = requestInitial;
     setWithCallback(true);
+    /**
+     * Checks the status of the permission.
+     * @returns {Promise<PermissionStatus>}
+     */
     const onPressGet = (): Promise<PermissionStatus> => {
       return checkMultiple(types)
         .then((statuses: Record<Permission[number], PermissionStatus>) => {
@@ -527,6 +617,11 @@ export function useMultiplePermissions(
           throw error1;
         });
     };
+
+    /**
+     * Checks the status of the permission.
+     * @returns {Promise<PermissionStatus>}
+     */
     const onPressAsk = (): Promise<PermissionStatus> => {
       return requestMultiple(types)
         .then((statuses: Record<Permission[number], PermissionStatus>) => {
@@ -551,7 +646,13 @@ export function useMultiplePermissions(
     };
 
     return new Promise<PermissionStatus>((resolve) => {
+      /**
+       * It returns a function that resolves the promise returned by onPressGet().
+       */
       const onPressNegative = () => resolve(onPressGet());
+      /**
+       * It returns a function that resolves the promise returned by onPressAsk().
+       */
       const onPressPositive = () => resolve(onPressAsk());
       if (isPresentValue(customDialogView)) {
         customDialogView?.(onPressPositive, onPressNegative);
@@ -634,6 +735,13 @@ export function useMultiplePermissions(
   return [permissionStatus, error, callPermission, getPermissions];
 }
 
+/**
+ * used for notification permission check and request control.
+ * @param {Rationale} requestBlocked - The rationale to display when the user is blocked permission.
+ * @param {PermissionsOptions} options - for initial configuration of hooks.
+ * @param {() => void} onGranted - The function to call when the permission is granted.
+ * @returns [PermissionStatus | undefined, Error | undefined, () => Promise<void>, () => Promise<void>]
+ */
 export function useNotificationPermissions(
   requestBlocked: Rationale,
   options: PermissionsOptions = {},
@@ -650,6 +758,9 @@ export function useNotificationPermissions(
       const buttons: AlertButton[] = [];
 
       if (buttonNegative) {
+        /**
+         * It checks the permission status of the user and returns the status.
+         */
         const onPress = () =>
           resolve(
             checkNotifications().then(({ status }) => {
@@ -687,6 +798,9 @@ export function useNotificationPermissions(
       const buttons: AlertButton[] = [];
 
       if (buttonNegative) {
+        /**
+         * OnPress is a function that returns the result of resolve().
+         */
         const onPress = () => resolve();
         if (buttonNeutral) {
           buttons.push({ text: buttonNeutral, onPress });
