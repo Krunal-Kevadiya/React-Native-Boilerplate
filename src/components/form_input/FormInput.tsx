@@ -10,7 +10,7 @@ import { Icon } from '../icon';
 import styleSheet from './FormInputStyles';
 import { defaultProps } from './FormInputTypes';
 import { getChangeValue } from './FormInputUtils';
-import TagInput from './tag/TagInput';
+import { TagInput } from './tag_input';
 
 import type { FormInputPropsType } from './FormInputTypes';
 

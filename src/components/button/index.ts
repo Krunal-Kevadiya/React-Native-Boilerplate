@@ -1,2 +1,2 @@
-export { default as FabButton } from './fab/FabButton';
-export { default as GlowPadButton } from './glow_pad/GlowPadButton';
+export * from './fab_button';
+export * from './glow_pad_button';
