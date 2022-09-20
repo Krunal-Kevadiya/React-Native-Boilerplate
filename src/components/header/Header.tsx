@@ -4,11 +4,11 @@ import { useTheme } from 'rn-custom-style-sheet';
 
 import { useHeaderHeight, useStatusBarHeight } from '@hooks';
 
-import BothSide from './both/BothSide';
-import CenterSide from './center/CenterSide';
+import { BothSide } from './both_side';
+import { CenterSide } from './center_side';
 import styleSheet from './HeaderStyles';
 import { defaultProps } from './HeaderTypes';
-import Search from './search/Search';
+import { Search } from './search';
 
 import type { HeaderPropsType } from './HeaderTypes';
 

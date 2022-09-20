@@ -8,7 +8,7 @@ import { Header, Icon } from '@components';
 import { SignInFormModel } from '@models';
 import { navigateBack } from '@navigators';
 
-import SignInForm from './sign_in_form/SignInForm';
+import { SignInForm } from './sign_in_form';
 import styleSheet from './SignInStyles';
 import useSignIn from './useSignIn';
 
