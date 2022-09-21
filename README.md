@@ -1,74 +1,61 @@
-# React Native Structure-Project
+# React Native Boilerplate Template
 
-<img src="https://badgen.net/badge/App Name/React Native Structure
-/blue"> <img src="https://badgen.net/badge/Bundle | Package/com.reactnativeboilerplate
-/blue?icon=apple"> <img src="https://badgen.net/badge/Platforms/Android | IOS /blue?icon=googleplay">
-<br/>
-<img src="https://badgen.net/badge/License/MIT License/red"> <img src="https://badgen.net/badge/Framework/React Native/red?icon=atom"> <img src="https://badgen.net/badge/Code Style/Standard/red">
-<br/>
-<img src="https://badgen.net/badge/Npm/v8.8.0/green?icon=npm"> <img src="https://badgen.net/badge/React/v17.0.2/green?icon=atom"> <img src="https://badgen.net/badge/React Native/v0.68.2/green?icon=atom"> <img src="https://badgen.net/badge/codebeat/A?icon=codebeat&color=green" />
-<br/><br/><br/>
+## Prerequisites
 
-Welcome to the **React Native Structure
-Mobile**!
+### MacOS
 
-This application is useful for kickstart or setup basic structure of new project with below features
+* MacOS 10.14 or higher to use Homebrew
+* XCode command line tools (Required for Homebrew)
+    * ```xcode-select --install```
+* Homebrew
+    * ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"```
+* Python3
+     * ```brew install python3```
+* Cookie Cutter
+    * ```brew install cookiecutter```
 
-- Support SVG images.
-- Fully typescript support.
-- Disable system font scaling.
-- Predefine support for Light - Dark theme mode.
-- Config react navigation with deep link support.
-- Config Eslint and prettier for code formatting.
-- Added custom module for importing local directory.
-- Added microsoft appcenter codePush feature support.
-- Predefine custom hooks like Keyboard, Permission, Debounce, Timeout, AppState, AsyncStorage etc.
-- Configure Sentry, Formik, Multiple Language Translation, Redux-Toolkit, saga, Socket.io, apisauce with auto canceling feature.
-- Added some basic custom component like BottomSheet, Button, FormInput, Header, Icon, ProfileAvatar, Progress, Switch, Toast etc.
+### Linux
 
-To get started,
+* Python3
+    * ```sudo apt-get update && sudo apt-get install python3.6```
+* Cookie Cutter
+    * ```sudo apt-get install cookiecutter```
 
-1. [Pre requisites](./wiki/0.-Pre-Requisites.md)
-1. [How to setup project](./wiki/1.-Project-Setup.md)
-1. [How to set environment configuration](./wiki/2.-Environment-Setup.md)
-1. [How to run a project](./wiki/3.-Run-Project.md)
-1. [How to generate release build](./wiki/4.-Release-Build.md)
-1. [Apply coding style](./wiki/5.-Coding-Style.md)
-1. [Dependencies list](./wiki/6.-Package.md)
-1. [Accounts details](./wiki/7.-Accounts.md)
-1. [Git Process](./wiki/8.-Git-Process.md)
+### Windows
 
-# Troubleshoot Notes
+* Python3
+    * [Download](https://www.python.org/downloads/)
+    * ADD PYTHON TO ENVIORNMENT PATH
+* Cookie Cutter
+    * ```pip install --user cookiecutter```
 
-- There are no known issues for a run or build process right now.
+### Software and Tools
 
-# How it can be reused?
+* **iOS**: [XCode(13.0)](https://apps.apple.com/us/app/xcode/id497799835?mt=13), iOS 13.0+
 
-- Clone this repository to local and move to directory
-- Install **React-Native-Rename** global using
+* **[CocoaPods](http://cocoapods.org/)**: CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects. It has over 66 thousand libraries and is used in over 3 million apps. CocoaPods can help you scale your projects elegantly.
 
-  With **Yarn**:
+* **Android**: [Android Studio(4.0.1)](https://developer.android.com/studio)
 
-  ```
-  $ yarn global add react-native-rename
-  ```
+* **Editor**: [Visual Studio Code](https://code.visualstudio.com/)
 
-  With **npm**:
 
-  ```
-  $ npm install react-native-rename -g
-  ```
+**NOTE :-** Please check your system to node properly work before trigger a command using `node -v`.
 
-- Rename app and package | bundle identifier using
+## Usage
+* Open terminal at your desired location
+* Run ```cookiecutter https://github.com/Krunal-Kevadiya/React-Native-Boilerplate``` to create template
+        * If it asks for "You have .../.cookiecutters/Android_Project_Setup downloaded before. Is it okay to delete and re-download it?" press "yes"
 
-  Then, Rename your app
+## Required inputs
 
-  ```
-  $ npx react-native-rename "Travel App"
-  ```
-
-  With custom Bundle Identifier
-
-  ```
-  $ npx react-native-rename "Travel App" -b com.junedomingo.travelapp
-  ```
+Input name | Description | Default
+--- | --- | --- |
+project_name | Application name | Project Name
+bundle_identifier | Bundle ID of project | com.simformsolutions.app
+minimum_android_sdk_version | Minimum android SDK support | 21
+minimum_iOS_sdk_version | Minimum iOS SDK support | 12.4
+base_url | Base URL for a project rest api | https://simform.com
+sentry_dsn_url | Sentry DSN URL for crash reporting | NA
+encryption_key | Encryption key for local storage | encryptionKey
+repo_link | Repository link to connect project with remote | NA

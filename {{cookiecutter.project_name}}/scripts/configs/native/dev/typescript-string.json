@@ -1,0 +1,5 @@
+{
+  "sentryUrl": "{{cookiecutter.sentry_dsn_url}}",
+  "apiUrl": "{{cookiecutter.base_url}}",
+  "encryptionKey": "{{cookiecutter.encryption_key}}"
+}

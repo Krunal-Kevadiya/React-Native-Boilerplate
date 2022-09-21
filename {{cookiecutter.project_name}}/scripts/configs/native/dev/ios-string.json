@@ -1,0 +1,4 @@
+{
+  "appName": "{{cookiecutter.project_name}} dev",
+  "codePushKey": "{{cookiecutter.ios_codePush_key}}"
+}
