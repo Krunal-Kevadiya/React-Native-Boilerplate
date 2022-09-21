@@ -1,4 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn pretty-Lint
+yarn lint
+yarn prettier
+yarn eslint-fix
+yarn types
+yarn spelling

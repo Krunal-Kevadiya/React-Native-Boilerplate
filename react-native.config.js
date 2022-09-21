@@ -4,5 +4,5 @@ module.exports = {
     android: {}
   },
   // dependencies: { 'react-native-call-detection': { platforms: { android: null } } },
-  assets: ['./src/Assets/Font']
+  assets: ['./app/assets/fonts']
 };
