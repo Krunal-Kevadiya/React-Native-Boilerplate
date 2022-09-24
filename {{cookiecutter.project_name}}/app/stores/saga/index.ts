@@ -1,10 +1,7 @@
 import { networkSaga } from 'react-native-offline';
 import { all, fork } from 'redux-saga/effects';
-
 import { AppConst } from '@constants';
-
 import AuthSaga from './AuthSaga';
-
 import type { ConnectivityArgs } from 'react-native-offline/dist/src/types';
 
 /**

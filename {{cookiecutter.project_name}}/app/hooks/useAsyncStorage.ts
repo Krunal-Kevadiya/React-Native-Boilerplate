@@ -1,10 +1,6 @@
 import { useState } from 'react';
-
-import { getStorageString, setStorageString } from '@utils';
-
+import { getStorageString, setStorageString, type StorageStringType } from '@utils';
 import useDidMount from './useDidMount';
-
-import type { StorageStringType } from '@utils';
 
 /**
  * A type that represents the state of an AsyncStorage object.

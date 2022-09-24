@@ -1,6 +1,5 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { useState } from 'react';
-
 import useDidMount from './useDidMount';
 import useLifecycle from './useLifecycle';
 

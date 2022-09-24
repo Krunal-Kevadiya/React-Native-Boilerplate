@@ -1,5 +1,5 @@
 export * from '@models-form';
-export * from '@models-util';
+export * from '@models-utils';
 export * from '@models-other';
 export * from '@models-request';
 export * from '@models-response';

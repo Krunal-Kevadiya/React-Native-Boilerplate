@@ -1,5 +1,4 @@
 import Animated from 'react-native-reanimated';
-
 import type { PanResponderGestureState, LayoutChangeEvent } from 'react-native';
 
 /**

@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
+import { useCreateHandlerSetter, type DependencyList } from '@hooks-utils';
 
-import { useCreateHandlerSetter } from '@hooks-util';
-
-import type { DependencyList } from '@hooks-util';
 /**
  * Returns a callback setter for a function to be performed when the component did mount.
  */

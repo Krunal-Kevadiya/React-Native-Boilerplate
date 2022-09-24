@@ -5,16 +5,13 @@ import {
   type PanResponderGestureState,
   type PanResponderInstance
 } from 'react-native';
-
 import { useDeepCompareEffect, usePrevious } from '@hooks';
-
 import {
   swipeConfig,
   setClassSwipeConfig,
   handlePanResponderEnd,
   handleShouldSetPanResponder
 } from './GestureRecognizerUtil';
-
 import type {
   ConfigPropsType,
   GestureRecognizerPropsType,

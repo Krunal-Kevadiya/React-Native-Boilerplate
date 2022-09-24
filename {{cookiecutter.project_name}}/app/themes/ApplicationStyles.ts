@@ -1,11 +1,8 @@
 import { StyleSheet } from 'react-native';
-
 import { Fonts } from '@assets';
 import { colorOpacity } from '@utils';
-
 import Colors from './Colors';
 import { isIos } from './Metrics';
-
 import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 const viewStyle = StyleSheet.create({

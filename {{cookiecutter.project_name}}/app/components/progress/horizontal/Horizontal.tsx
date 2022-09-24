@@ -1,16 +1,12 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Progress from 'react-native-progress';
-import { scale, windowWidth, useCurrentTheme } from 'rn-custom-style-sheet';
-
+import { scale, windowWidth, useCurrentTheme, type ThemeType } from 'rn-custom-style-sheet';
 import { useStatusBarHeight } from '@hooks';
 import { Colors } from '@themes';
 import { colorOpacity } from '@utils';
-
 import styles from './HorizontalStyles';
-
 import type { HorizontalProgressHandleType } from './HorizontalTypes';
-import type { ThemeType } from 'rn-custom-style-sheet';
 
 /**
  * A custom horizontal progress bar that can be used to display a progress bar in the

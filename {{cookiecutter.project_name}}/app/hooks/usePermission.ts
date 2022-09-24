@@ -11,9 +11,7 @@ import {
   checkNotifications,
   requestNotifications
 } from 'react-native-permissions';
-
 import { isPresentValue } from '@utils';
-
 import useDeepCompareCallback from './useDeepCompareCallback';
 import useDeepCompareEffect from './useDeepCompareEffect';
 

@@ -1,6 +1,5 @@
 import filter from 'lodash/filter';
 import * as RNLocalize from 'react-native-localize';
-
 import { MockData } from '@assets';
 
 /**

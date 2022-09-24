@@ -4,19 +4,16 @@ import includes from 'lodash/includes';
 import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { ToastHolder } from '@components';
 import { AppConst, AppRouteEnum, ExcludeTrackAppRoute } from '@constants';
 import { useDidMount, useExceptionHandler } from '@hooks';
 import { ErrorResponse, UserResponse } from '@models';
 import { AppRequestSelectors, AuthSelectors, AppRequestActions } from '@stores';
 import { getLinkConfiguration } from '@utils';
-
 import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
 import LaunchNavigator from './LaunchNavigator';
 import { navigationRef, rightToLeftAnimation, routeNameRef } from './NavigatorUtil';
-
 import type { AppDispatchType, RootStateType } from '@stores';
 
 /**

@@ -1,7 +1,5 @@
 import { create, MMKVLoader } from 'react-native-mmkv-storage';
-
 import { AppConst } from '@constants';
-
 import { isPresentValue } from './StringUtils';
 
 /**

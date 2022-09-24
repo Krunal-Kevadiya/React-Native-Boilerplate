@@ -1,6 +1,5 @@
 import { Alert, BackHandler } from 'react-native';
 import { setJSExceptionHandler, setNativeExceptionHandler } from 'react-native-exception-handler';
-
 import { sentryCaptureException } from '@configs';
 
 /**

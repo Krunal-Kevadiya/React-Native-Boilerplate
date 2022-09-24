@@ -51,11 +51,18 @@
 
 Input name | Description | Default
 --- | --- | --- |
-project_name | Application name | Project Name
+project_name | Application name(Start with Upper case without space & symbols) | AppName
 bundle_identifier | Bundle ID of project | com.simformsolutions.app
 minimum_android_sdk_version | Minimum android SDK support | 21
 minimum_iOS_sdk_version | Minimum iOS SDK support | 12.4
-base_url | Base URL for a project rest api | https://simform.com
+base_url | Base URL for a project rest api | https://reqres.in
 sentry_dsn_url | Sentry DSN URL for crash reporting | NA
 encryption_key | Encryption key for local storage | encryptionKey
-repo_link | Repository link to connect project with remote | NA
+android_codePush_key | Android app center code push key | ""
+ios_codePush_key | IOS app center code push key | ""
+deep_link_scheme | Deep link scheme | "appName"
+deep_link_host | Deep link host | "beta.appName.com"
+repository_link | Repository link to connect project with remote | NA
+launch_android_studio | Open Android Studio after project is created. **Works only for MacOS** | 1 (false)
+launch_xcode | Open Xcode after project is created. **Works only for MacOS** | 1 (false)
+launch_visual_studio | Open visual Studio after project is created. **Works only for MacOS** | 1 (true)

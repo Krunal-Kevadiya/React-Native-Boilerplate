@@ -2,7 +2,6 @@ import { createNavigationContainerRef } from '@react-navigation/core';
 import { CommonActions, DrawerActions, StackActions, TabActions } from '@react-navigation/routers';
 import React from 'react';
 import { Animated } from 'react-native';
-
 import type {
   StackCardInterpolatedStyle,
   StackCardInterpolationProps,

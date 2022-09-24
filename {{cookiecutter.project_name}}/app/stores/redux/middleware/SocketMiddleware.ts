@@ -1,7 +1,5 @@
 import { SocketWrapper } from '@utils';
-
-import { AppRequestActions } from '../app_request';
-
+import { AppRequestActions } from '../app-request';
 import type { RootStateType } from '../Store';
 
 /**

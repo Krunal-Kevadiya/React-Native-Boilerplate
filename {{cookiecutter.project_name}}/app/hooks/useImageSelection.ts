@@ -1,10 +1,7 @@
 import { useCallback, useState } from 'react';
-import { openCamera, openPicker } from 'react-native-image-crop-picker';
-
+import { openCamera, openPicker, type Options } from 'react-native-image-crop-picker';
 import { imagePickerBottomSheetRef, ToastHolder } from '@components';
 import { ImageSelectionOther } from '@models';
-
-import type { Options } from 'react-native-image-crop-picker';
 
 /**
  * "Given a URL, return the file name with extension."

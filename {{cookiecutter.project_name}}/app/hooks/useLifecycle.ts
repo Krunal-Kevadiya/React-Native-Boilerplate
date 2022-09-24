@@ -1,7 +1,6 @@
 import useDidMount from './useDidMount';
 import useWillUnmount from './WillUnmountHook';
-
-import type { DependencyList } from '@hooks-util';
+import type { DependencyList } from '@hooks-utils';
 
 /**
  * Returns an object wrapping lifecycle hooks such as `useDidMount` or `useWillUnmount`.
