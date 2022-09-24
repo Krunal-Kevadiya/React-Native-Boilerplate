@@ -1,5 +1,5 @@
 {
-  "project_name": "App Name",
+  "project_name": "AppName",
   "__project_name_with_lower_cap": "{{cookiecutter.project_name | initCapLower}}",
   "__project_name_with_lowercase": "{{cookiecutter.project_name | lower}}",
   "bundle_identifier": "com.krunalkevadiya.app",
