@@ -45,7 +45,7 @@
     "editor.defaultFormatter": "jock.svg"
   },
   "files.associations": {
-    "*.xml": "html",
+    //"*.xml": "html",
     "*.svg": "html"
   },
   "editor.codeActionsOnSave": {

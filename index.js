@@ -3,7 +3,7 @@ import { AppRegistry, LogBox, Text, TextInput } from 'react-native';
 import 'react-native-gesture-handler';
 import 'reflect-metadata';
 import { name as appName } from './app.json';
-import App from './src/App';
+import App from './app/App';
 
 Text.defaultProps = Text.defaultProps ?? {};
 Text.defaultProps.allowFontScaling = false;

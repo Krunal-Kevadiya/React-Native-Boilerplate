@@ -180,7 +180,7 @@ fi
 FIREBASE_PATH="scripts/configs/firebase/${ENV}"
 NATIVE_PATH="scripts/configs/native/${ENV}"
 ASSETS_PATH="scripts/configs/native/${ENV}/assets"
-INFO_PLIST_PATH=ios/ReactNativeStructure
+INFO_PLIST_PATH=ios/ReactNativeBoilerplate
 
 echoHeader "-" "-" "${Yellow}"
 echoHeader " " "Applying project setting" "${Green}"
@@ -237,6 +237,7 @@ if [[ "$TYPE_OF_OPERATION" == "setup" || "$TYPE_OF_OPERATION" == "setupWithBuild
     echoHeaderValue "Change google-service json file" "${FIREBASE_PATH}/google-services.json file not found!"
   fi
   if [ -f "${NATIVE_PATH}/appcenter-config.json" ]; then
+    mkdir -p android/app/src/main/assets
     yes | cp -rf "${NATIVE_PATH}/appcenter-config.json" android/app/src/main/assets
     echoHeaderValue "Change appcenter-config json file" "android/app/src/main/assets/appcenter-config.json"
   else
@@ -531,7 +532,7 @@ if [[ "$TYPE_OF_OPERATION" == "build" || "$TYPE_OF_OPERATION" == "setupWithBuild
   sed -i '' -e "s/ versionCode *[0-9]*/ versionCode $BUNDLE_NO_ANDROID/" android/app/build.gradle
   echoHeaderValue "NEW android" "verions-${VERSION_MAJOR_ANDROID}.${VERSION_MINOR_ANDROID} & build-${BUNDLE_NO_ANDROID}"
  
-  sed -i '' -e 's/const appVersion.*/const appVersion = '"'v${VERSION_MAJOR_IOS}.${VERSION_MINOR_IOS}(${BUNDLE_NO_IOS})';"'/' src/constants/AppConst.ts
+  sed -i '' -e 's/const appVersion.*/const appVersion = '"'v${VERSION_MAJOR_IOS}.${VERSION_MINOR_IOS}(${BUNDLE_NO_IOS})';"'/' app/constants/AppConst.ts
   echoHeaderValue "NEW typescript" "verions-v${VERSION_MAJOR_IOS}.${VERSION_MINOR_IOS}(${BUNDLE_NO_IOS})"
 
   echoHeader "-" "-" "${Yellow}"

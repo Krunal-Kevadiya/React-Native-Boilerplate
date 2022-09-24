@@ -1,7 +1,7 @@
 # React Native Structure-Project
 
 <img src="https://badgen.net/badge/App Name/React Native Structure
-/blue"> <img src="https://badgen.net/badge/Bundle | Package/com.reactnativestructure
+/blue"> <img src="https://badgen.net/badge/Bundle | Package/com.reactnativeboilerplate
 /blue?icon=apple"> <img src="https://badgen.net/badge/Platforms/Android | IOS /blue?icon=googleplay">
 <br/>
 <img src="https://badgen.net/badge/License/MIT License/red"> <img src="https://badgen.net/badge/Framework/React Native/red?icon=atom"> <img src="https://badgen.net/badge/Code Style/Standard/red">
