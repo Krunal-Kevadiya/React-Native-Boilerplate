@@ -177,10 +177,7 @@ if [[ "$TYPE_OF_OPERATION" == "build" || "$TYPE_OF_OPERATION" == "setupWithBuild
   VERSION_TYPE="${versionOptions[$?]}"
 fi
 
-FIREBASE_PATH="scripts/configs/firebase/${ENV}"
-NATIVE_PATH="scripts/configs/native/${ENV}"
-ASSETS_PATH="scripts/configs/native/${ENV}/assets"
-INFO_PLIST_PATH=ios/{{cookiecutter.project_name}}
+. "$PWD/scripts/pathscript.sh"
 
 echoHeader "-" "-" "${Yellow}"
 echoHeader " " "Applying project setting" "${Green}"
