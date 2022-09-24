@@ -1,12 +1,9 @@
 import filter from 'lodash/filter';
 import has from 'lodash/has';
 import { Linking } from 'react-native';
-
 import { ToastHolder } from '@components';
 import { DeepLinkEnum, RegexConst, AppConst, AppRouteEnum } from '@constants';
-
 import { isPresentValue } from './StringUtils';
-
 import type { LinkingOptions } from '@react-navigation/native';
 
 /**

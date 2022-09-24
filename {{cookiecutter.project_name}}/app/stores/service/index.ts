@@ -1,10 +1,7 @@
 import { apiConfig } from '@configs';
 import { AppConst } from '@constants';
-
 import AuthService from './AuthService';
-
 import type { ApiResponse, ApisauceInstance } from 'apisauce';
-
 export type { AuthServiceType } from './AuthService';
 
 /**

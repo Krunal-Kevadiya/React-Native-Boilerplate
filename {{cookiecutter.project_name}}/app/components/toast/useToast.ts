@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
-
 import { useHeaderHeight, useKeyboard, useStatusBarHeight, useTimeout } from '@hooks';
 import { isPresentValue } from '@utils';
-
 import { callback } from './ToastUtil';
-
 import type { ToastHandleType, InternalDataPropsType, UseToastReturnType, ToastPosition } from './ToastTypes';
 import type { LayoutChangeEvent, LayoutRectangle, PanResponderGestureState } from 'react-native';
 

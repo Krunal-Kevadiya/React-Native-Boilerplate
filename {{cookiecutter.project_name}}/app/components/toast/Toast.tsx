@@ -2,17 +2,12 @@ import React, { forwardRef } from 'react';
 import { StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import Animated, { withSpring, useAnimatedStyle } from 'react-native-reanimated';
 import { useTheme } from 'rn-custom-style-sheet';
-
 import { isPresentValue } from '@utils';
-
 import { Icon } from '../icon';
-
 import { GestureRecognizer } from './gesture';
 import styleSheet from './ToastStyle';
-import { defaultProps } from './ToastTypes';
+import { defaultProps, type ToastHandleType, type ToastPropsType, type UseToastReturnType } from './ToastTypes';
 import useToast from './useToast';
-
-import type { ToastHandleType, ToastPropsType, UseToastReturnType } from './ToastTypes';
 
 /**
  * A custom toast component that can be used to display messages to the user.

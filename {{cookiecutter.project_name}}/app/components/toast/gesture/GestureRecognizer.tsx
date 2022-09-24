@@ -1,8 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-
 import useGestureRecognizer from './useGestureRecognizer';
-
 import type { GestureRecognizerPropsType, UseGestureRecognizerReturnType } from './GestureRecognizerTypes';
 
 /**

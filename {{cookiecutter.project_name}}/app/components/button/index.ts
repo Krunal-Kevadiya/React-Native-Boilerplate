@@ -1,2 +1,2 @@
-export * from './fab_button';
-export * from './glow_pad_button';
+export * from './fab-button';
+export * from './glow-pad-button';

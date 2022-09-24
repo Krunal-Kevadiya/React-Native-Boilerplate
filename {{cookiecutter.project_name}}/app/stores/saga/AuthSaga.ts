@@ -1,13 +1,10 @@
 import { call, put, race, take, takeLatest, type CallEffect, type CancelledEffect } from 'redux-saga/effects';
-
 import { ToastHolder } from '@components';
 import { apiCall } from '@configs';
 import { SignInRequest, SuccessUserResponse, ErrorResponse } from '@models';
 import { AuthActions, AppRequestActions } from '@stores-redux';
-import Services from '@stores-service';
-
+import Services, { type AuthServiceType } from '@stores-service';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { AuthServiceType } from '@stores-service';
 import type { ApiResponse } from 'apisauce';
 import type { ClassConstructor } from 'class-transformer';
 

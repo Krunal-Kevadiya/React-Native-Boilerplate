@@ -1,5 +1,4 @@
 import { instanceToPlain, plainToClass } from 'class-transformer';
-
 import { cleanUndefOrNull } from '@utils';
 
 /* It's a class that represents a request to sign in */

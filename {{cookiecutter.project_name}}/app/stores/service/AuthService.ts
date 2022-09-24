@@ -1,7 +1,6 @@
 import { apiWithCancelToken } from '@configs';
 import { ApiUrlConst } from '@constants';
 import { SignInRequest, SuccessUserResponse } from '@models';
-
 import type { ApiResponse, ApisauceInstance } from 'apisauce';
 
 export type AuthServiceType = {

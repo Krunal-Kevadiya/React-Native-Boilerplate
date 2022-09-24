@@ -1,3 +1,3 @@
-export * from './code_push_hoc';
-export * from './image_progress_hoc';
-export * from './image_picker_hoc';
+export * from './code-push-hoc';
+export * from './image-progress-hoc';
+export * from './image-picker-hoc';

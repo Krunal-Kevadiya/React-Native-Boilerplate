@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-
 import { AppConst } from '@constants';
-import { useDeepCompareMemoize, checkDeps } from '@hooks-util';
+import { useDeepCompareMemoize, checkDeps } from '@hooks-utils';
 
 /**
  * A React hook that it's a wrapper around React's useEffect hook that uses a

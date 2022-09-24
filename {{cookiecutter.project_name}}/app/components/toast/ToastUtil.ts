@@ -1,6 +1,5 @@
 import React from 'react';
 import { runOnJS } from 'react-native-reanimated';
-
 import type { InternalDataPropsType } from './ToastTypes';
 
 /**
