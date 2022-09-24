@@ -1,0 +1,4 @@
+{
+  "appName": "{{cookiecutter.project_name}}",
+  "codePushKey": "{{cookiecutter.android_codePush_key}}"
+}

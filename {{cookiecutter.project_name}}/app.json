@@ -1,0 +1,5 @@
+{
+  "name": "{{cookiecutter.project_name}}",
+  "displayName": "{{cookiecutter.project_name}}",
+  "scheme": "{{cookiecutter.deep_link_scheme}}"
+}
