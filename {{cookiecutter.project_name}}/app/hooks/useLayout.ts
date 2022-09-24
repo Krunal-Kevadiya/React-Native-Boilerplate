@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-
 import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
 
 /**

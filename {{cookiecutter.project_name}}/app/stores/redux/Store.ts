@@ -3,12 +3,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createNetworkMiddleware, reducer as NetworkReducer } from 'react-native-offline';
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
-
 import { MMKVStorageKey, AppConst } from '@constants';
-import rootSaga from '@stores-saga';
+//import rootSaga from '@stores-saga';
 import { storage } from '@utils';
-
-import { AppRequestReducer } from './app_request';
+import { AppRequestReducer } from './app-request';
 import { AuthReducer } from './auth';
 import { socketMiddleware } from './middleware';
 

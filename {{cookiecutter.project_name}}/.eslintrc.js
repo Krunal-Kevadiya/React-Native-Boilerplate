@@ -138,7 +138,7 @@ module.exports = {
     'eol-last': [ERROR, 'always'],
     'no-console': OFF,
     'no-restricted-syntax': [
-      ERROR,
+      WARN,
       {
         selector:
           "CallExpression[callee.object.name='console'][callee.property.name!=/^(warn|error|info|trace|disableYellowBox|tron)$/]",
@@ -146,7 +146,7 @@ module.exports = {
       }
     ],
     'require-jsdoc': [
-      ERROR,
+      WARN,
       {
         require: {
           FunctionDeclaration: true,
@@ -195,8 +195,7 @@ module.exports = {
           order: 'asc',
           caseInsensitive: true
         },
-        warnOnUnassignedImports: true,
-        'newlines-between': 'always-and-inside-groups'
+        warnOnUnassignedImports: true
       }
     ],
     'import/no-unresolved': [ERROR, { commonjs: true, amd: true }],

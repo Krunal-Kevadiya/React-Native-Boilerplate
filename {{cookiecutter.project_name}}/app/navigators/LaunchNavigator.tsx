@@ -1,11 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-
 import { AppRouteEnum } from '@constants';
 import { WelcomeScreen } from '@modules';
-
 import { rightToLeftAnimation } from './NavigatorUtil';
-
 import type { AppNavigatorParams } from './AppNavigator';
 
 /**

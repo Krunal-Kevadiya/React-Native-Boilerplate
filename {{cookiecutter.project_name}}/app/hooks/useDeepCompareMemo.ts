@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
-
 import { AppConst } from '@constants';
-import { useDeepCompareMemoize, checkDeps } from '@hooks-util';
+import { useDeepCompareMemoize, checkDeps } from '@hooks-utils';
 
 /**
  * A React hook that memoizes a function using deep compare.

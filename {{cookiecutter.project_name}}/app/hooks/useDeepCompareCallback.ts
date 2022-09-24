@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
-
 import { AppConst } from '@constants';
-import { useDeepCompareMemoize, checkDeps } from '@hooks-util';
+import { useDeepCompareMemoize, checkDeps } from '@hooks-utils';
 
 /**
  * A React hook that it returns a memoized callback that only changes if one of the dependencies has changed.

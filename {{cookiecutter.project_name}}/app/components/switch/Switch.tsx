@@ -2,11 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, type ViewStyle } from 'react-native';
 import Animated, { interpolateColors, spring } from 'react-native-reanimated';
 import { useTheme } from 'rn-custom-style-sheet';
-
 import styleSheet, { SwitchWidth } from './SwitchStyles';
-import { defaultProps } from './SwitchTypes';
-
-import type { SwitchPropsType } from './SwitchTypes';
+import { defaultProps, type SwitchPropsType } from './SwitchTypes';
 
 /**
  * A Switch component that can be used to toggle between two values.

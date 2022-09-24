@@ -1,5 +1,4 @@
 import { BackHandler } from 'react-native';
-
 import useLifecycle from './useLifecycle';
 
 /**

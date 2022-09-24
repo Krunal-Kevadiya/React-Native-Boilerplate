@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, type ImageStyle, StyleSheet } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { moderateScale } from 'rn-custom-style-sheet';
-
 import type { IconPropsType } from './IconTypes';
 
 /**

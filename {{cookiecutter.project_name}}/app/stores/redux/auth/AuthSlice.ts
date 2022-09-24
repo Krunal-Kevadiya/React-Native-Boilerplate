@@ -1,10 +1,6 @@
 import { createAction, createSlice, type PayloadAction, type Draft } from '@reduxjs/toolkit';
-
 import { UserResponse, SignInRequest } from '@models';
-
-import INITIAL_STATE from './AuthInitial';
-
-import type { AuthStateType } from './AuthInitial';
+import INITIAL_STATE, { type AuthStateType } from './AuthInitial';
 
 /**
  * An action that is dispatched when the user clicks the clean button.

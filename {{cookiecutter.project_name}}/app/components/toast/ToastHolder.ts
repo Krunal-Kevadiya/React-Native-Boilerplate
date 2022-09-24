@@ -1,6 +1,5 @@
 import { StringConst } from '@constants';
 import { isPresentValue } from '@utils';
-
 import type { ToastHandleType } from './ToastTypes';
 
 /**

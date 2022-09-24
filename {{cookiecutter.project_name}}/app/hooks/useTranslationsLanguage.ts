@@ -1,7 +1,5 @@
 import * as RNLocalize from 'react-native-localize';
-
 import { i18n } from '@configs';
-
 import useLifecycle from './useLifecycle';
 
 /**

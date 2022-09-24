@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
-
-import { useCreateHandlerSetter } from '@hooks-util';
+import { useCreateHandlerSetter, type DependencyList } from '@hooks-utils';
 import { navigationRef } from '@navigators';
-
-import type { DependencyList } from '@hooks-util';
 
 /**
  * Returns a callback setter for a callback to be performed when the component will unmount.

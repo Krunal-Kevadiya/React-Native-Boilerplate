@@ -2,7 +2,6 @@ import isEmpty from 'lodash/isEmpty';
 import isNaN from 'lodash/isNaN';
 import isNil from 'lodash/isNil';
 import isNull from 'lodash/isNull';
-
 import { RegexConst, StringConst } from '@constants';
 
 /**
