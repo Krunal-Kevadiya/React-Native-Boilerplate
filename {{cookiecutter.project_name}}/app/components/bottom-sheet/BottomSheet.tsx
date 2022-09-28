@@ -13,13 +13,13 @@ import type { BottomSheetHandleType, BottomSheetPropsType } from './BottomSheetT
  * @returns {React.ReactElement} A React Element.
  */
 function CustomBottomSheet<T>(
-  { title, message, onSwipeComplete, onBackButtonPress, children, ...extraFlatListProps }: BottomSheetPropsType<T>,
+  { title, message, onSwipeComplete, onBackButtonPress, children, ...restProps }: BottomSheetPropsType<T>,
   ref: React.Ref<BottomSheetHandleType>
 ): React.ReactElement {
   const [isVisible, setVisible] = useState<boolean>(false);
   const [swipeThresholdHeight, setSwipeThresholdHeight] = useState<number>(0);
   const { styles } = useTheme(styleSheet);
-  const { data, style, ...restFlatListProps } = extraFlatListProps;
+  const { data, style, ...restFlatListProps } = restProps;
   useImperativeHandle(ref, () => ({
     show: () => {
       setVisible(true);

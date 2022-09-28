@@ -1,15 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Pressable, Text, TextInput, View, StyleSheet } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
-
 import { Icons } from '@assets';
 import { useDebounce, useWillUnmount } from '@hooks';
 import { Colors } from '@themes';
-
 import { Icon } from '../../icon';
-
 import styleSheet from './SearchStyles';
-
 import type { SearchPropsType } from './SearchTypes';
 
 /**
@@ -26,7 +22,7 @@ export default function Search({
   labelCancel,
   onSearchQuery,
   handleCancel,
-  ...inputProps
+  ...restProps
 }: SearchPropsType): React.ReactElement {
   const { styles, theme } = useTheme(styleSheet);
   const [searchText, setSearchText] = useState<string>('');
@@ -69,11 +65,11 @@ export default function Search({
       <View style={styles.searchContainer}>
         <Icon type="svg" source={Icons.icSearch} style={styles.imageSearch} size={24} />
         <TextInput
-          {...inputProps}
+          {...restProps}
           autoFocus
           //value={searchText}
           returnKeyType="search"
-          style={StyleSheet.flatten([styles.inputSearch, inputProps.style])}
+          style={StyleSheet.flatten([styles.inputSearch, restProps.style])}
           placeholderTextColor={Colors[theme]?.gray}
           keyboardType="default"
           selectionColor={Colors[theme]?.secondary}

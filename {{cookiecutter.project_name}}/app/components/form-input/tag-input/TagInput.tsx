@@ -72,7 +72,7 @@ function CustomTabInput(
     style: parentStyle,
     placeholder,
     placeholderTextColor,
-    ...OtherProps
+    ...restProps
   }: TagInputPropsType,
   ref: React.LegacyRef<TextInput> | undefined
 ): React.ReactElement {
@@ -88,7 +88,7 @@ function CustomTabInput(
   return (
     <View>
       {editable && isPresentValue(newValues) && (
-        <TextInput style={parentStyle} {...OtherProps} {...localSelectionProps} ref={ref}>
+        <TextInput style={parentStyle} {...restProps} {...localSelectionProps} ref={ref}>
           {getParsedText(
             parse || parseArrayJson,
             { ...localSelectionProps, ...childrenProps },
@@ -101,7 +101,7 @@ function CustomTabInput(
       )}
       {!editable && isPresentValue(newValues) && (
         <View>
-          <Text {...OtherProps} {...localSelectionProps}>
+          <Text {...restProps} {...localSelectionProps}>
             {getParsedText(
               parse || parseArrayJson,
               { ...localSelectionProps, ...childrenProps },
@@ -120,7 +120,7 @@ function CustomTabInput(
             styles.placeholder,
             placeholderTextColor ? { color: placeholderTextColor } : {}
           ])}
-          {...OtherProps}
+          {...restProps}
         >
           {placeholder}
           {children}

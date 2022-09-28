@@ -1,8 +1,5 @@
-import { CustomStyleSheet } from 'rn-custom-style-sheet';
-
+import { CustomStyleSheet, type StyleSheetOption } from 'rn-custom-style-sheet';
 import { Colors, ApplicationStyles } from '@themes';
-
-import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 /**
  * Create a custom style sheet for the given theme.

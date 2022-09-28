@@ -43,7 +43,7 @@ function CustomInput(
     inputContainerStyle,
     isDisableError = defaultProps.isDisableError,
     style,
-    ...inputProps
+    ...restProps
   }: FormInputPropsType,
   ref: React.LegacyRef<TextInput> | undefined
 ): React.ReactElement {
@@ -106,19 +106,19 @@ function CustomInput(
             onChangeText={handleChange}
             onBlur={handleBlur}
             onFocus={handleFocus}
-            {...inputProps}
+            {...restProps}
           />
         )}
         {isTagInput && (
           <TagInput
             ref={ref}
-            values={values?.[id] || inputProps.value}
+            values={values?.[id] || restProps.value}
             underlineColorAndroid="transparent"
             style={StyleSheet.flatten([styles.input, style])}
             onChangeText={handleChange}
             onBlur={handleBlur}
             onFocus={handleFocus}
-            {...inputProps}
+            {...restProps}
           />
         )}
         {rightIconSource && (
@@ -131,7 +131,7 @@ function CustomInput(
         <View
           style={StyleSheet.flatten([
             styles.normalLine,
-            { backgroundColor: isFocus ? inputProps.selectionColor : divider }
+            { backgroundColor: isFocus ? restProps.selectionColor : divider }
           ])}
         />
       )}

@@ -6,7 +6,13 @@ initialize_git() {
 }
 
 connect_git_repo() {
-    git remote add origin {{cookiecutter.repository_link}}
+    if [[ "{{cookiecutter.repository_link}}" != "NA" ]]; then
+        git branch -M master
+        git remote add origin {{ cookiecutter.repository_link }}
+        git remote -v
+    else
+        echo "Skipping to connect git repository..."
+    fi
 }
 
 update_project_permissions() {
@@ -72,16 +78,13 @@ launch_visual_studio() {
     fi                                                                
 }
 
+initialize_git
 yarn
 npx jetify
 cd ios/
 pod install
 cd ..
-initialize_git
-{%- if cookiecutter.repository_link != "NA" -%}
- connect_git_repo
-{% endif %}
-# git config core.hooksPath .githooks/
+connect_git_repo
 update_project_permissions
 launch_android_studio
 launch_xcode

@@ -34,7 +34,7 @@ function OneInputField({
   digitsMemo,
   setDigits,
   setSelectedIndex,
-  ...otherProps
+  ...restProps
 }: OneInputFieldPropsType): React.ReactElement {
   const { styles } = useTheme(styleSheet);
   const { color: defaultPlaceholderTextColor } = { ...styles.defaultTextFieldStyle, ...codeInputFieldStyle };
@@ -74,7 +74,7 @@ function OneInputField({
             setSelectedIndex
           );
         }}
-        {...otherProps}
+        {...restProps}
       />
     </View>
   );
@@ -93,7 +93,7 @@ export function OtpInput({
   autoFocusOnLoad,
   onCodeFilled,
   onCodeChanged,
-  ...otherProps
+  ...restProps
 }: OtpInputPropsType): React.ReactElement {
   const { styles } = useTheme(styleSheet);
   const { digits, setDigits, digitsMemo, selectedIndex, setSelectedIndex, handlePress }: UseOtpInputReturnType =
@@ -124,7 +124,7 @@ export function OtpInput({
               setSelectedIndex={setSelectedIndex}
               onCodeFilled={onCodeFilled}
               onCodeChanged={onCodeChanged}
-              {...otherProps}
+              {...restProps}
             />
           ))}
         </View>

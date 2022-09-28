@@ -1,8 +1,5 @@
-import { CustomStyleSheet } from 'rn-custom-style-sheet';
-
+import { CustomStyleSheet, type StyleSheetOption } from 'rn-custom-style-sheet';
 import { Colors } from '@themes';
-
-import type { StyleSheetOption } from 'rn-custom-style-sheet';
 
 /**
  * Create a custom style sheet for the given theme.
@@ -12,27 +9,31 @@ import type { StyleSheetOption } from 'rn-custom-style-sheet';
 export default function styleSheet(option: StyleSheetOption) {
   return CustomStyleSheet.create(
     {
-      centerSide: {
+      centerView: {
         left: 0,
         position: 'absolute',
-        right: 0
+        right: 0,
+        flexDirection: 'row'
       },
-      imageTitle: {
+      image: {
         tintColor: Colors[option.theme]?.black
       },
-      centerContainerSide: {
+      centerImage: {
+        alignSelf: 'center'
+      },
+      centerContainer: {
         alignItems: 'center',
         justifyContent: 'center'
       },
-      centerImageTitle: {
-        alignSelf: 'center'
-      },
-      textTitle: {
+      text: {
         fontSize: '16@ms',
         color: Colors[option.theme]?.black
       },
-      centerTextTitle: {
+      centerText: {
         textAlign: 'center'
+      },
+      addMargin: {
+        marginHorizontal: '10@s'
       }
     },
     option

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native';
+
 type TextInputPropsType = React.ComponentProps<typeof TextInput>;
 
 /**
@@ -18,4 +19,5 @@ type LocalSearchPropsType = {
   onSearchQuery: (search: string) => void;
   handleCancel: () => void;
 };
+
 export type SearchPropsType = Partial<LocalSearchPropsType> & TextInputPropsType;
