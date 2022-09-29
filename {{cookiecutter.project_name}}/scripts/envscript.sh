@@ -1,3 +1,4 @@
+{% raw %}
 #!/usr/bin/env bash
 
 # Color Code'
@@ -176,9 +177,14 @@ if [[ "$TYPE_OF_OPERATION" == "build" || "$TYPE_OF_OPERATION" == "setupWithBuild
   select_option "${versionOptions[@]}"
   VERSION_TYPE="${versionOptions[$?]}"
 fi
+{%- endraw %}
 
-. "$PWD/scripts/pathscript.sh"
+FIREBASE_PATH="scripts/configs/firebase/${ENV}"
+NATIVE_PATH="scripts/configs/native/${ENV}"
+ASSETS_PATH="scripts/configs/native/${ENV}/assets"
+INFO_PLIST_PATH=ios/{{cookiecutter.project_name}}
 
+{% raw %}
 echoHeader "-" "-" "${Yellow}"
 echoHeader " " "Applying project setting" "${Green}"
 echoHeader "-" "-" "${Yellow}"
@@ -547,3 +553,4 @@ fi
 echoHeader "-" "-" "${Yellow}"
 echoHeader " " "Successfully updated project setting, Enjoy now" "${Purple}"
 echoHeader "-" "-" "${Yellow}"
+{%- endraw %}
