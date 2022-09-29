@@ -20,7 +20,7 @@ export default function FabButton({
   textStyle,
   isRight,
   isLoading,
-  ...OtherProps
+  ...restProps
 }: FabButtonPropsType): React.ReactElement {
   const loading: boolean = isLoading === true ? true : false;
   const { styles, theme } = useTheme(styleSheet);
@@ -36,9 +36,9 @@ export default function FabButton({
         {loading && <ActivityIndicator size={'small'} color={Colors[theme]?.secondary} />}
         {!loading && (
           <>
-            {isPresentValue(OtherProps.source) && isRight !== true && <Icon {...OtherProps} />}
+            {isPresentValue(restProps.source) && isRight !== true && <Icon {...restProps} />}
             {isPresentValue(text) && <Text style={textStyle}>{text}</Text>}
-            {isPresentValue(OtherProps.source) && isRight === true && <Icon {...OtherProps} />}
+            {isPresentValue(restProps.source) && isRight === true && <Icon {...restProps} />}
           </>
         )}
       </Pressable>

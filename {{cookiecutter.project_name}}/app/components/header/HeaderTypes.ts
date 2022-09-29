@@ -1,6 +1,5 @@
 import React from 'react';
 import { type ImageStyle, TextInput, type TextStyle, type ViewStyle } from 'react-native';
-
 import type { SvgIconPropsStyle, ImageIconPropsStyle, OtherIconPropsStyle } from '../icon';
 import type { XmlProps } from 'react-native-svg';
 
@@ -27,10 +26,10 @@ type IconPropsType = Partial<{
  */
 type LocalHeaderPropsType = {
   left: IconPropsType;
+  customLeftView: React.ReactElement;
   center: IconPropsType;
   right: IconPropsType;
   customRightView: React.ReactElement;
-  rightOption: IconPropsType;
 
   isLowerCase: boolean;
   isSearch: boolean;

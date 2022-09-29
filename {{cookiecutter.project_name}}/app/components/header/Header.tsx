@@ -1,15 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { type LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
-
 import { useHeaderHeight, useStatusBarHeight } from '@hooks';
-
-import { BothSide } from './both_side';
-import { CenterSide } from './center_side';
+import { HeaderButton } from './header-button';
 import styleSheet from './HeaderStyles';
 import { defaultProps } from './HeaderTypes';
 import { Search } from './search';
-
 import type { HeaderPropsType } from './HeaderTypes';
 
 /**
@@ -19,10 +15,10 @@ import type { HeaderPropsType } from './HeaderTypes';
  */
 export default function Header({
   left,
+  customLeftView,
   center,
   right,
   customRightView,
-  rightOption,
 
   isLowerCase,
   isSearch,
@@ -55,15 +51,18 @@ export default function Header({
       <View pointerEvents="none" style={{ height: statusBarHeight }} />
       {!isSearch && (
         <View pointerEvents="box-none" style={styles.subContainer}>
-          <CenterSide
+          <HeaderButton
+            isCenterView
             isLeftAlign={isLeftAlign}
             {...center}
             viewStyle={StyleSheet.flatten([center?.viewStyle, { left: widthLeft, right: widthRight }])}
           />
-          <BothSide isAddMargin {...left} onLayout={handleLeftLayout} />
+          <View style={styles.rightView} onLayout={handleLeftLayout}>
+            {!customLeftView && <HeaderButton isAddMargin isCenterView={false} {...left} />}
+            {customLeftView && customLeftView}
+          </View>
           <View style={styles.rightView} onLayout={handleRightLayout}>
-            <BothSide {...rightOption} />
-            <BothSide isAddMargin {...right} />
+            {!customRightView && <HeaderButton isAddMargin isCenterView={false} {...right} />}
             {customRightView && customRightView}
           </View>
         </View>

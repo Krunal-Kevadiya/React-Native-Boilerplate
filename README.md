@@ -52,12 +52,12 @@
 Input name | Description | Default
 --- | --- | --- |
 project_name | Application name(Start with Upper case without space & symbols) | AppName
-bundle_identifier | Bundle ID of project | com.simformsolutions.app
+bundle_identifier | Bundle ID of project | com.krunalkevadiya.appname
 minimum_android_sdk_version | Minimum android SDK support | 21
 minimum_iOS_sdk_version | Minimum iOS SDK support | 12.4
 base_url | Base URL for a project rest api | https://reqres.in
 sentry_dsn_url | Sentry DSN URL for crash reporting | NA
-encryption_key | Encryption key for local storage | encryptionKey
+encryption_key | Encryption key for local storage | AppName
 android_codePush_key | Android app center code push key | ""
 ios_codePush_key | IOS app center code push key | ""
 deep_link_scheme | Deep link scheme | "appName"
