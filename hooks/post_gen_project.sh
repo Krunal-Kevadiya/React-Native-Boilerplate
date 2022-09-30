@@ -80,7 +80,7 @@ launch_visual_studio() {
 
 initialize_git
 yarn
-npx jetify
+# npx jetify
 cd ios/
 pod install
 cd ..
