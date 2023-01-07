@@ -29,13 +29,13 @@ export default function styleSheet(option: StyleSheetOption) {
         marginTop: '12@vs'
       },
       button: {
-        backgroundColor: Colors[option.theme]?.black
+        backgroundColor: Colors[option.theme]?.invertedBlack
       },
       disabledButton: {
         backgroundColor: Colors[option.theme]?.gray
       },
       buttonText: {
-        color: Colors[option.theme]?.white
+        color: Colors[option.theme]?.invertedWhite
       },
       signUpDescContainer: {
         borderWidth: 0,
@@ -53,7 +53,7 @@ export default function styleSheet(option: StyleSheetOption) {
         fontFamily: Fonts.regular,
         fontSize: '14@ms',
         textAlign: 'center',
-        color: colorOpacity(Colors[option.theme]?.black, 0.3)
+        color: colorOpacity(Colors[option.theme]?.invertedBlack, 0.3)
       }
     },
     option

@@ -17,7 +17,7 @@ export default function styleSheet(option: StyleSheetOption) {
         fontSize: '14@ms',
         fontWeight: 'bold',
         letterSpacing: -1,
-        color: Colors[option.theme]?.white
+        color: Colors[option.theme]?.invertedWhite
       },
       container: {
         backgroundColor: Colors[option.theme]?.secondary

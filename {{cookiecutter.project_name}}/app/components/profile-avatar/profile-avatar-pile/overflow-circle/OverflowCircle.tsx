@@ -27,9 +27,20 @@ export default function OverflowCircle({
   return (
     <View style={StyleSheet.flatten([localCircleStyle, circleStyle])}>
       <View
-        style={StyleSheet.flatten([styles.overflow, localCircleStyle, { borderRadius: localSize / 2 }, overflowStyle])}
+        style={StyleSheet.flatten([
+          styles.overflow,
+          localCircleStyle,
+          { borderRadius: localSize / 2 },
+          overflowStyle
+        ])}
       >
-        <Text style={StyleSheet.flatten([styles.overflowLabel, { fontSize: localSize * 0.4 }, overflowLabelStyle])}>
+        <Text
+          style={StyleSheet.flatten([
+            styles.overflowLabel,
+            { fontSize: localSize * 0.4 },
+            overflowLabelStyle
+          ])}
+        >
           +{overflow}
         </Text>
       </View>

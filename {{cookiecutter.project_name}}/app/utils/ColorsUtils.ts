@@ -6,7 +6,10 @@ import tinycolor2 from 'tinycolor2';
  * @param rgb2 - The color to multiply with.
  * @returns A tinycolor2 instance
  */
-function multiply(rgb1: tinycolor2.ColorFormats.RGBA, rgb2: tinycolor2.ColorFormats.RGBA): tinycolor2.Instance {
+function multiply(
+  rgb1: tinycolor2.ColorFormats.RGBA,
+  rgb2: tinycolor2.ColorFormats.RGBA
+): tinycolor2.Instance {
   rgb1.b = Math.floor((rgb1.b * rgb2.b) / 255);
   rgb1.g = Math.floor((rgb1.g * rgb2.g) / 255);
   rgb1.r = Math.floor((rgb1.r * rgb2.r) / 255);
@@ -25,7 +28,10 @@ type MaterialPaletteObjectType = {
  * @param {string} name - the name of the color.
  * @returns {MaterialPaletteObjectType} - the object with the name and hex value of the color.
  */
-function getMaterialPaletteObject(value: tinycolor2.ColorInput, name: string): MaterialPaletteObjectType {
+function getMaterialPaletteObject(
+  value: tinycolor2.ColorInput,
+  name: string
+): MaterialPaletteObjectType {
   var colors = tinycolor2(value);
   return {
     name: name,
@@ -49,7 +55,12 @@ export function getMaterialPaletteList(
   // Return array of color objects.
   var baseLight: tinycolor2.Instance;
   var baseDark: tinycolor2.Instance;
-  var baseTriad: [tinycolor2.Instance, tinycolor2.Instance, tinycolor2.Instance, tinycolor2.Instance];
+  var baseTriad: [
+    tinycolor2.Instance,
+    tinycolor2.Instance,
+    tinycolor2.Instance,
+    tinycolor2.Instance
+  ];
 
   switch (algorithm) {
     case 'constantin': {
@@ -67,10 +78,22 @@ export function getMaterialPaletteList(
         getMaterialPaletteObject(tinycolor2.mix(baseDark, hex, 70), '700'),
         getMaterialPaletteObject(tinycolor2.mix(baseDark, hex, 54), '800'),
         getMaterialPaletteObject(tinycolor2.mix(baseDark, hex, 25), '900'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(80).lighten(65), 'A100'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(80).lighten(55), 'A200'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(100).lighten(45), 'A400'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(100).lighten(40), 'A700')
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(80).lighten(65),
+          'A100'
+        ),
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(80).lighten(55),
+          'A200'
+        ),
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(100).lighten(45),
+          'A400'
+        ),
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[3], 15).saturate(100).lighten(40),
+          'A700'
+        )
       ];
     }
 
@@ -90,10 +113,22 @@ export function getMaterialPaletteList(
         getMaterialPaletteObject(tinycolor2.mix(baseDark, hex, 70), '700'),
         getMaterialPaletteObject(tinycolor2.mix(baseDark, hex, 54), '800'),
         getMaterialPaletteObject(tinycolor2.mix(baseDark, hex, 25), '900'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(80).lighten(48), 'A100'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(80).lighten(36), 'A200'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(100).lighten(31), 'A400'),
-        getMaterialPaletteObject(tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(100).lighten(28), 'A700')
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(80).lighten(48),
+          'A100'
+        ),
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(80).lighten(36),
+          'A200'
+        ),
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(100).lighten(31),
+          'A400'
+        ),
+        getMaterialPaletteObject(
+          tinycolor2.mix(baseDark, baseTriad[2], 15).saturate(100).lighten(28),
+          'A700'
+        )
       ];
     }
 

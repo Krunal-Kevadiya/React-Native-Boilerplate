@@ -1,4 +1,8 @@
-import { SwipeDirectionsEnum, type ConfigPropsType, type SwipeHandlerPropsType } from './GestureRecognizerTypes';
+import {
+  SwipeDirectionsEnum,
+  type ConfigPropsType,
+  type SwipeHandlerPropsType
+} from './GestureRecognizerTypes';
 import type { GestureResponderEvent, PanResponderGestureState } from 'react-native';
 
 export const swipeConfig: ConfigPropsType = Object.freeze({
@@ -34,7 +38,10 @@ function isValidSwipe(
   directionalOffset: number,
   directionalOffsetThreshold: number
 ): boolean {
-  return Math.abs(velocity) > velocityThreshold && Math.abs(directionalOffset) < directionalOffsetThreshold;
+  return (
+    Math.abs(velocity) > velocityThreshold &&
+    Math.abs(directionalOffset) < directionalOffsetThreshold
+  );
 }
 
 /**

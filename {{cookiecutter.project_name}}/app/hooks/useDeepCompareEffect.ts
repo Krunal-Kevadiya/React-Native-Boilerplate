@@ -9,7 +9,10 @@ import { useDeepCompareMemoize, checkDeps } from '@hooks-utils';
  * @param {React.DependencyList} dependencies - The dependencies to check for changes.
  * @returns None
  */
-export default function useDeepCompareEffect(effect: React.EffectCallback, dependencies: React.DependencyList) {
+export default function useDeepCompareEffect(
+  effect: React.EffectCallback,
+  dependencies: React.DependencyList
+) {
   if (AppConst.isDevelopment) {
     checkDeps(dependencies, 'useDeepCompareEffect');
   }

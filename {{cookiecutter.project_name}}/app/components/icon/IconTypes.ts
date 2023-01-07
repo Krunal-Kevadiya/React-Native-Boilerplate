@@ -9,7 +9,12 @@ import type { XmlProps } from 'react-native-svg';
  * @property {ViewStyle} [style] - The style of the icon.
  * @property {XmlProps} [svgStyle] - The style of the svg.
  */
-export type SvgIconPropsStyle = { type?: 'svg'; source?: string; style?: ViewStyle; svgStyle?: XmlProps };
+export type SvgIconPropsStyle = {
+  type?: 'svg';
+  source?: string;
+  style?: ViewStyle;
+  svgStyle?: XmlProps;
+};
 
 /**
  * The type of props that can be passed to the ImageIcon component.
@@ -19,7 +24,12 @@ export type SvgIconPropsStyle = { type?: 'svg'; source?: string; style?: ViewSty
  * @property {ImageStyle} [style] - The style to apply to the image.
  * @property {never} [svgStyle] - The style to apply to the SVG.
  */
-export type ImageIconPropsStyle = { type?: 'image'; source?: number; style?: ImageStyle; svgStyle?: never };
+export type ImageIconPropsStyle = {
+  type?: 'image';
+  source?: number;
+  style?: ImageStyle;
+  svgStyle?: never;
+};
 
 /**
  * A type alias for the props of the OtherIcon component.
@@ -29,7 +39,12 @@ export type ImageIconPropsStyle = { type?: 'image'; source?: number; style?: Ima
  * @property {ViewStyle} [style] - The style of the icon.
  * @property {ViewStyle} [svgStyle] - The style of the SVG element.
  */
-export type OtherIconPropsStyle = { type?: never; source?: never; style?: ViewStyle; svgStyle?: never };
+export type OtherIconPropsStyle = {
+  type?: never;
+  source?: never;
+  style?: ViewStyle;
+  svgStyle?: never;
+};
 
 /**
  * The props for the Icon component.

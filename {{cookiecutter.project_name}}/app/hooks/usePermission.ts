@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert, type AlertButton } from 'react-native';
 import {
@@ -11,7 +12,6 @@ import {
   checkNotifications,
   requestNotifications
 } from 'react-native-permissions';
-import { isPresentValue } from '@utils';
 import useDeepCompareCallback from './useDeepCompareCallback';
 import useDeepCompareEffect from './useDeepCompareEffect';
 
@@ -39,56 +39,6 @@ const defaultOption: RationaleOptions = {
   message: '',
   buttonPositive: ''
 };
-
-/* @TODO: How to used useSinglePermissions hook
-const [data, error, askPermission, getPermission] = useSinglePermissions(
-    PERMISSIONS.IOS.PHOTO_LIBRARY,
-    {
-      title: 'Can we access your photo library?',
-      message: 'We need access so you can upload photos',
-      buttonPositive: 'Ok',
-      buttonNegative: 'Cancel'
-
-      OR
-
-      customDialogView: (buttonPositive: () => void, buttonNegative: () => void) => {
-        // Do anything here
-      }
-    },
-    {
-      title: 'Can we access your photo library?',
-      message: 'We need access so you can upload photos',
-      buttonPositive: 'Ok',
-      buttonNegative: 'Cancel'
-
-      OR
-
-      customDialogView: (buttonPositive: () => void, buttonNegative: () => void) => {
-        // Do anything here
-      }
-    },
-    {
-      title: 'Can we access your photo library?',
-      message: 'We need access so you can upload photos',
-      buttonPositive: 'Setting',
-      buttonNegative: 'Cancel'
-
-      OR
-
-      customDialogView: (buttonPositive: () => void, buttonNegative: () => void) => {
-        // Do anything here
-      }
-    }, {
-      ask: false,
-      get: true,
-      getWithCallback: false
-    }, () => {
-      // Permission grant then what to do.
-    }, () => {
-      // dismiss the dialog
-    }
-  );
-*/
 
 /**
  * used for single permission check and request control.
@@ -119,10 +69,15 @@ export function useSinglePermissions(
   const [withCallback, setWithCallback] = useState<boolean>(false);
 
   const askDeniedOrBlockedPermissions = useDeepCompareCallback<
-    (withState: boolean, isDenied: boolean, option: RationaleOptions) => () => Promise<PermissionStatus>
+    (
+      withState: boolean,
+      isDenied: boolean,
+      option: RationaleOptions
+    ) => () => Promise<PermissionStatus>
   >(
     (withState, isDenied, option) => () => {
-      const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = option;
+      const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } =
+        option;
       setWithCallback(true);
       /**
        * Checks the status of the permission.
@@ -189,13 +144,13 @@ export function useSinglePermissions(
          */
         const onPressPositive = () => resolve(onPressAsk());
 
-        if (isPresentValue(customDialogView)) {
+        if (!isEmpty(customDialogView)) {
           customDialogView?.(onPressPositive, onPressNegative);
         } else if (
-          isPresentValue(title) &&
-          isPresentValue(message) &&
-          isPresentValue(buttonPositive) &&
-          (isPresentValue(buttonNegative) || isPresentValue(buttonNeutral))
+          !isEmpty(title) &&
+          !isEmpty(message) &&
+          !isEmpty(buttonPositive) &&
+          (!isEmpty(buttonNegative) || !isEmpty(buttonNeutral))
         ) {
           const buttons: AlertButton[] = [];
 
@@ -221,7 +176,8 @@ export function useSinglePermissions(
   );
 
   const askPermissions = useDeepCompareCallback<() => Promise<PermissionStatus>>(() => {
-    const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = requestInitial;
+    const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } =
+      requestInitial;
     setWithCallback(true);
     /**
      * Checks the status of the permission.
@@ -275,13 +231,14 @@ export function useSinglePermissions(
        * It returns a function that resolves the promise returned by onPressAsk().
        */
       const onPressPositive = () => resolve(onPressAsk());
-      if (isPresentValue(customDialogView)) {
+
+      if (!isEmpty(customDialogView)) {
         customDialogView?.(onPressPositive, onPressNegative);
       } else if (
-        isPresentValue(title) &&
-        isPresentValue(message) &&
-        isPresentValue(buttonPositive) &&
-        (isPresentValue(buttonNegative) || isPresentValue(buttonNeutral))
+        !isEmpty(title) &&
+        !isEmpty(message) &&
+        !isEmpty(buttonPositive) &&
+        (!isEmpty(buttonNegative) || !isEmpty(buttonNeutral))
       ) {
         const buttons: AlertButton[] = [];
 
@@ -327,7 +284,10 @@ export function useSinglePermissions(
   }, [ask, get]);
 
   useDeepCompareEffect(() => {
-    if ((permissionStatus === 'granted' || permissionStatus === 'limited') && (withCallback || getWithCallback)) {
+    if (
+      (permissionStatus === 'granted' || permissionStatus === 'limited') &&
+      (withCallback || getWithCallback)
+    ) {
       onGranted();
     }
   }, [permissionStatus, withCallback, getWithCallback]);
@@ -379,7 +339,9 @@ function getPermissionResult(
   const tempOptionTypes: Permission[] = optionTypes ?? [];
   const grantedList: Permission[] = types.filter(
     (type) =>
-      statuses[type] === 'granted' || statuses[type] === 'limited' || tempOptionTypes.findIndex((p) => p === type) > -1
+      statuses[type] === 'granted' ||
+      statuses[type] === 'limited' ||
+      tempOptionTypes.findIndex((p) => p === type) > -1
   );
   const deniedList: Permission[] = types.filter(
     (type) => statuses[type] === 'denied' && tempOptionTypes.findIndex((p) => p === type) <= -1
@@ -399,57 +361,6 @@ function getPermissionResult(
   }
   return { status, deniedList, blockedList };
 }
-
-/* @TODO: How to used useMultiplePermissions hook
-const [data, error, askPermission, getPermission] = useMultiplePermissions(
-    [PERMISSIONS.IOS.PHOTO_LIBRARY, PERMISSIONS.IOS.CAMERA, PERMISSIONS.IOS.MICROPHONE],
-    {
-      title: 'Can we access your photo library?',
-      message: 'We need access so you can upload photos',
-      buttonPositive: 'Ok',
-      buttonNegative: 'Cancel'
-
-      OR
-
-      customDialogView: (buttonPositive: () => void, buttonNegative: () => void) => {
-        // Do anything here
-      }
-    },
-    {
-      title: 'Can we access your photo library?',
-      message: 'We need access so you can upload photos',
-      buttonPositive: 'Ok',
-      buttonNegative: 'Cancel'
-
-      OR
-
-      customDialogView: (buttonPositive: () => void, buttonNegative: () => void) => {
-        // Do anything here
-      }
-    },
-    {
-      title: 'Can we access your photo library?',
-      message: 'We need access so you can upload photos',
-      buttonPositive: 'Ok',
-      buttonNegative: 'Cancel'
-
-      OR
-
-      customDialogView: (buttonPositive: () => void, buttonNegative: () => void) => {
-        // Do anything here
-      }
-    }, {
-      ask: false,
-      get: true,
-      getWithCallback: false
-    }, () => {
-      // All permission grant then what to do.
-    }, () => {
-      // dismiss the dialog
-    },
-    [PERMISSIONS.IOS.CAMERA]
-  );
-*/
 
 /**
  * used for multiple permission check and request control.
@@ -490,7 +401,8 @@ export function useMultiplePermissions(
     ) => () => Promise<PermissionStatus>
   >(
     (withState, isDenied, option, requestList) => () => {
-      const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = option;
+      const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } =
+        option;
       setWithCallback(true);
       /**
        * Checks the status of the permission.
@@ -563,13 +475,13 @@ export function useMultiplePermissions(
          */
         const onPressPositive = () => resolve(onPressAsk());
 
-        if (isPresentValue(customDialogView)) {
+        if (!isEmpty(customDialogView)) {
           customDialogView?.(onPressPositive, onPressNegative);
         } else if (
-          isPresentValue(title) &&
-          isPresentValue(message) &&
-          isPresentValue(buttonPositive) &&
-          (isPresentValue(buttonNegative) || isPresentValue(buttonNeutral))
+          !isEmpty(title) &&
+          !isEmpty(message) &&
+          !isEmpty(buttonPositive) &&
+          (!isEmpty(buttonNegative) || !isEmpty(buttonNeutral))
         ) {
           const buttons: AlertButton[] = [];
 
@@ -595,7 +507,8 @@ export function useMultiplePermissions(
   );
 
   const askPermissions = useDeepCompareCallback<() => Promise<PermissionStatus>>(() => {
-    const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } = requestInitial;
+    const { title, message, buttonPositive, buttonNegative, buttonNeutral, customDialogView } =
+      requestInitial;
     setWithCallback(true);
     /**
      * Checks the status of the permission.
@@ -623,7 +536,11 @@ export function useMultiplePermissions(
     const onPressAsk = (): Promise<PermissionStatus> => {
       return requestMultiple(types)
         .then((statuses: Record<Permission[number], PermissionStatus>) => {
-          const { status, deniedList, blockedList } = getPermissionResult(types, optionTypes, statuses);
+          const { status, deniedList, blockedList } = getPermissionResult(
+            types,
+            optionTypes,
+            statuses
+          );
           if (status === 'denied') {
             return askDeniedOrBlockedPermissions(false, true, requestRationale, deniedList)();
           } else if (status === 'blocked') {
@@ -652,13 +569,14 @@ export function useMultiplePermissions(
        * It returns a function that resolves the promise returned by onPressAsk().
        */
       const onPressPositive = () => resolve(onPressAsk());
-      if (isPresentValue(customDialogView)) {
+
+      if (!isEmpty(customDialogView)) {
         customDialogView?.(onPressPositive, onPressNegative);
       } else if (
-        isPresentValue(title) &&
-        isPresentValue(message) &&
-        isPresentValue(buttonPositive) &&
-        (isPresentValue(buttonNegative) || isPresentValue(buttonNeutral))
+        !isEmpty(title) &&
+        !isEmpty(message) &&
+        !isEmpty(buttonPositive) &&
+        (!isEmpty(buttonNegative) || !isEmpty(buttonNeutral))
       ) {
         const buttons: AlertButton[] = [];
 
@@ -701,7 +619,10 @@ export function useMultiplePermissions(
   }, [ask, get]);
 
   useDeepCompareEffect(() => {
-    if ((permissionStatus === 'granted' || permissionStatus === 'limited') && (withCallback || getWithCallback)) {
+    if (
+      (permissionStatus === 'granted' || permissionStatus === 'limited') &&
+      (withCallback || getWithCallback)
+    ) {
       onGranted();
     }
   }, [permissionStatus, withCallback, getWithCallback]);
@@ -761,7 +682,7 @@ export function useNotificationPermissions(
          */
         const onPress = () =>
           resolve(
-            checkNotifications().then(({ status }) => {
+            checkNotifications().then(({ status }: { status: PermissionStatus }) => {
               setPermissionStatus(status);
               return status;
             })
@@ -777,7 +698,7 @@ export function useNotificationPermissions(
         onPress: () =>
           resolve(
             openSettings().then(() =>
-              checkNotifications().then(({ status }) => {
+              checkNotifications().then(({ status }: { status: PermissionStatus }) => {
                 setPermissionStatus(status);
                 return status;
               })
@@ -817,7 +738,7 @@ export function useNotificationPermissions(
 
   const askPermissions = useCallback<() => Promise<void>>(() => {
     return requestNotifications(['alert', 'badge', 'sound'])
-      .then(({ status }) => {
+      .then(({ status }: { status: PermissionStatus }) => {
         if (status === 'blocked') {
           return askBlockedPermissionsWithState();
         }
@@ -830,7 +751,7 @@ export function useNotificationPermissions(
 
   const getPermissions = useCallback<() => Promise<void>>(() => {
     return checkNotifications()
-      .then(({ status }) => setPermissionStatus(status))
+      .then(({ status }: { status: PermissionStatus }) => setPermissionStatus(status))
       .catch(setError);
   }, []);
 

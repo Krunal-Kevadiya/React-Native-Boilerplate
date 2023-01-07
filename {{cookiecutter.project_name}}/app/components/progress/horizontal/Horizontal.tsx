@@ -37,13 +37,19 @@ function CustomHorizontalProgress(
   }
 
   return (
-    <View style={StyleSheet.flatten([styles.containerStyle, styles.centerAlign, { top: statusBarHeight }])}>
+    <View
+      style={StyleSheet.flatten([
+        styles.containerStyle,
+        styles.centerAlign,
+        { top: statusBarHeight }
+      ])}
+    >
       <Progress.Bar
         progress={progress}
         width={windowWidth - scale(5)}
         height={scale(5)}
         color={colorOpacity(Colors[theme]?.secondary, 0.5)}
-        unfilledColor={colorOpacity(Colors[theme]?.black, 0.5)}
+        unfilledColor={colorOpacity(Colors[theme]?.invertedBlack, 0.5)}
         borderColor={Colors[theme]?.secondary}
         {...props}
       />

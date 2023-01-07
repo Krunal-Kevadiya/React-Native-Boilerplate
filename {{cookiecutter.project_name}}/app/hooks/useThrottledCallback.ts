@@ -1,4 +1,7 @@
-import useDebouncedCallback, { type CallOptions, type DebouncedState } from './useDebouncedCallback';
+import useDebouncedCallback, {
+  type CallOptions,
+  type DebouncedState
+} from './useDebouncedCallback';
 
 /**
  * Creates a throttled function that only invokes `func` at most once per

@@ -7,6 +7,10 @@ import type ImageStaticPropsType from './ImageStaticTypes';
  * @param {ImageStaticPropsType} props - The props for the component.
  * @returns {React.ReactElement} A React Element.
  */
-export default function ImageStatic({ image, size, svgStyle }: ImageStaticPropsType): React.ReactElement {
+export default function ImageStatic({
+  image,
+  size,
+  svgStyle
+}: ImageStaticPropsType): React.ReactElement {
   return <Icon type="svg" size={size} source={image ?? ''} svgStyle={svgStyle} />;
 }

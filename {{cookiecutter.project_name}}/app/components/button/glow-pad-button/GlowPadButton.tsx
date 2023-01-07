@@ -12,7 +12,12 @@ import { moderateScale } from 'rn-custom-style-sheet';
 import { Icon } from '@components';
 import { isPresentValue } from '@utils';
 import styles from './GlowPadButtonStyles';
-import { defaultProps, type GlowPadButtonPropsType, type RingViewPropsType, type PulseType } from './GlowPadButtonTypes';
+import {
+  defaultProps,
+  type GlowPadButtonPropsType,
+  type RingViewPropsType,
+  type PulseType
+} from './GlowPadButtonTypes';
 
 /**
  * A custom ring view component
@@ -99,7 +104,13 @@ export default function GlowPadButton({
   return (
     <View style={StyleSheet.flatten([styles.centerView, style, containerStyle])}>
       {pulses.map((pulse, index) => (
-        <RingView key={pulse.pulseKey} delay={index * speed} color={color} pulse={pulse} duration={duration} />
+        <RingView
+          key={pulse.pulseKey}
+          delay={index * speed}
+          color={color}
+          pulse={pulse}
+          duration={duration}
+        />
       ))}
       {isPresentValue(image?.source) && <Icon {...image} />}
     </View>

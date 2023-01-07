@@ -5,7 +5,13 @@ import type { LayoutChangeEvent, LayoutRectangle } from 'react-native';
  * layout hook that returns a function that can be used to set the layout of a component.
  * @returns A function that can be used to set the layout of a component.
  */
-export default function useLayout(): [(e: LayoutChangeEvent) => void, number, number, number, number] {
+export default function useLayout(): [
+  (e: LayoutChangeEvent) => void,
+  number,
+  number,
+  number,
+  number
+] {
   const [layout, setLayout] = useState<LayoutRectangle>({
     x: 0,
     y: 0,

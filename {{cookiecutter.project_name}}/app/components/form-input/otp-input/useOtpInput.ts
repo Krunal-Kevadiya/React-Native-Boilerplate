@@ -36,7 +36,10 @@ export function useOtpInput({
   const [digits, setDigits] = useState<string[]>(codeToArray(code));
   const [selectedIndex, setSelectedIndex] = useState<number>(autoFocusOnLoad ? 0 : -1);
 
-  const digitsMemo = useMemo<string[]>(() => (code === undefined ? digits : code.split('')), [code, digits]);
+  const digitsMemo = useMemo<string[]>(
+    () => (code === undefined ? digits : code.split('')),
+    [code, digits]
+  );
 
   const prevLocalCode = usePrevious<string>(localCode);
 
@@ -61,9 +64,23 @@ export function useOtpInput({
   useEffect(() => {
     let handleTimer: number;
     if (isAndroid) {
-      checkPinCodeFromClipBoard(pinCount, fieldList, onCodeFilled, onCodeChanged, setDigits, setSelectedIndex);
+      checkPinCodeFromClipBoard(
+        pinCount,
+        fieldList,
+        onCodeFilled,
+        onCodeChanged,
+        setDigits,
+        setSelectedIndex
+      );
       handleTimer = setInterval(() => {
-        checkPinCodeFromClipBoard(pinCount, fieldList, onCodeFilled, onCodeChanged, setDigits, setSelectedIndex);
+        checkPinCodeFromClipBoard(
+          pinCount,
+          fieldList,
+          onCodeFilled,
+          onCodeChanged,
+          setDigits,
+          setSelectedIndex
+        );
       }, 400);
     }
     bringUpKeyBoardIfNeeded(autoFocusOnLoad, pinCount, digitsMemo, fieldList, setSelectedIndex);

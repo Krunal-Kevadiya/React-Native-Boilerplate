@@ -30,7 +30,8 @@ export default function ProfileAvatar({
   const isImage: boolean = !isUrl && isPresentValue(image) && image !== -1;
   const isSource: boolean = isPresentValue(source);
   const isText: boolean = !isUrl && !isImage && isPresentValue(text);
-  const localStyle = isUrl && !load ? omit(StyleSheet.flatten(style), 'backgroundColor') : StyleSheet.flatten(style);
+  const localStyle =
+    isUrl && !load ? omit(StyleSheet.flatten(style), 'backgroundColor') : StyleSheet.flatten(style);
 
   return (
     <Pressable onPress={onPress}>
@@ -46,7 +47,9 @@ export default function ProfileAvatar({
         )}
         {isImage && <ImageStatic image={image as string} size={size} svgStyle={svgStyle} />}
         {isText && <ImageText text={text} textStyle={textStyle} />}
-        {isSource && !load && <ImageOverlap source={source as string} size={size} style={style} svgStyle={svgStyle} />}
+        {isSource && !load && (
+          <ImageOverlap source={source as string} size={size} style={style} svgStyle={svgStyle} />
+        )}
       </View>
     </Pressable>
   );

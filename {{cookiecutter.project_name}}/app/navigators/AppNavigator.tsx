@@ -1,20 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import includes from 'lodash/includes';
-import React, { useEffect } from 'react';
+import React from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import { useDispatch, useSelector } from 'react-redux';
-import { ToastHolder } from '@components';
+import { useTheme } from 'rn-custom-style-sheet';
 import { AppConst, AppRouteEnum, ExcludeTrackAppRoute } from '@constants';
-import { useDidMount, useExceptionHandler } from '@hooks';
-import { ErrorResponse, UserResponse } from '@models';
-import { AppRequestSelectors, AuthSelectors, AppRequestActions } from '@stores';
-import { getLinkConfiguration } from '@utils';
+import { useExceptionHandler {% if cookiecutter.state_management != 'graphql' -%}, useGlobalError {% endif -%} } from '@hooks';
+import { Colors } from '@themes';
+import { getLinkConfiguration, navigationRef, routeNameRef } from '@utils';
 import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
 import LaunchNavigator from './LaunchNavigator';
-import { navigationRef, rightToLeftAnimation, routeNameRef } from './NavigatorUtil';
-import type { AppDispatchType, RootStateType } from '@stores';
 
 /**
  * The type of the navigation prop for the RootStack.
@@ -47,52 +43,36 @@ function InitializeReactNavigationDevTools(): void {
 }
 
 /**
- * Initializes the app.
- * @returns None
- */
-function InitializeApp(): React.ReactElement | null {
-  const dispatch = useDispatch<AppDispatchType>();
-  const error = useSelector<RootStateType, ErrorResponse>(AppRequestSelectors.getError);
-
-  if (AppConst.isDevelopment) {
-    InitializeReactNavigationDevTools();
-  }
-
-  useEffect(() => {
-    if (error.message && error.isGlobalType) {
-      ToastHolder.toastMessage(error.message);
-      dispatch(AppRequestActions.changeError(undefined));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error.message, error.isGlobalType]);
-
-  useDidMount(() => {
-    dispatch(AppRequestActions.changeError(undefined));
-  });
-
-  return null;
-}
-
-/**
- * Initializes the app with the user's preferences.
- * @returns None
- */
-function InitializeAppWithUser(): React.ReactElement | null {
-  useExceptionHandler();
-  return null;
-}
-
-/**
  * The main App container.
  * @returns {React.ReactElement} The main App container.
  */
 export default function AppNavigator(): React.ReactElement {
-  const user = useSelector<RootStateType, UserResponse>(AuthSelectors.getUser);
+  const { theme } = useTheme(() => {});
+  useExceptionHandler();
+  {% if cookiecutter.state_management != 'graphql' -%}
+  useGlobalError();
+  {% endif -%}
+  {% raw %}
 
+  if (AppConst.isDevelopment) {
+    InitializeReactNavigationDevTools();
+  }
+  
   return (
     <NavigationContainer
       ref={navigationRef}
       linking={getLinkConfiguration()}
+      theme={{
+        dark: theme === 'dark',
+        colors: {
+          primary: Colors[theme]?.invertedBlack,
+          background: Colors[theme]?.invertedWhite,
+          card: Colors[theme]?.invertedWhite,
+          text: Colors[theme]?.invertedBlack,
+          border: Colors[theme]?.invertedBlack,
+          notification: Colors[theme]?.invertedWhite
+        }
+      }}
       onReady={() => {
         SplashScreen.hide();
         routeNameRef.current = navigationRef.getCurrentRoute()?.name;
@@ -101,7 +81,10 @@ export default function AppNavigator(): React.ReactElement {
         const previousRouteName = routeNameRef.current;
         const currentRouteName = navigationRef.getCurrentRoute()?.name;
 
-        if (previousRouteName !== currentRouteName && !includes(ExcludeTrackAppRoute, currentRouteName)) {
+        if (
+          previousRouteName !== currentRouteName &&
+          !includes(ExcludeTrackAppRoute, currentRouteName)
+        ) {
           // ServiceConst.analyticsService.screenEventSegment(currentRouteName, {});
         }
 
@@ -109,11 +92,9 @@ export default function AppNavigator(): React.ReactElement {
         routeNameRef.current = currentRouteName;
       }}
     >
-      <InitializeApp />
-      {user?.id && <InitializeAppWithUser />}
       <Stack.Navigator
         initialRouteName={AppRouteEnum.LAUNCH}
-        screenOptions={{ headerMode: 'screen', headerShown: false, ...rightToLeftAnimation }}
+        screenOptions={{ headerMode: 'screen', headerShown: false }}
       >
         <Stack.Screen name={AppRouteEnum.LAUNCH} component={LaunchNavigator} />
         <Stack.Screen name={AppRouteEnum.AUTH} component={AuthNavigator} />
@@ -122,3 +103,4 @@ export default function AppNavigator(): React.ReactElement {
     </NavigationContainer>
   );
 }
+{%- endraw %}

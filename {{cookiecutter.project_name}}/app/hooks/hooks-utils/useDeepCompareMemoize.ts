@@ -11,7 +11,9 @@ export function checkDeps(deps: React.DependencyList, name: string) {
   const reactHookName: string = `React.${name.replace(/DeepCompare/, '')}`;
 
   if (!deps || deps.length === 0) {
-    throw new Error(`${name} should not be used with no dependencies. Use ${reactHookName} instead.`);
+    throw new Error(
+      `${name} should not be used with no dependencies. Use ${reactHookName} instead.`
+    );
   }
 }
 

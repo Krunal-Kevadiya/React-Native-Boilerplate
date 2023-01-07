@@ -1,27 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import SpinnerButton from 'react-native-spinner-button';
-import { useSelector } from 'react-redux';
 import { useTheme } from 'rn-custom-style-sheet';
 import { FormInput } from '@components';
 import { StringConst } from '@constants';
-import { SignInFormModel } from '@models';
-import { AppRequestSelectors , type RootStateType } from '@stores';
 import { Colors } from '@themes';
 import { isRemainingToFillForm } from '../SignInUtils';
 import styleSheet from './SignInFormStyles';
-import type { FormikProps } from 'formik';
+import type { SignInFormPropsType } from './SignInFormTypes';
 
 /**
  * The sign in form component.
- * @param {FormikProps<SignInFormModel>} props - The props for the sign in form.
+ * @param SignInFormPropsType props - The props for the sign in form.
  * @returns A sign in form component.
  */
-export default function SignInForm(props: FormikProps<SignInFormModel>): React.ReactElement {
+export default function SignInForm(props: SignInFormPropsType): React.ReactElement {
   const { styles, theme } = useTheme(styleSheet);
   const inputPasswordRef: React.LegacyRef<TextInput> = React.createRef();
-  const loading: boolean = useSelector<RootStateType, boolean>(AppRequestSelectors.getLoading);
-  const { handleSubmit, values, errors } = props;
+  const { handleSubmit, values, errors, loading } = props;
   const disabled: boolean = isRemainingToFillForm(values, errors);
 
   return (
@@ -77,7 +73,9 @@ export default function SignInForm(props: FormikProps<SignInFormModel>): React.R
         isLoading={loading}
         onPress={handleSubmit}
       >
-        <Text style={StyleSheet.flatten([styles.textLabel, styles.buttonText])}>{StringConst.Auth.btnSignIn}</Text>
+        <Text style={StyleSheet.flatten([styles.textLabel, styles.buttonText])}>
+          {StringConst.Auth.btnSignIn}
+        </Text>
       </SpinnerButton>
     </View>
   );

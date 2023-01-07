@@ -252,7 +252,9 @@ export default function withImageProgress<T>(ImageComponent: React.ComponentType
       if (error) {
         if (renderError) {
           indicatorElement = (
-            <View style={StyleSheet.flatten([styleSheet.centered, errorContainerStyle])}>{renderError(error)}</View>
+            <View style={StyleSheet.flatten([styleSheet.centered, errorContainerStyle])}>
+              {renderError(error)}
+            </View>
           );
         }
       } else if ((loading || progress < 1) && thresholdReached) {
@@ -262,11 +264,17 @@ export default function withImageProgress<T>(ImageComponent: React.ComponentType
           const IndicatorComponent = typeof indicator === 'function' ? indicator : DefaultIndicator;
           indicatorElement = (
             //@ts-ignore
-            <IndicatorComponent progress={progress} indeterminate={!loading || !progress} {...indicatorProps} />
+            <IndicatorComponent
+              progress={progress}
+              indeterminate={!loading || !progress}
+              {...indicatorProps}
+            />
           );
         }
         indicatorElement = (
-          <View style={StyleSheet.flatten([styleSheet.centered, indicatorContainerStyle])}>{indicatorElement}</View>
+          <View style={StyleSheet.flatten([styleSheet.centered, indicatorContainerStyle])}>
+            {indicatorElement}
+          </View>
         );
       }
 

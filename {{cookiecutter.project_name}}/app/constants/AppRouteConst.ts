@@ -10,7 +10,13 @@ enum AppRouteEnum {
   WEL_COME = 'WelComeScreen',
 
   // Auth Stack
-  SIGN_IN = 'SignInScreen'
+  SIGN_IN = 'SignInScreen',
+  CREATE_NEW_PASSWORD = 'CreateNewPasswordScreen',
+
+  // Home Stack
+
+  // Other Stack
+  NotFound = 'NotFound'
 }
 export default AppRouteEnum;
 

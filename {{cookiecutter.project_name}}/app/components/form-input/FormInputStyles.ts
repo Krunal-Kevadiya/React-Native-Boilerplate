@@ -29,10 +29,10 @@ export default function styleSheet(option: StyleSheetOption) {
         alignItems: 'center',
         borderRadius: '20@ms',
         borderWidth: 1,
-        borderColor: colorOpacity(Colors[option.theme]?.black, 0.2)
+        borderColor: colorOpacity(Colors[option.theme]?.invertedBlack, 0.2)
       },
       inputContainerActive: {
-        borderColor: colorOpacity(Colors[option.theme]?.black, 0.4)
+        borderColor: colorOpacity(Colors[option.theme]?.invertedBlack, 0.4)
       },
       inputContainerError: {
         borderColor: Colors[option.theme]?.red
@@ -41,17 +41,17 @@ export default function styleSheet(option: StyleSheetOption) {
         fontFamily: Fonts.semibold,
         fontSize: '14@ms',
         marginRight: '12@s',
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       },
       input: {
         flex: 1,
         fontFamily: Fonts.regular,
         fontSize: '14@ms',
         padding: 0,
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       },
       foregroundColor: {
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       }
     },
     option

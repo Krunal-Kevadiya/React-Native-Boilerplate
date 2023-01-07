@@ -18,7 +18,7 @@ export default function styleSheet(option: StyleSheetOption) {
       },
       container: {
         width: '100%',
-        backgroundColor: Colors[option.theme]?.white
+        backgroundColor: Colors[option.theme]?.invertedWhite
       },
       rightView: {
         flexDirection: 'row'

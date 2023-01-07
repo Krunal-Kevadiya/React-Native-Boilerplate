@@ -57,7 +57,11 @@ export function fetchWithRetry(fetch: unknown, defaults: DefaultsType) {
     throw new Error(StringConst.Message.retryDelayMustNePositiveInteger);
   }
 
-  if (defaults.retryOn !== undefined && !Array.isArray(defaults.retryOn) && typeof defaults.retryOn !== 'function') {
+  if (
+    defaults.retryOn !== undefined &&
+    !Array.isArray(defaults.retryOn) &&
+    typeof defaults.retryOn !== 'function'
+  ) {
     throw new Error(StringConst.Message.retryOnPropertyExpectsArrayOrFunction);
   }
 
@@ -94,7 +98,10 @@ export function fetchWithRetry(fetch: unknown, defaults: DefaultsType) {
     }
 
     if (init && init.retryOn) {
-      if ((typeof init.retryOn !== 'function' && Array.isArray(init.retryOn)) || typeof init.retryOn === 'function') {
+      if (
+        (typeof init.retryOn !== 'function' && Array.isArray(init.retryOn)) ||
+        typeof init.retryOn === 'function'
+      ) {
         retryOn = init.retryOn;
       } else {
         throw new Error(StringConst.Message.retryOnPropertyExpectsArrayOrFunction);
@@ -173,7 +180,8 @@ export function fetchWithRetry(fetch: unknown, defaults: DefaultsType) {
        * @returns None
        */
       function retry(attempt: number, error?: Error, response?: any) {
-        var delay = typeof retryDelay === 'function' ? retryDelay(attempt, error, response) : retryDelay;
+        var delay =
+          typeof retryDelay === 'function' ? retryDelay(attempt, error, response) : retryDelay;
         setTimeout(function () {
           wrappedFetch(++attempt);
         }, delay);

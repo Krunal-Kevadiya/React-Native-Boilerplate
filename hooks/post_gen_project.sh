@@ -78,11 +78,53 @@ launch_visual_studio() {
     fi                                                                
 }
 
+update_project_with_redux() {
+    PATH_TEMPLATES="templates/redux/common"
+    mkdir -p app/redux
+    cp -R "${PATH_TEMPLATES}/constants/" app/constants
+    cp -R "${PATH_TEMPLATES}/hooks/" app/hooks
+    cp -R "${PATH_TEMPLATES}/redux/" app/redux
+}
+
+update_project_details() {
+    if [[ "{{cookiecutter.state_management}}" == "thunk" ]]; then
+        update_project_with_redux
+        PATH_TEMPLATES="templates/redux/thunk"
+        cp -R "${PATH_TEMPLATES}/configs/" app/configs
+        cp -R "${PATH_TEMPLATES}/constants/" app/constants
+        cp -R "${PATH_TEMPLATES}/redux/auth/" app/redux/auth
+    elif [[ "{{cookiecutter.state_management}}" == "saga" ]]; then
+        update_project_with_redux
+        PATH_TEMPLATES="templates/redux/saga"
+        cp -R "${PATH_TEMPLATES}/configs/" app/configs
+        cp -R "${PATH_TEMPLATES}/redux/auth/" app/redux/auth
+        cp -R "${PATH_TEMPLATES}/services/" app/services
+        mkdir -p app/saga
+        cp -R "${PATH_TEMPLATES}/saga/" app/saga
+    elif [[ "{{cookiecutter.state_management}}" == "graphql" ]]; then
+        PATH_TEMPLATES="templates/graphql"
+        cp -R "${PATH_TEMPLATES}/configs/" app/configs
+        cp -R "${PATH_TEMPLATES}/hooks/" app/hooks
+        mkdir -p app/graphql
+        cp -R "${PATH_TEMPLATES}/graphql/" app/graphql
+    fi
+    if [[ "{{cookiecutter.__with_react_native_web}}" == true ]]; then
+        PATH_TEMPLATES="templates/web"
+        cp -R "${PATH_TEMPLATES}/hooks/" app/hooks
+        cp -R "${PATH_TEMPLATES}/public" .
+        cp -R "${PATH_TEMPLATES}/index.scss" .
+        cp -R "${PATH_TEMPLATES}/index.web.tsx" .
+        cp -R "${PATH_TEMPLATES}/server.js" .
+        cp -R "${PATH_TEMPLATES}/webpack.config.js" .
+    fi
+    rm -d -R "templates"
+}
+
+update_project_details
 initialize_git
 yarn
-npx jetify
 cd ios/
-pod install
+pod install --repo-update
 cd ..
 connect_git_repo
 update_project_permissions

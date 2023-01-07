@@ -2,7 +2,7 @@
  * A collection of colors used in the theme.
  * @type {Object}
  */
-const themeColors = {
+const themeColors: Record<string, string> = {
   primary: '#141414',
   secondary: '#F1C336',
   gray: '#7B7B7B',
@@ -19,7 +19,7 @@ const themeColors = {
  * A collection of common colors used in the theme.
  * @type {Object}
  */
-const commonColors = {
+const commonColors: Record<string, string> = {
   white: '#FFFFFF',
   black: '#000000',
   transparentBlack: '#00000000',
@@ -30,24 +30,26 @@ const commonColors = {
  * A light theme object.
  * @returns {ThemeColors}
  */
-const light = {
+const light: Record<string, string> = {
   ...themeColors,
-  black: commonColors.black,
-  white: commonColors.white,
-  transparentWhite: commonColors.transparentWhite,
-  transparentBlack: commonColors.transparentBlack
+  ...commonColors,
+  invertedBlack: commonColors.black,
+  invertedWhite: commonColors.white,
+  invertedTransparentWhite: commonColors.transparentWhite,
+  invertedTransparentBlack: commonColors.transparentBlack
 };
 
 /**
  * A dark theme object.
  * @returns {ThemeColors}
  */
-const dark = {
+const dark: Record<string, string> = {
   ...themeColors,
-  black: commonColors.white,
-  white: commonColors.black,
-  transparentWhite: commonColors.transparentBlack,
-  transparentBlack: commonColors.transparentWhite
+  ...commonColors,
+  invertedBlack: commonColors.white,
+  invertedWhite: commonColors.black,
+  invertedTransparentWhite: commonColors.transparentBlack,
+  invertedTransparentBlack: commonColors.transparentWhite
 };
 
 export default { light, dark };

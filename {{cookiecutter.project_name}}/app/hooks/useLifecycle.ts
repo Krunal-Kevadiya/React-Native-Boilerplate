@@ -1,5 +1,5 @@
 import useDidMount from './useDidMount';
-import useWillUnmount from './WillUnmountHook';
+import useWillUnmount from './useWillUnmount';
 import type { DependencyList } from '@hooks-utils';
 
 /**

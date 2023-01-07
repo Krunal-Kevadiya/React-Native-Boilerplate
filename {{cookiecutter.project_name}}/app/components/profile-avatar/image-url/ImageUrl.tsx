@@ -17,7 +17,12 @@ const FastImageProgress = withImageProgress(FastImage);
  * @param {ImageUrlPropsType} props - the props for the component.
  * @returns {React.ReactElement} A React Element.
  */
-export default function ImageUrl({ url, style, imageStyle, onLoading }: ImageUrlPropsType): React.ReactElement {
+export default function ImageUrl({
+  url,
+  style,
+  imageStyle,
+  onLoading
+}: ImageUrlPropsType): React.ReactElement {
   const [indicatorSize, setIndicatorSize] = useState<number>(0);
   const { styles, theme } = useTheme(styleSheet);
 
@@ -45,12 +50,14 @@ export default function ImageUrl({ url, style, imageStyle, onLoading }: ImageUrl
         indeterminate: false,
         strokeCap: 'round',
         color: Colors[theme]?.secondary,
-        unfilledColor: Colors[theme]?.white,
+        unfilledColor: Colors[theme]?.invertedWhite,
         borderColor: Colors[theme]?.secondary,
         borderWidth: 2
       }}
       renderError={() => {
-        return <Icon type={'svg'} size={indicatorSize} source={Icons.icUser} style={styles.imageStyle} />;
+        return (
+          <Icon type={'svg'} size={indicatorSize} source={Icons.icUser} style={styles.imageStyle} />
+        );
       }}
       resizeMode={FastImage.resizeMode.cover}
       onLayout={handleLayout}

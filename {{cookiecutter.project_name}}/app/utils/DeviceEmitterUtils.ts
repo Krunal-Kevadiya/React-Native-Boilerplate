@@ -27,6 +27,9 @@ export function emitEventBus(eventName: EventBusNameEnum, key: EventBusKey, valu
  * @param {(data: Object) => void} callback - the callback to call when the event is emitted
  * @returns {EmitterSubscription} - the subscription to the event bus
  */
-export function eventBusListener(eventName: EventBusNameEnum, callback: (data: Object) => void): EmitterSubscription {
+export function eventBusListener(
+  eventName: EventBusNameEnum,
+  callback: (data: Object) => void
+): EmitterSubscription {
   return DeviceEventEmitter.addListener(eventName, callback);
 }

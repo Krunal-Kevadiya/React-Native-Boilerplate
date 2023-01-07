@@ -85,7 +85,9 @@ function CustomInput(
           isPresentValue(fieldError) && !isDisableError && styles.inputContainerError
         ])}
       >
-        {leftIconSource && <Icon type="svg" source={leftIconSource} size={leftIconSize} svgStyle={leftSvgStyle} />}
+        {leftIconSource && (
+          <Icon type="svg" source={leftIconSource} size={leftIconSize} svgStyle={leftSvgStyle} />
+        )}
         {label && (
           <Text
             style={StyleSheet.flatten([
@@ -123,7 +125,12 @@ function CustomInput(
         )}
         {rightIconSource && (
           <Pressable onPress={rightIconPress}>
-            <Icon type="svg" source={rightIconSource} size={rightIconSize} svgStyle={rightSvgStyle} />
+            <Icon
+              type="svg"
+              source={rightIconSource}
+              size={rightIconSize}
+              svgStyle={rightSvgStyle}
+            />
           </Pressable>
         )}
       </View>
@@ -136,7 +143,9 @@ function CustomInput(
         />
       )}
       {isPresentValue(fieldError) && !isDisableError && (
-        <Text style={StyleSheet.flatten([styles.errorMsg, { color: errorColor }])}>{fieldError}</Text>
+        <Text style={StyleSheet.flatten([styles.errorMsg, { color: errorColor }])}>
+          {fieldError}
+        </Text>
       )}
     </View>
   );

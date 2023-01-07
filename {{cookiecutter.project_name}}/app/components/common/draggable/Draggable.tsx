@@ -1,5 +1,8 @@
 import React from 'react';
-import { PanGestureHandler, type PanGestureHandlerGestureEvent } from 'react-native-gesture-handler';
+import {
+  PanGestureHandler,
+  type PanGestureHandlerGestureEvent
+} from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   withSpring,
@@ -87,7 +90,8 @@ export default function DraggableView({
         },
         { translateY: y.value }
       ],
-      height: y.value <= padding || y.value >= maxHeight - height - padding ? height : height - padding,
+      height:
+        y.value <= padding || y.value >= maxHeight - height - padding ? height : height - padding,
       paddingTop: y.value <= padding ? padding : 0,
       paddingBottom: y.value >= maxHeight - height - padding ? padding : 0
     };

@@ -17,7 +17,7 @@ export default function styleSheet(option: StyleSheetOption) {
         position: 'absolute',
         right: 0,
         top: 0,
-        backgroundColor: colorOpacity(Colors[option.theme]?.white, 0.9)
+        backgroundColor: colorOpacity(Colors[option.theme]?.invertedWhite, 0.9)
       }
     },
     option

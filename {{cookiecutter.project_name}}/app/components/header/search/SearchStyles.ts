@@ -43,10 +43,10 @@ export default function styleSheet(option: StyleSheetOption) {
         fontSize: '16@ms',
         paddingHorizontal: '5@s',
         paddingVertical: '5@vs',
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       },
       imageSearch: {
-        tintColor: Colors[option.theme]?.black
+        tintColor: Colors[option.theme]?.invertedBlack
       }
     },
     option

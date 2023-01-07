@@ -23,15 +23,18 @@ export default function useAppState(settings?: UseAppStatePropsType): AppStateSt
   const [appState, setAppState] = useState<AppStateStatus>(AppState.currentState);
 
   useEffect(() => {
-    const subscription = AppState.addEventListener('change', (nextAppState: AppStateStatus): void => {
-      if (nextAppState === 'active' && appState !== 'active') {
-        onForeground?.();
-      } else if (appState === 'active' && nextAppState.match(/inactive|background/)) {
-        onBackground?.();
+    const subscription = AppState.addEventListener(
+      'change',
+      (nextAppState: AppStateStatus): void => {
+        if (nextAppState === 'active' && appState !== 'active') {
+          onForeground?.();
+        } else if (appState === 'active' && nextAppState.match(/inactive|background/)) {
+          onBackground?.();
+        }
+        setAppState(nextAppState);
+        onChange?.(nextAppState);
       }
-      setAppState(nextAppState);
-      onChange?.(nextAppState);
-    });
+    );
     return () => subscription.remove();
   }, [onChange, onForeground, onBackground, appState]);
 

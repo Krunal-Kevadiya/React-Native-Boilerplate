@@ -2,7 +2,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { AppRouteEnum } from '@constants';
 import { WelcomeScreen } from '@modules';
-import { rightToLeftAnimation } from './NavigatorUtil';
 import type { AppNavigatorParams } from './AppNavigator';
 
 /**
@@ -28,7 +27,7 @@ const Stack = createStackNavigator<LaunchNavigatorParams>();
 export default function LaunchNavigator(): React.ReactElement {
   return (
     <Stack.Navigator
-      screenOptions={{ headerMode: 'screen', headerShown: false, ...rightToLeftAnimation }}
+      screenOptions={{ headerMode: 'screen', headerShown: false }}
       initialRouteName={AppRouteEnum.WEL_COME}
     >
       <Stack.Screen name={AppRouteEnum.WEL_COME} component={WelcomeScreen} />

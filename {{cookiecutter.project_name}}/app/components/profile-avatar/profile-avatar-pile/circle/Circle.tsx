@@ -38,7 +38,14 @@ export default function Circle({
   }, [delay, fadeAnim]);
 
   return (
-    <Animated.View style={StyleSheet.flatten([localCircleStyle, { opacity: fadeAnim }, styles.container, circleStyle])}>
+    <Animated.View
+      style={StyleSheet.flatten([
+        localCircleStyle,
+        { opacity: fadeAnim },
+        styles.container,
+        circleStyle
+      ])}
+    >
       <ProfileAvatar
         style={StyleSheet.flatten([localCircleStyle, styles.overflow, imageStyle])}
         url={face?.getProfileImage}

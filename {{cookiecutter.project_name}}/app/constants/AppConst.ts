@@ -1,7 +1,6 @@
 import { SENTRY_URL, API_URL, ENVIRONMENT, ENCRYPTION_KEY } from 'react-native-dotenv';
 
-const appVersion = 'v1.0(1)';
-const PREFIXES: string[] = ['{{cookiecutter.deep_link_scheme}}://', '{{cookiecutter.deep_link_host}}//'];
+const appVersion: string = 'v1.0(1)';
 
 /**
  * A constant freezing object that contains the app value.
@@ -9,12 +8,11 @@ const PREFIXES: string[] = ['{{cookiecutter.deep_link_scheme}}://', '{{cookiecut
  */
 export default Object.freeze({
   mobile: 'Mobile',
-  isDevelopment: ENVIRONMENT === 'dev',
+  isDevelopment: __DEV__ || ENVIRONMENT === 'dev',
   environment: ENVIRONMENT,
   sentryUrl: SENTRY_URL,
   encryptionKey: ENCRYPTION_KEY,
   apiUrl: API_URL,
   appVersion,
-  deepLinkPrefixes: PREFIXES,
   pingServerUrl: 'https://www.google.com/'
 });

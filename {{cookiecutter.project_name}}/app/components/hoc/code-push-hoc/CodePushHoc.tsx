@@ -3,9 +3,9 @@ import { Text, Pressable } from 'react-native';
 import CodePush, { type DownloadProgress, type SyncOptions } from 'react-native-code-push';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { getCurrentTheme, type AppThemeType } from 'rn-custom-style-sheet';
-import { MMKVStorageKey, StringConst } from '@constants';
+import { MMKVKeyConst, StringConst } from '@constants';
 import { useAsyncStorage, useHeaderHeight, useStatusBarHeight } from '@hooks';
-import { format } from '@utils';
+import { formatString } from '@utils';
 import { Draggable } from '../../common';
 import styleSheet from './CodePushStyles';
 import type { MovableViewPropsType } from './CodePushTypes';
@@ -18,15 +18,21 @@ import type { MovableViewPropsType } from './CodePushTypes';
 function MovableView({ message, isBtnVisible }: MovableViewPropsType): React.ReactElement {
   const statusBarHeight: number = useStatusBarHeight();
   const headerHeight: number = useHeaderHeight();
-  const [appTheme] = useAsyncStorage<string>(MMKVStorageKey.appTheme, 'system');
-  const [systemTheme] = useAsyncStorage<string>(MMKVStorageKey.systemTheme, 'system');
+  const [appTheme] = useAsyncStorage<string>(MMKVKeyConst.appTheme, 'system');
+  const [systemTheme] = useAsyncStorage<string>(MMKVKeyConst.systemTheme, 'system');
   const styles = useMemo(
-    () => styleSheet({ theme: getCurrentTheme(systemTheme as AppThemeType, appTheme as AppThemeType) }),
+    () =>
+      styleSheet({ theme: getCurrentTheme(systemTheme as AppThemeType, appTheme as AppThemeType) }),
     [appTheme, systemTheme]
   );
 
   return (
-    <Draggable style={styles.container} padding={statusBarHeight} height={headerHeight} maxWidth={0}>
+    <Draggable
+      style={styles.container}
+      padding={statusBarHeight}
+      height={headerHeight}
+      maxWidth={0}
+    >
       <>
         <Text style={styles.textHeader}>{message}</Text>
         {isBtnVisible && (
@@ -55,7 +61,10 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
    * A component that wraps the RootComponent and displays a message if there is an update available.
    * @returns None
    */
-  class RootComponentWithCodePush extends PureComponent<T, { message?: string; isBtnVisible: boolean }> {
+  class RootComponentWithCodePush extends PureComponent<
+    T,
+    { message?: string; isBtnVisible: boolean }
+  > {
     /**
      * The constructor for the class.
      * @param {T} props - The props for the class.
@@ -104,13 +113,22 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
     codePushStatusDidChange(syncStatus: CodePush.SyncStatus): void {
       switch (syncStatus) {
         case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
-          this.setState({ message: StringConst.CodePush.textCheckingForUpdate, isBtnVisible: false });
+          this.setState({
+            message: StringConst.CodePush.textCheckingForUpdate,
+            isBtnVisible: false
+          });
           break;
         case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
-          this.setState({ message: format(StringConst.CodePush.textDownloadingPackage, 0), isBtnVisible: false });
+          this.setState({
+            message: formatString(StringConst.CodePush.textDownloadingPackage, { progress: 0 }),
+            isBtnVisible: false
+          });
           break;
         case CodePush.SyncStatus.AWAITING_USER_ACTION:
-          this.setState({ message: StringConst.CodePush.textAwaitingUserAction, isBtnVisible: true });
+          this.setState({
+            message: StringConst.CodePush.textAwaitingUserAction,
+            isBtnVisible: true
+          });
           break;
         case CodePush.SyncStatus.INSTALLING_UPDATE:
           this.setState({ message: StringConst.CodePush.textInstallingUpdate, isBtnVisible: true });
@@ -119,7 +137,10 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
           this.setState({ message: StringConst.CodePush.textAppUpToDate, isBtnVisible: false });
           break;
         case CodePush.SyncStatus.UPDATE_IGNORED:
-          this.setState({ message: StringConst.CodePush.textUpdateCancelledByUser, isBtnVisible: false });
+          this.setState({
+            message: StringConst.CodePush.textUpdateCancelledByUser,
+            isBtnVisible: false
+          });
           break;
         case CodePush.SyncStatus.UPDATE_INSTALLED:
           this.setState({
@@ -128,7 +149,10 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
           });
           break;
         case CodePush.SyncStatus.UNKNOWN_ERROR:
-          this.setState({ message: StringConst.CodePush.textAnUnknownErrorOccurred, isBtnVisible: false });
+          this.setState({
+            message: StringConst.CodePush.textAnUnknownErrorOccurred,
+            isBtnVisible: false
+          });
           break;
         default:
           break;
@@ -142,7 +166,10 @@ export default function withCodePush<T>(RootComponent: React.ComponentType<T>): 
      */
     codePushDownloadDidProgress(downloadProgress: DownloadProgress): void {
       const progress = (downloadProgress.receivedBytes / downloadProgress.totalBytes) * 100;
-      this.setState({ message: format(StringConst.CodePush.textDownloadingPackage, progress), isBtnVisible: false });
+      this.setState({
+        message: formatString(StringConst.CodePush.textDownloadingPackage, { progress }),
+        isBtnVisible: false
+      });
     }
 
     /** Update pops a confirmation dialog, and applied on restart (recommended) */

@@ -11,7 +11,7 @@ export default function styleSheet(option: StyleSheetOption) {
     {
       ...ApplicationStyles.viewStyle,
       screenView: {
-        backgroundColor: Colors[option.theme]?.white
+        backgroundColor: Colors[option.theme]?.invertedWhite
       }
     },
     option

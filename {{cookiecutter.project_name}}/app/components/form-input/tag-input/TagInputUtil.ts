@@ -23,7 +23,8 @@ export const PATTERNS = Object.freeze({
   [PatternsEnum.underline]: /~(.*?)~/,
   [PatternsEnum.blockquote]: /\s>\s([A-za-z 0-9@:%-?&/._\\+~=]*)/,
   [PatternsEnum.newLine]: /\\n/g,
-  [PatternsEnum.lineBreak]: /<br>|<br >|<br\/>|<br \/>|<Br>|<Br >|<Br\/>|<Br \/>|<BR>|<BR >|<BR\/>|<BR \/>/
+  [PatternsEnum.lineBreak]:
+    /<br>|<br >|<br\/>|<br \/>|<Br>|<Br >|<Br\/>|<Br \/>|<BR>|<BR >|<BR\/>|<BR \/>/
 });
 
 /**
@@ -99,7 +100,9 @@ function getMatchedPart(
     type: matchedPattern.type,
     style: matchedPattern.style,
     onPress: matchedPattern.onPress ? () => matchedPattern.onPress?.(text, index) : undefined,
-    onLongPress: matchedPattern.onLongPress ? () => matchedPattern.onLongPress?.(text, index) : undefined
+    onLongPress: matchedPattern.onLongPress
+      ? () => matchedPattern.onLongPress?.(text, index)
+      : undefined
   });
 
   let children = text;
@@ -257,7 +260,8 @@ function callEmail(email: string): void {
  * @returns None
  */
 function callUrl(url: string): void {
-  const urls: string = url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
+  const urls: string =
+    url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
   Linking.canOpenURL(urls)
     .then((supported: boolean) => {
       if (supported) {
