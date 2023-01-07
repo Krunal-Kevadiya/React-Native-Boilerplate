@@ -16,7 +16,7 @@ export default function styleSheet(option: StyleSheetOption) {
         flexDirection: 'row'
       },
       image: {
-        tintColor: Colors[option.theme]?.black
+        tintColor: Colors[option.theme]?.invertedBlack
       },
       centerImage: {
         alignSelf: 'center'
@@ -27,7 +27,7 @@ export default function styleSheet(option: StyleSheetOption) {
       },
       text: {
         fontSize: '16@ms',
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       },
       centerText: {
         textAlign: 'center'

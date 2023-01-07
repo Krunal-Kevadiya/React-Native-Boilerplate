@@ -9,7 +9,11 @@ import type { ImageStyle as FastImageStyle } from 'react-native-fast-image';
  * @param {object} indicatorProps - the props to pass to the indicator.
  * @returns {React.ReactElement} - the indicator element.
  */
-type IndicatorFnType = (progress: number, indeterminate: boolean, { ...indicatorProps }: object) => React.ReactElement;
+type IndicatorFnType = (
+  progress: number,
+  indeterminate: boolean,
+  { ...indicatorProps }: object
+) => React.ReactElement;
 
 /**
  * A props type of component that renders an image with a loading indicator.

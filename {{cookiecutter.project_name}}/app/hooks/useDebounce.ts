@@ -27,7 +27,10 @@ function adjustFunctionValueOfSetState<T>(value: T): T | (() => T) {
  */
 function useStateIgnoreCallback<T>(initialState: T): [T, Dispatch<T>] {
   const [state, setState] = useState(adjustFunctionValueOfSetState(initialState));
-  const setStateIgnoreCallback = useCallback((value: T) => setState(adjustFunctionValueOfSetState(value)), []);
+  const setStateIgnoreCallback = useCallback(
+    (value: T) => setState(adjustFunctionValueOfSetState(value)),
+    []
+  );
   return [state, setStateIgnoreCallback];
 }
 
@@ -41,7 +44,12 @@ function useStateIgnoreCallback<T>(initialState: T): [T, Dispatch<T>] {
 export default function useDebounce<T>(
   value: T,
   delay: number,
-  options?: { maxWait?: number; leading?: boolean; trailing?: boolean; equalityFn?: (left: T, right: T) => boolean }
+  options?: {
+    maxWait?: number;
+    leading?: boolean;
+    trailing?: boolean;
+    equalityFn?: (left: T, right: T) => boolean;
+  }
 ): [T, ControlFunctions] {
   const eq: (left: T, right: T) => boolean = (options && options.equalityFn) || valueEquality;
 
@@ -61,5 +69,8 @@ export default function useDebounce<T>(
     }
   }, [value, debounced, eq]);
 
-  return [state, { cancel: debounced.cancel, isPending: debounced.isPending, flush: debounced.flush }];
+  return [
+    state,
+    { cancel: debounced.cancel, isPending: debounced.isPending, flush: debounced.flush }
+  ];
 }

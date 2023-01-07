@@ -1,14 +1,13 @@
-import { type FormikProps } from 'formik';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
 import { Icons } from '@assets';
 import { Header, Icon } from '@components';
-import { SignInFormModel } from '@models';
-import { navigateBack } from '@navigators';
+import { navigateBack } from '@utils';
 import { SignInForm } from './sign-in-form';
 import styleSheet from './SignInStyles';
 import useSignIn from './useSignIn';
+import type { SignInHookReturnType } from './SignInTypes';
 import type { XmlProps } from 'react-native-svg';
 
 /**
@@ -17,7 +16,7 @@ import type { XmlProps } from 'react-native-svg';
  */
 export default function SignInScreen(): React.ReactElement {
   const { styles } = useTheme(styleSheet);
-  const formik: FormikProps<SignInFormModel> = useSignIn();
+  const formik: SignInHookReturnType = useSignIn();
 
   return (
     <View style={StyleSheet.flatten([styles.screen, styles.screenView])}>
@@ -31,7 +30,12 @@ export default function SignInScreen(): React.ReactElement {
         }}
       />
       <View style={StyleSheet.flatten([styles.screen, styles.centerAlign])}>
-        <Icon type="svg" style={styles.logo} svgStyle={styles.logoSvg as XmlProps} source={Icons.icLogo} />
+        <Icon
+          type="svg"
+          style={styles.logo}
+          svgStyle={styles.logoSvg as XmlProps}
+          source={Icons.icLogo}
+        />
         <SignInForm {...formik} />
       </View>
     </View>

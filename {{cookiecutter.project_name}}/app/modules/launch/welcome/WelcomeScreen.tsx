@@ -3,9 +3,8 @@ import React, { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
 import { AppRouteEnum } from '@constants';
-import { navigateWithReset } from '@navigators';
 import { Colors } from '@themes';
-import { isPresentValue } from '@utils';
+import { navigateWithReset, isPresentValue } from '@utils';
 import styleSheet from './WelcomeStyles';
 import type { WelcomeRouteParamList } from './WelcomeTypes';
 

@@ -1,3 +1,3 @@
 export { default as Toast } from './Toast';
 export { default as ToastHolder } from './ToastHolder';
-export type { ToastHandleType } from './ToastTypes';
+export { ToastType, type ToastHandleType, type InternalDataPropsType } from './ToastTypes';

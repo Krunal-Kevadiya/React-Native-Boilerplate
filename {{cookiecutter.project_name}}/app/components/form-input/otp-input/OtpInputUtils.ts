@@ -227,7 +227,16 @@ export function handleKeyPressTextInput(
 ): void {
   if (key === 'Backspace') {
     if (!digitsMemo[index] && index > 0) {
-      handleChangeText(index - 1, '', pinCount, digitsMemo, onCodeFilled, onCodeChanged, setDigits, setSelectedIndex);
+      handleChangeText(
+        index - 1,
+        '',
+        pinCount,
+        digitsMemo,
+        onCodeFilled,
+        onCodeChanged,
+        setDigits,
+        setSelectedIndex
+      );
       focusField(index - 1, fieldList, setSelectedIndex);
     }
   }

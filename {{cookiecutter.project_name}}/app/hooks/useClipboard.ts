@@ -28,7 +28,9 @@ function setString(content: string): void {
  * @param {Boolean} [withGetValue=false] - Whether or not to get the current clipboard data.
  * @returns A function that can be used to set the clipboard data.
  */
-export default function useClipboard(withGetValue: Boolean = false): [string, (content: string) => void] {
+export default function useClipboard(
+  withGetValue: Boolean = false
+): [string, (content: string) => void] {
   const [data, updateClipboardData] = useState<string>('');
 
   // Get initial data

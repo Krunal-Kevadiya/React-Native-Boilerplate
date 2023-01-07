@@ -1,9 +1,21 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { StatusBar, Text, View, FlatList, StyleSheet, type LayoutChangeEvent } from 'react-native';
+import React, { forwardRef, useImperativeHandle, useState, useMemo } from 'react';
+import {
+  KeyboardAvoidingView,
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  type LayoutChangeEvent
+} from 'react-native';
 import Modal from 'react-native-modal';
-import { useTheme } from 'rn-custom-style-sheet';
+import { useTheme, scale } from 'rn-custom-style-sheet';
+import { Icons } from '@assets';
+import { isIos, Colors } from '@themes';
 import { isPresentValue } from '@utils';
+import { Icon } from '../icon';
 import styleSheet from './BottomSheetStyles';
+import { DashedLine } from './dashed-line';
 import type { BottomSheetHandleType, BottomSheetPropsType } from './BottomSheetTypes';
 
 /**
@@ -13,19 +25,37 @@ import type { BottomSheetHandleType, BottomSheetPropsType } from './BottomSheetT
  * @returns {React.ReactElement} A React Element.
  */
 function CustomBottomSheet<T>(
-  { title, message, onSwipeComplete, onBackButtonPress, children, ...restProps }: BottomSheetPropsType<T>,
+  {
+    title,
+    message,
+    onSwipeComplete,
+    onBackButtonPress,
+    onDismiss,
+    children,
+    ...restProps
+  }: BottomSheetPropsType<T>,
   ref: React.Ref<BottomSheetHandleType>
 ): React.ReactElement {
   const [isVisible, setVisible] = useState<boolean>(false);
   const [swipeThresholdHeight, setSwipeThresholdHeight] = useState<number>(0);
-  const { styles } = useTheme(styleSheet);
-  const { data, style, ...restFlatListProps } = restProps;
+  const { styles, theme } = useTheme(styleSheet);
+  const { data, style, renderItem, ...restFlatListProps } = useMemo(() => {
+    if (children) {
+      return { data: undefined, style: undefined, renderItem: undefined };
+    } else {
+      return restProps;
+    }
+  }, [children, restProps]);
   useImperativeHandle(ref, () => ({
     show: () => {
       setVisible(true);
     },
     hide: () => {
       setVisible(false);
+      onDismiss?.();
+    },
+    isShow: () => {
+      return isVisible;
     }
   }));
 
@@ -44,43 +74,68 @@ function CustomBottomSheet<T>(
       backdropOpacity={0.7}
       customBackdrop={<View style={styles.customBackdrop} />}
       onSwipeComplete={() => {
-        StatusBar.setHidden(false, 'slide');
         setVisible(false);
         onSwipeComplete?.();
+        onDismiss?.();
       }}
       onBackButtonPress={() => {
-        StatusBar.setHidden(false, 'slide');
         setVisible(false);
         onBackButtonPress?.();
+        onDismiss?.();
       }}
-      onModalWillShow={() => StatusBar.setHidden(true, 'slide')}
-      onModalWillHide={() => StatusBar.setHidden(false, 'slide')}
     >
-      <View style={styles.popupStyle}>
+      <KeyboardAvoidingView style={styles.popupStyle} {...(isIos ? { behavior: 'padding' } : {})}>
         <View
           style={styles.popupContainerStyle}
-          onLayout={(event: LayoutChangeEvent) => setSwipeThresholdHeight(event.nativeEvent.layout.height * 0.2)}
+          onLayout={(event: LayoutChangeEvent) =>
+            setSwipeThresholdHeight(event.nativeEvent.layout.height * 0.2)
+          }
         >
           <View style={styles.containerViewStyle}>
             <View style={styles.popupDismissLine} />
-            {isPresentValue(title) && (
-              <Text style={styles.titleText} numberOfLines={1}>
-                {title}
-              </Text>
-            )}
+            <View style={styles.headerContainer}>
+              <View style={StyleSheet.flatten([styles.flexRow, styles.headerTextContainer])}>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => {
+                    setVisible(false);
+                    onDismiss?.();
+                  }}
+                >
+                  <Icon
+                    type="svg"
+                    source={Icons.icCloseCircle}
+                    style={styles.closeImage}
+                    size={24}
+                  />
+                </TouchableOpacity>
+                {!isPresentValue(title) && (
+                  <Text numberOfLines={1} style={styles.titleText}>
+                    {title}
+                  </Text>
+                )}
+              </View>
+              <DashedLine
+                dashLength={scale(5)}
+                dashThickness={scale(2)}
+                dashGap={scale(3)}
+                dashColor={Colors[theme]?.dashedLine}
+              />
+            </View>
             {isPresentValue(message) && <Text style={styles.messageText}>{message}</Text>}
-            {data && (
+            {!children && data && (
               <FlatList
                 style={StyleSheet.flatten([styles.list, !children && styles.listMargin, style])}
                 showsVerticalScrollIndicator={false}
                 data={data}
+                renderItem={renderItem}
                 {...restFlatListProps}
               />
             )}
-            {children && children}
+            <View>{children && children}</View>
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 }

@@ -175,7 +175,9 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
       if (useRAF && timerId.current !== undefined) {
         cancelAnimationFrame(timerId.current);
       }
-      timerId.current = useRAF ? requestAnimationFrame(pendingFunc) : setTimeout(pendingFunc, argWait);
+      timerId.current = useRAF
+        ? requestAnimationFrame(pendingFunc)
+        : setTimeout(pendingFunc, argWait);
     };
 
     /**
@@ -237,7 +239,9 @@ export default function useDebouncedCallback<T extends (...args: any[]) => Retur
       const timeSinceLastCall = time - (lastCallTime.current ?? 0);
       const timeSinceLastInvoke = time - lastInvokeTime.current;
       const timeWaiting = wait - timeSinceLastCall;
-      const remainingWait = maxing ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+      const remainingWait = maxing
+        ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke)
+        : timeWaiting;
 
       // Restart the timer
       startTimer(timerExpired, remainingWait);

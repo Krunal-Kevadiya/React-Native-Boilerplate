@@ -42,10 +42,64 @@
 
 **NOTE :-** Please check your system to node properly work before trigger a command using `node -v`.
 
+## Project structure
+```
+ - <ProjectName>
+ |-- __tests__
+ |-- .bundle
+ |-- .husky
+   |-- commit-msg
+   |-- pre-commit
+ |-- .vscode
+   |-- settings.json
+ |-- android
+ |-- app
+   |-- assets
+     |-- fonts
+     |-- icons
+     |-- images
+   |-- components
+   |-- configs
+   |-- constants
+   |-- hooks
+   |-- models
+   |-- graphql  -> <If you have selected GraphQL as a state management then this folder visible>
+   |-- redux    -> <If you have selected Toolkit With Thunk or Saga as a state management then this folder visible>
+   |-- saga     -> <If you have selected Toolkit With Saga as a state management then this folder visible>
+   |-- modules
+   |-- navigation
+   |-- services -> <If you have selected Toolkit With Saga as a state management then this folder visible>
+   |-- theme
+   |-- translations
+   |-- types
+   |-- utils
+   |-- App.tsx
+ |-- ios
+ |-- public                 -> <If you have selected true as a react native web then this folder visible>
+ |-- scripts
+ |-- .env
+ |-- .eslintrc.js
+ |-- .gitignore
+ |-- .prettierrc.js
+ |-- app.json
+ |-- babel.config.js
+ |-- cspell.json
+ |-- index.scss             -> <If you have selected true as a react native web then this file visible>
+ |-- index.ts
+ |-- index.web.tsx           -> <If you have selected true as a react native web then this file visible>
+ |-- metro.config.js
+ |-- package.json
+ |-- react.native.config.js
+ |-- README.md
+ |-- server.js              -> <If you have selected true as a react native web then this file visible>
+ |-- webpack.config.js      -> <If you have selected true as a react native web then this file visible>
+ |-- tsconfig.json
+```
+
 ## Usage
 * Open terminal at your desired location
 * Run ```cookiecutter https://github.com/Krunal-Kevadiya/React-Native-Boilerplate``` to create template
-        * If it asks for "You have .../.cookiecutters/Android_Project_Setup downloaded before. Is it okay to delete and re-download it?" press "yes"
+        * If it asks for "You have .../.cookiecutters/React-Native-Boilerplate downloaded before. Is it okay to delete and re-download it? [yes]:?" press "yes"
 
 ## Required inputs
 
@@ -55,6 +109,7 @@ project_name | Application name(Start with Upper case without space & symbols) |
 bundle_identifier | Bundle ID of project | com.krunalkevadiya.appname
 minimum_android_sdk_version | Minimum android SDK support | 21
 minimum_iOS_sdk_version | Minimum iOS SDK support | 12.4
+state_management | Which type of state management you want to used (thunk, saga, graphql) | thunk
 base_url | Base URL for a project rest api | https://reqres.in
 sentry_dsn_url | Sentry DSN URL for crash reporting | NA
 encryption_key | Encryption key for local storage | AppName

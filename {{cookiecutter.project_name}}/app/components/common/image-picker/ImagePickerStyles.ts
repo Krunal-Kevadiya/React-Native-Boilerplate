@@ -12,7 +12,7 @@ export default function styleSheet(option: StyleSheetOption) {
       actionSheetItem: {
         fontSize: '18@ms',
         paddingVertical: '10@vs',
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       }
     },
     option

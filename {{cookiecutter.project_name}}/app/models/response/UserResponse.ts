@@ -1,5 +1,4 @@
-import { instanceToPlain, plainToClass, Type } from 'class-transformer';
-import { SuccessOther } from '@models-other';
+import { instanceToPlain, plainToClass } from 'class-transformer';
 import { cleanUndefOrNull } from '@utils';
 
 /**
@@ -49,16 +48,8 @@ export class UserResponse {
    */
   static withInitPlainObject(object?: Record<string, any>): UserResponse {
     const tempObject = object ? cleanUndefOrNull(object) : object;
-    return tempObject ? plainToClass<UserResponse, Record<string, any>>(UserResponse, tempObject) : new UserResponse();
+    return tempObject
+      ? plainToClass<UserResponse, Record<string, any>>(UserResponse, tempObject)
+      : new UserResponse();
   }
-}
-
-/**
- * A successful response from the server.
- * @extends SuccessOther
- * @property {UserResponse} data - The user response object.
- */
-export class SuccessUserResponse extends SuccessOther {
-  @Type(() => UserResponse)
-  readonly data?: UserResponse;
 }

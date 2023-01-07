@@ -3,14 +3,13 @@ import { cleanUndefOrNull } from '@utils';
 
 /**
  * A class that represents an error response.
- * @param {number} status - The error code.
  * @param {string} message - The error message.
  * @param {boolean} isGlobalType - Whether or not the response is a global type.
  */
 export class ErrorResponse {
   readonly status?: number;
   readonly message?: string;
-  isGlobalType?: boolean;
+  isGlobalType: boolean;
 
   /**
    * A class that represents a error response from the API.
@@ -18,7 +17,7 @@ export class ErrorResponse {
    * @param {string} [message=""] - The message of the response.
    * @param {boolean} [isGlobalType=false] - Whether or not the response is a global type.
    */
-  constructor(status?: number, message?: string, isGlobalType?: boolean) {
+  constructor(status: number | undefined, message: string | undefined, isGlobalType: boolean) {
     this.status = status;
     this.message = message;
     this.isGlobalType = isGlobalType;
@@ -37,7 +36,7 @@ export class ErrorResponse {
    * @param {boolean} [isGlobalType=false] - whether the filter is global or not.
    * @returns None
    */
-  setGlobalType(isGlobalType?: boolean) {
+  setGlobalType(isGlobalType: boolean) {
     this.isGlobalType = isGlobalType;
   }
 
@@ -71,6 +70,6 @@ export class ErrorResponse {
     const tempObject = object ? cleanUndefOrNull(object) : object;
     return tempObject
       ? plainToClass<ErrorResponse, Record<string, any>>(ErrorResponse, tempObject)
-      : new ErrorResponse();
+      : new ErrorResponse(undefined, undefined, false);
   }
 }

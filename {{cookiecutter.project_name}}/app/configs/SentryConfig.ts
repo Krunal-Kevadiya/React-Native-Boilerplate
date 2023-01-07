@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/react-native';
+import isEqual from 'lodash/isEqual';
 import { AppConst } from '@constants';
 import { UserResponse } from '@models';
 import { isPresentValue } from '@utils';
-import isEqual from 'lodash/isEqual';
 
 /**
  * Initializes the Sentry client with the Sentry URL, the environment, and whether or not we're in debug mode..
@@ -28,7 +28,11 @@ if (!isPresentValue(AppConst.sentryUrl) && !isEqual(AppConst.sentryUrl, 'NA')) {
  * @param {object | null} error - The error object that was thrown
  * @returns None
  */
-export function sentryCaptureMessage(eventName: string, request: object | null, error: object | null): void {
+export function sentryCaptureMessage(
+  eventName: string,
+  request: object | null,
+  error: object | null
+): void {
   Sentry.withScope((scope) => {
     scope.setExtra(eventName, {
       Request: JSON.stringify(request ?? {}),
@@ -46,7 +50,8 @@ export function sentryCaptureMessage(eventName: string, request: object | null, 
  */
 export function sentryCaptureException(error: Error): void {
   if (AppConst.isDevelopment) {
-    console.error(error);
+    // eslint-disable-next-line no-restricted-syntax
+    console.log(error);
   } else {
     Sentry.captureException(error);
   }

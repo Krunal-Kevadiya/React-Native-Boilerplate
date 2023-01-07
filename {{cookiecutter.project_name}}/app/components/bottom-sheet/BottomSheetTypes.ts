@@ -1,6 +1,17 @@
 import React from 'react';
 import type { FlatListProps } from 'react-native';
 
+type ChildrenPropsType = {
+  children?: React.ReactElement;
+  data?: never;
+  style?: never;
+  renderItem?: never;
+};
+
+type FlatListPropsType<T> = {
+  children?: never;
+} & FlatListProps<T>;
+
 /**
  * A type that represents the props to the bottom sheet.
  * @param {BottomSheetPropsType<T>} props - the props for the component.
@@ -10,9 +21,10 @@ export type BottomSheetPropsType<T> = Partial<{
   message: string;
   onSwipeComplete: () => void;
   onBackButtonPress: () => void;
+  onDismiss: () => void;
   children: React.ReactElement;
 }> &
-  FlatListProps<T>;
+  (ChildrenPropsType | FlatListPropsType<T>);
 
 /**
  * A type that represents the handle to the bottom sheet.
@@ -23,4 +35,5 @@ export type BottomSheetPropsType<T> = Partial<{
 export type BottomSheetHandleType = Required<{
   show: () => void;
   hide: () => void;
+  isShow: () => boolean;
 }>;

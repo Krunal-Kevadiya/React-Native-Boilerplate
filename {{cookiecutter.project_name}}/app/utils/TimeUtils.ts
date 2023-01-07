@@ -114,7 +114,11 @@ dayjs.updateLocale('en', {
  * @param {boolean} [isDateVisible=false] - whether or not to display the date
  * @returns {string} the time since the date
  */
-export function timeSince(date: string, inputFormat: string, isDateVisible: boolean = false): string {
+export function timeSince(
+  date: string,
+  inputFormat: string,
+  isDateVisible: boolean = false
+): string {
   const newDate = dayjs(dayjs(date, inputFormat)?.toDate());
   let temp = dayjs(newDate).fromNow();
   const diff = dayjs().diff(dayjs(newDate), 'days', true);

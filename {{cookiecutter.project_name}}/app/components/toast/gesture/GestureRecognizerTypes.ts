@@ -1,4 +1,9 @@
-import type { PanResponderGestureState, PanResponderInstance, StyleProp, ViewStyle } from 'react-native';
+import type {
+  PanResponderGestureState,
+  PanResponderInstance,
+  StyleProp,
+  ViewStyle
+} from 'react-native';
 
 /**
  * An enum that represents the four directions that a swipe can be.
@@ -31,7 +36,10 @@ export type ConfigPropsType = Required<{
 export type GestureRecognizerPropsType = Partial<{
   config: ConfigPropsType;
   style: StyleProp<ViewStyle>;
-  onSwipe: (swipeDirection: SwipeDirectionsEnum | null | undefined, gestureState: PanResponderGestureState) => void;
+  onSwipe: (
+    swipeDirection: SwipeDirectionsEnum | null | undefined,
+    gestureState: PanResponderGestureState
+  ) => void;
   onSwipeUp: (gestureState: PanResponderGestureState) => void;
   onSwipeDown: (gestureState: PanResponderGestureState) => void;
   onSwipeLeft: (gestureState: PanResponderGestureState) => void;
@@ -46,7 +54,10 @@ export type GestureRecognizerPropsType = Partial<{
 export type SwipeHandlerPropsType = {
   swipeDirection?: SwipeDirectionsEnum | null;
   gestureState: PanResponderGestureState;
-  onSwipe?: (swipeDirection: SwipeDirectionsEnum | null | undefined, gestureState: PanResponderGestureState) => void;
+  onSwipe?: (
+    swipeDirection: SwipeDirectionsEnum | null | undefined,
+    gestureState: PanResponderGestureState
+  ) => void;
   onSwipeUp?: (gestureState: PanResponderGestureState) => void;
   onSwipeDown?: (gestureState: PanResponderGestureState) => void;
   onSwipeLeft?: (gestureState: PanResponderGestureState) => void;

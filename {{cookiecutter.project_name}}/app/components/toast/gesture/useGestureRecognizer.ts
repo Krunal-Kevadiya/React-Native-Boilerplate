@@ -44,12 +44,11 @@ export default function useGestureRecognizer({
     return handleShouldSetPanResponder(evt, gestureState);
   }, []);
 
-  const responderEnd = useCallback<(evt: GestureResponderEvent, gestureState: PanResponderGestureState) => void>(
-    (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
-      setGestureData({ evt, gestureState });
-    },
-    []
-  );
+  const responderEnd = useCallback<
+    (evt: GestureResponderEvent, gestureState: PanResponderGestureState) => void
+  >((evt: GestureResponderEvent, gestureState: PanResponderGestureState) => {
+    setGestureData({ evt, gestureState });
+  }, []);
 
   const panResponder = useMemo<PanResponderInstance>(
     () =>
@@ -65,7 +64,14 @@ export default function useGestureRecognizer({
   useDeepCompareEffect(() => {
     if (gestureData) {
       const { gestureState } = gestureData;
-      handlePanResponderEnd({ gestureState, onSwipe, onSwipeUp, onSwipeDown, onSwipeLeft, onSwipeRight });
+      handlePanResponderEnd({
+        gestureState,
+        onSwipe,
+        onSwipeUp,
+        onSwipeDown,
+        onSwipeLeft,
+        onSwipeRight
+      });
       setGestureData(null);
     }
   }, [gestureData, onSwipe, onSwipeDown, onSwipeLeft, onSwipeRight, onSwipeUp]);

@@ -15,20 +15,20 @@ export default function styleSheet(option: StyleSheetOption) {
       ...ApplicationStyles.textStyle,
       ...ApplicationStyles.buttonStyle,
       screenView: {
-        backgroundColor: Colors[option.theme]?.white
+        backgroundColor: Colors[option.theme]?.invertedWhite
       },
       logo: {
         height: '38@s',
         width: '115@s',
         marginTop: '-84@vs',
         marginBottom: '18@vs',
-        tintColor: Colors[option.theme]?.black
+        tintColor: Colors[option.theme]?.invertedBlack
       },
       logoSvg: {
         resizeMode: 'contain'
       },
       headerLeftImage: {
-        color: Colors[option.theme]?.black,
+        color: Colors[option.theme]?.invertedBlack,
         height: '22@ms',
         width: '22@ms',
         marginLeft: '8@s',
@@ -41,18 +41,18 @@ export default function styleSheet(option: StyleSheetOption) {
       },
       fabButton: {
         borderRadius: '20@s',
-        backgroundColor: Colors[option.theme]?.black
+        backgroundColor: Colors[option.theme]?.invertedBlack
       },
       fabText: {
         fontSize: '16@ms',
         marginLeft: '8@s',
         fontFamily: Fonts.regular,
-        color: Colors[option.theme]?.white
+        color: Colors[option.theme]?.invertedWhite
       },
       icon: {
         width: '22@s',
         height: '22@s',
-        tintColor: Colors[option.theme]?.white
+        tintColor: Colors[option.theme]?.invertedWhite
       },
       orText: {
         marginTop: '12@vs'
@@ -61,7 +61,7 @@ export default function styleSheet(option: StyleSheetOption) {
         fontFamily: Fonts.regular,
         fontSize: '14@ms',
         textAlign: 'center',
-        color: colorOpacity(Colors[option.theme]?.black, 0.3)
+        color: colorOpacity(Colors[option.theme]?.invertedBlack, 0.3)
       },
       policyDescContainer: {
         borderWidth: 0,

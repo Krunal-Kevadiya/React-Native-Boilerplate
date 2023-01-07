@@ -1,7 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import useGestureRecognizer from './useGestureRecognizer';
-import type { GestureRecognizerPropsType, UseGestureRecognizerReturnType } from './GestureRecognizerTypes';
+import type {
+  GestureRecognizerPropsType,
+  UseGestureRecognizerReturnType
+} from './GestureRecognizerTypes';
 
 /**
  * A React component that wraps a View and adds gesture recognition.

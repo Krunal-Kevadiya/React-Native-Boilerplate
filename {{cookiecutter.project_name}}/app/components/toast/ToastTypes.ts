@@ -10,11 +10,24 @@ import type { PanResponderGestureState, LayoutChangeEvent } from 'react-native';
  * @property {number} [interval] - The interval to use for the popup.
  */
 export type InternalDataPropsType = {
+  type?: ToastType;
+  title?: string;
   message?: string;
   image?: number;
   imageTint?: string;
   interval?: number;
 };
+
+export enum ToastType {
+  danger,
+  error,
+  warning,
+  detail,
+  info,
+  success,
+  primary,
+  custom
+}
 
 /**
  * The position of the toast.
@@ -31,7 +44,7 @@ export type ToastPropsType = {
   translucent?: boolean;
   numberOfLines?: number;
   toastPosition: ToastPosition;
-} & typeof defaultProps;
+};
 
 export const defaultProps = {
   translucent: true,
@@ -47,7 +60,7 @@ export const defaultProps = {
  */
 export type ToastHandleType = Required<{
   clearToast: () => void;
-  toastWithType: (message?: string, image?: number, imageTint?: string, interval?: number) => void;
+  toastWithType: (newData: InternalDataPropsType) => void;
   toastLifecycle: (callback: (isOpen: boolean) => void) => void;
 }>;
 
@@ -58,7 +71,9 @@ export type ToastHandleType = Required<{
 export type UseToastReturnType = {
   data: InternalDataPropsType | null;
   offset: Animated.SharedValue<number>;
+  opacity: Animated.SharedValue<number>;
   minHeight: number;
   handlerSwipeUp: (gestureState: PanResponderGestureState) => void | undefined | null;
   handleLayout: (event: LayoutChangeEvent) => void;
+  handleHideToast: () => void;
 };

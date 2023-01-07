@@ -8,7 +8,10 @@ import { useDeepCompareMemoize, checkDeps } from '@hooks-utils';
  * @param {React.DependencyList} dependencies - The dependencies to use for memoization.
  * @returns The memoized function.
  */
-export default function useDeepCompareMemo<T>(factory: () => T, dependencies: React.DependencyList) {
+export default function useDeepCompareMemo<T>(
+  factory: () => T,
+  dependencies: React.DependencyList
+) {
   if (AppConst.isDevelopment) {
     checkDeps(dependencies, 'useDeepCompareMemo');
   }

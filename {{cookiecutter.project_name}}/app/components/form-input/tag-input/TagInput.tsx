@@ -1,12 +1,26 @@
 import React, { forwardRef } from 'react';
-import { View, Text, TextInput, type TextProps, StyleSheet, type TextStyle, type StyleProp } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  type TextProps,
+  StyleSheet,
+  type TextStyle,
+  type StyleProp
+} from 'react-native';
 import { useTheme } from 'rn-custom-style-sheet';
 import { Colors, isAndroid, isIos } from '@themes';
 import { colorOpacity, isPresentValue } from '@utils';
 import styleSheet from './TagInputStyle';
+import {
+  defaultProps,
+  type MatchPartType,
+  type ParseType,
+  type TagInputPropsType,
+  type UseTagInputReturnType
+} from './TagInputTypes';
 import { removePrefixOrPostfixText, textExtraction, removeHtmlTags } from './TagInputUtil';
 import useTagInput from './useTagInput';
-import { defaultProps, type MatchPartType, type ParseType, type TagInputPropsType, type UseTagInputReturnType } from './TagInputTypes';
 
 /**
  * Takes in a string of code and parses it for the given parse type.

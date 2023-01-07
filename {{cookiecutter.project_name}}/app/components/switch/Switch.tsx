@@ -83,7 +83,9 @@ export default function Switch({
   return (
     <Pressable disabled={disabled} onPress={memoizedOnSwitchPressCallback}>
       <Animated.View style={StyleSheet.flatten([styles.containerStyle, animatedTrackStyles])}>
-        <Animated.View style={StyleSheet.flatten([styles.circleStyle, animatedThumbStyles, styles.shadowValue])} />
+        <Animated.View
+          style={StyleSheet.flatten([styles.circleStyle, animatedThumbStyles, styles.shadowValue])}
+        />
       </Animated.View>
     </Pressable>
   );

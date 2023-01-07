@@ -7,7 +7,7 @@
     "textUpdateCancelledByUser": "Update cancelled by user.",
     "textUpdateInstalledAndWillBeAppliedOnRestart": "Update installed and will be applied on restart.",
     "textAnUnknownErrorOccurred": "An unknown error occurred.",
-    "textDownloadingPackage": "Downloading package. {0}%",
+    "textDownloadingPackage": "Downloading package. {progress}%",
     "btnRestart": "Restart"
   },
   "apiError": {
@@ -32,9 +32,7 @@
     "defaultsMustBeObject": "defaults must be an object",
     "retriesMustBePositiveInteger": "retries must be a positive integer",
     "retryDelayMustNePositiveInteger": "retryDelay must be a positive integer or a function returning a positive integer",
-    "retryOnPropertyExpectsArrayOrFunction": "retryOn property expects an array or function",
-    "stringInvalidFormat": "String invalid format string.",
-    "stringArgumentIndexOutOfRangeInFormat": "String argument index is out of range in format"
+    "retryOnPropertyExpectsArrayOrFunction": "retryOn property expects an array or function"
   },
   "components": {
     "textSelectAPhoto": "Select a Photo",

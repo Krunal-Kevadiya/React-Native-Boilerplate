@@ -12,7 +12,12 @@ import type { XmlProps } from 'react-native-svg';
  * @param {ImageOverlapPropsType} props - the props for the component.
  * @returns {React.ReactElement} A React Element..
  */
-export default function ImageOverlap({ source, size, style, svgStyle }: ImageOverlapPropsType): React.ReactElement {
+export default function ImageOverlap({
+  source,
+  size,
+  style,
+  svgStyle
+}: ImageOverlapPropsType): React.ReactElement {
   const { styles } = useTheme(styleSheet);
   const localStyle: ViewStyle = omit(StyleSheet.flatten(style), 'marginTop');
 

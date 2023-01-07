@@ -10,9 +10,14 @@ import {
 import { useTheme } from 'rn-custom-style-sheet';
 import { isPresentValue } from '@utils';
 import styleSheet from './OtpInputStyles';
+import {
+  defaultProps,
+  type OtpInputPropsType,
+  type UseOtpInputReturnType,
+  type OneInputFieldPropsType
+} from './OtpInputTypes';
 import { handleChangeText, handleKeyPressTextInput, isAutoFillSupported } from './OtpInputUtils';
 import { fieldList, useOtpInput } from './useOtpInput';
-import { defaultProps, type OtpInputPropsType, type UseOtpInputReturnType, type OneInputFieldPropsType } from './OtpInputTypes';
 
 /**
  * A component that renders a single input field for the OneInputField component.
@@ -37,7 +42,10 @@ function OneInputField({
   ...restProps
 }: OneInputFieldPropsType): React.ReactElement {
   const { styles } = useTheme(styleSheet);
-  const { color: defaultPlaceholderTextColor } = { ...styles.defaultTextFieldStyle, ...codeInputFieldStyle };
+  const { color: defaultPlaceholderTextColor } = {
+    ...styles.defaultTextFieldStyle,
+    ...codeInputFieldStyle
+  };
   const inputValue: string | undefined = !clearInputs ? digits[index] : '';
   const isFilledValue: boolean = isPresentValue(inputValue);
 
@@ -47,7 +55,11 @@ function OneInputField({
         underlineColorAndroid="transparent"
         style={
           selectedIndex === index || isFilledValue
-            ? StyleSheet.flatten([styles.defaultTextFieldStyle, codeInputFieldStyle, codeInputHighlightStyle])
+            ? StyleSheet.flatten([
+                styles.defaultTextFieldStyle,
+                codeInputFieldStyle,
+                codeInputHighlightStyle
+              ])
             : StyleSheet.flatten([styles.defaultTextFieldStyle, codeInputFieldStyle])
         }
         value={inputValue}
@@ -60,9 +72,20 @@ function OneInputField({
           fieldList[index] = ref;
         }}
         onChangeText={(text: string) => {
-          handleChangeText(index, text, pinCount, digitsMemo, onCodeFilled, onCodeChanged, setDigits, setSelectedIndex);
+          handleChangeText(
+            index,
+            text,
+            pinCount,
+            digitsMemo,
+            onCodeFilled,
+            onCodeChanged,
+            setDigits,
+            setSelectedIndex
+          );
         }}
-        onKeyPress={({ nativeEvent: { key } }: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+        onKeyPress={({
+          nativeEvent: { key }
+        }: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
           handleKeyPressTextInput(
             index,
             key,
@@ -96,15 +119,21 @@ export function OtpInput({
   ...restProps
 }: OtpInputPropsType): React.ReactElement {
   const { styles } = useTheme(styleSheet);
-  const { digits, setDigits, digitsMemo, selectedIndex, setSelectedIndex, handlePress }: UseOtpInputReturnType =
-    useOtpInput({
-      code,
-      autoFocusOnLoad,
-      clearInputs,
-      pinCount,
-      onCodeFilled,
-      onCodeChanged
-    });
+  const {
+    digits,
+    setDigits,
+    digitsMemo,
+    selectedIndex,
+    setSelectedIndex,
+    handlePress
+  }: UseOtpInputReturnType = useOtpInput({
+    code,
+    autoFocusOnLoad,
+    clearInputs,
+    pinCount,
+    onCodeFilled,
+    onCodeChanged
+  });
   const array = new Array(pinCount).fill(<View />);
 
   return (

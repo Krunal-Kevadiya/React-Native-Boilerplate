@@ -17,23 +17,23 @@ export default function styleSheet(option: StyleSheetOption) {
         paddingVertical: '8@s',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors[option.theme]?.black
+        backgroundColor: Colors[option.theme]?.invertedBlack
       },
       textHeader: {
         flex: 1,
         fontSize: '16@ms',
-        color: Colors[option.theme]?.white
+        color: Colors[option.theme]?.invertedWhite
       },
       buttonView: {
         marginLeft: '5@s',
         borderRadius: '5@ms',
         paddingHorizontal: '8@s',
         paddingVertical: '8@s',
-        backgroundColor: Colors[option.theme]?.white
+        backgroundColor: Colors[option.theme]?.invertedWhite
       },
       textButton: {
         fontSize: '12@ms',
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       }
     },
     option

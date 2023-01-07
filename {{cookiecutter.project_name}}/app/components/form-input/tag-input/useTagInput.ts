@@ -1,18 +1,21 @@
 import { useCallback, useMemo } from 'react';
 import { useTheme } from 'rn-custom-style-sheet';
+import { ToastType } from '@components';
 import { StringConst } from '@constants';
 import { useClipboard } from '@hooks';
 import { Colors } from '@themes';
 import { ToastHolder } from '../../toast';
 import styleSheet from './TagInputStyle';
-import { callActions, PATTERNS } from './TagInputUtil';
 import { PatternsEnum, type ParseType, type UseTagInputReturnType } from './TagInputTypes';
+import { callActions, PATTERNS } from './TagInputUtil';
 
 /**
  * A custom tag input hook that returns an array of objects that can be used to parse text.
  * @returns {ParseType[]} - An array of objects that can be used to parse text.
  */
-export default function useTagInput(handlePress?: (type: string, value: string) => void): UseTagInputReturnType {
+export default function useTagInput(
+  handlePress?: (type: string, value: string) => void
+): UseTagInputReturnType {
   const [, setStringToClipboard] = useClipboard();
   const { styles, theme } = useTheme(styleSheet);
 
@@ -31,7 +34,7 @@ export default function useTagInput(handlePress?: (type: string, value: string) 
 
   const handleUrlLongPress = useCallback<(url: string) => void>((url) => {
     setStringToClipboard(url);
-    ToastHolder.toastMessage(StringConst.Message.copyLinkSuccess);
+    ToastHolder.toastMessage(ToastType.success, StringConst.Message.copyLinkSuccess);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -81,19 +84,31 @@ export default function useTagInput(handlePress?: (type: string, value: string) 
         style: { ...styles.hashtag, color: Colors[theme]?.secondary },
         onPress: handleHashtagPress
       },
-      { type: PatternsEnum.boldWith2Star, pattern: PATTERNS[PatternsEnum.boldWith2Star], style: styles.bold },
+      {
+        type: PatternsEnum.boldWith2Star,
+        pattern: PATTERNS[PatternsEnum.boldWith2Star],
+        style: styles.bold
+      },
       {
         type: PatternsEnum.boldWith2Underscore,
         pattern: PATTERNS[PatternsEnum.boldWith2Underscore],
         style: styles.bold
       },
-      { type: PatternsEnum.italicWith1Star, pattern: PATTERNS[PatternsEnum.italicWith1Star], style: styles.italic },
+      {
+        type: PatternsEnum.italicWith1Star,
+        pattern: PATTERNS[PatternsEnum.italicWith1Star],
+        style: styles.italic
+      },
       {
         type: PatternsEnum.italicWith1Underscore,
         pattern: PATTERNS[PatternsEnum.italicWith1Underscore],
         style: styles.italic
       },
-      { type: PatternsEnum.strikethrough, pattern: PATTERNS[PatternsEnum.strikethrough], style: styles.strikethrough },
+      {
+        type: PatternsEnum.strikethrough,
+        pattern: PATTERNS[PatternsEnum.strikethrough],
+        style: styles.strikethrough
+      },
       {
         type: PatternsEnum.underline,
         pattern: PATTERNS[PatternsEnum.underline],

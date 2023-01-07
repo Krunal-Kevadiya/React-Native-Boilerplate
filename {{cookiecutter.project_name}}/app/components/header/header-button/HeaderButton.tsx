@@ -49,7 +49,11 @@ export default function HeaderButton({
     >
       {isPresentValue(restProps.type) && <Icon size={24} {...restProps} {...object} />}
       {isPresentValue(label) && (
-        <Text style={StyleSheet.flatten([styles.text, textStyle, !isLeftAlign && styles.centerText])}>{label}</Text>
+        <Text
+          style={StyleSheet.flatten([styles.text, textStyle, !isLeftAlign && styles.centerText])}
+        >
+          {label}
+        </Text>
       )}
     </Pressable>
   );

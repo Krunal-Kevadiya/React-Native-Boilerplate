@@ -1,8 +1,29 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: [
+    {% if cookiecutter.__with_react_native_web == 'true' -%}
+    ['module:metro-react-native-babel-preset', { useTransformReactJSXExperimental: true }],
+    '@babel/preset-react',
+    '@babel/preset-typescript'
+    {% else -%}
+    'module:metro-react-native-babel-preset'
+    {% endif %}
+  ],
   plugins: [
-    'react-native-reanimated/plugin',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
+    {%- if cookiecutter.__with_react_native_web == 'true' -%}
+    ['@babel/plugin-transform-flow-strip-types'],
+    [
+      '@babel/plugin-transform-react-jsx',
+      {
+        runtime: 'automatic',
+      },
+    ],
+    ['@babel/plugin-proposal-export-namespace-from'],
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
+    ['@babel/plugin-proposal-private-methods', { loose: true }],
+    ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+    '@babel/plugin-transform-runtime',
+    {% endif -%}
     [
       'module:react-native-dotenv',
       {
@@ -41,12 +62,16 @@ module.exports = {
           '@models-response': './app/models/response',
           '@models-schema': './app/models/schema',
           '@models': './app/models',
-          '@stores-redux-middleware': './app/stores/redux/middleware',
-          '@stores-redux': './app/stores/redux',
-          '@stores-saga': './app/stores/saga',
-          '@stores-service': './app/stores/service',
-          '@stores-utils': './app/stores/stores-utils',
-          '@stores': './app/stores',
+          {% if cookiecutter.state_management != 'graphql' -%}
+          "@redux-middleware": './app/redux/middleware',
+          "@redux": './app/redux',
+          {% if cookiecutter.state_management == 'saga' -%}
+          "@saga": './app/saga',
+          "@services": './app/services',
+          {%- endif -%}
+          {% elif cookiecutter.state_management == "graphql" -%}
+          "@graphql": './app/graphql',
+          {%- endif -%}
           '@themes': './app/themes',
           '@translations': './app/translations',
           '@utils': './app/utils'
@@ -58,7 +83,8 @@ module.exports = {
       {
         extensions: ['.svg']
       }
-    ]
+    ],
+    'react-native-reanimated/plugin'
   ],
   env: {
     development: {},

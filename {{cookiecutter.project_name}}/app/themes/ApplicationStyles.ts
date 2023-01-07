@@ -72,11 +72,9 @@ const buttonStyle = {
  * @param {ThemeMode} theme - The theme of the application.
  * @returns {StyleSheet} - A StyleSheet object containing all of the application's styles.
  */
-const ApplicationStyles = {
+export default {
   viewStyle,
   lineStyle,
   buttonStyle,
   textStyle
 };
-
-export default ApplicationStyles;

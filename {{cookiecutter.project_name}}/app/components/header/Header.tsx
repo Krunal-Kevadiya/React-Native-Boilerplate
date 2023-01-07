@@ -47,7 +47,13 @@ export default function Header({
   }, []);
 
   return (
-    <View style={StyleSheet.flatten([isBottomLine && styles.bottomLine, { height: headerHeight }, styles.container])}>
+    <View
+      style={StyleSheet.flatten([
+        isBottomLine && styles.bottomLine,
+        { height: headerHeight },
+        styles.container
+      ])}
+    >
       <View pointerEvents="none" style={{ height: statusBarHeight }} />
       {!isSearch && (
         <View pointerEvents="box-none" style={styles.subContainer}>
@@ -55,7 +61,10 @@ export default function Header({
             isCenterView
             isLeftAlign={isLeftAlign}
             {...center}
-            viewStyle={StyleSheet.flatten([center?.viewStyle, { left: widthLeft, right: widthRight }])}
+            viewStyle={StyleSheet.flatten([
+              center?.viewStyle,
+              { left: widthLeft, right: widthRight }
+            ])}
           />
           <View style={styles.rightView} onLayout={handleLeftLayout}>
             {!customLeftView && <HeaderButton isAddMargin isCenterView={false} {...left} />}

@@ -5,13 +5,15 @@ import { i18n } from '@configs';
  * @readonly
  * @enum {string}
  */
-const CodePush = Object.freeze({
+const CodePush: Record<string, string> = Object.freeze({
   textCheckingForUpdate: i18n.t('codePush:textCheckingForUpdate'),
   textAwaitingUserAction: i18n.t('codePush:textAwaitingUserAction'),
   textInstallingUpdate: i18n.t('codePush:textInstallingUpdate'),
   textAppUpToDate: i18n.t('codePush:textAppUpToDate'),
   textUpdateCancelledByUser: i18n.t('codePush:textUpdateCancelledByUser'),
-  textUpdateInstalledAndWillBeAppliedOnRestart: i18n.t('codePush:textUpdateInstalledAndWillBeAppliedOnRestart'),
+  textUpdateInstalledAndWillBeAppliedOnRestart: i18n.t(
+    'codePush:textUpdateInstalledAndWillBeAppliedOnRestart'
+  ),
   textAnUnknownErrorOccurred: i18n.t('codePush:textAnUnknownErrorOccurred'),
   textDownloadingPackage: i18n.t('codePush:textDownloadingPackage'),
   btnRestart: i18n.t('codePush:btnRestart')
@@ -22,7 +24,7 @@ const CodePush = Object.freeze({
  * @readonly
  * @enum {string}
  */
-const ApiError = Object.freeze({
+const ApiError: Record<string, string> = Object.freeze({
   network: i18n.t('apiError:msgNetworkError'),
   server: i18n.t('apiError:msgServerError'),
   somethingWentWrong: i18n.t('apiError:msgSomethingWentWrong'),
@@ -38,7 +40,7 @@ const ApiError = Object.freeze({
  * A collection of error messages for the Yup validation schema.
  * @type {Object}
  */
-const YupError = Object.freeze({
+const YupError: Record<string, string> = Object.freeze({
   requireEmail: i18n.t('yupError:msgRequireEmail'),
   validEmail: i18n.t('yupError:msgValidEmail'),
   requirePassword: i18n.t('yupError:msgRequirePassword')
@@ -48,22 +50,20 @@ const YupError = Object.freeze({
  * A collection of messages for the application.
  * @type {Object}
  */
-const Message = Object.freeze({
+const Message: Record<string, string> = Object.freeze({
   copyLinkSuccess: i18n.t('message:copyLinkSuccess'),
   fetchMustBeFunction: i18n.t('message:fetchMustBeFunction'),
   defaultsMustBeObject: i18n.t('message:defaultsMustBeObject'),
   retriesMustBePositiveInteger: i18n.t('message:retriesMustBePositiveInteger'),
   retryDelayMustNePositiveInteger: i18n.t('message:retryDelayMustNePositiveInteger'),
-  retryOnPropertyExpectsArrayOrFunction: i18n.t('message:retryOnPropertyExpectsArrayOrFunction'),
-  stringInvalidFormat: i18n.t('message:stringInvalidFormat'),
-  stringArgumentIndexOutOfRangeInFormat: i18n.t('message:stringArgumentIndexOutOfRangeInFormat')
+  retryOnPropertyExpectsArrayOrFunction: i18n.t('message:retryOnPropertyExpectsArrayOrFunction')
 });
 
 /**
  * A collection of messages for the components.
  * @type {Object}
  */
-const Components = Object.freeze({
+const Components: Record<string, any> = Object.freeze({
   textSelectAPhoto: i18n.t('components:textSelectAPhoto'),
   listSelectAPhoto: [
     i18n.t('components:listItemTakePhoto'),
@@ -72,7 +72,7 @@ const Components = Object.freeze({
   ]
 });
 
-const Auth = Object.freeze({
+const Auth: Record<string, string> = Object.freeze({
   textEmail: i18n.t('auth:textEmail'),
   inputEmail: i18n.t('auth:inputEmail'),
   textPassword: i18n.t('auth:textPassword'),

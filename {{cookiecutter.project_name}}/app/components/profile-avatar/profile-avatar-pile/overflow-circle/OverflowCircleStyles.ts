@@ -12,13 +12,13 @@ export default function styleSheet(option: StyleSheetOption) {
       overflow: {
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors[option.theme]?.white
+        backgroundColor: Colors[option.theme]?.invertedWhite
       },
       overflowLabel: {
         fontSize: '14@ms',
         fontWeight: 'bold',
         letterSpacing: -1,
-        color: Colors[option.theme]?.black
+        color: Colors[option.theme]?.invertedBlack
       }
     },
     option
