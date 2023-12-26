@@ -1,0 +1,464 @@
+# CONFIGURATION
+
+# Configure Krupy min version used by defaults
+_min_krupy_version: "2.0.0"
+
+# Configure jinja2 defaults to make syntax highlighters lives easier
+_templates_suffix: .jinja
+
+# Configurations for the Jinja environment. Krupy uses the Jinja defaults whenever possible
+_envops:
+  autoescape: false
+  trim_blocks: true
+  keep_trailing_newline: true
+  block_end_string: "%}"
+  block_start_string: "{%"
+  comment_end_string: "#}"
+  comment_start_string: "{#"
+  variable_end_string: "}}"
+  variable_start_string: "{{"
+
+# Configurations question settings
+_envquestions:
+  is_visible_count: true
+  is_visible_mark: true
+  is_visible_type: true
+  is_visible_default_value: false
+
+# This template is just a complement, so we better use a different default answers file
+_subdirectory: template
+
+# This template is just a complement, so we better use a different default answers file
+_answers_file: .krupy-answers.yml
+
+# Need to skit save value
+_secret_questions:
+  - encryption_key
+  - android_codePush_key
+  - ios_codePush_key
+
+# Need to skit if files already exists
+_skip_if_exists:
+  - README.md
+
+# Need to exclude from render
+_exclude:
+  - /.git
+  - /.github
+
+# Need to execute task or command after template generate
+_tasks:
+  # Initial commit
+  - "git init"
+  - "git add -A"
+  # Installing package
+  - "yarn"
+  # Pod install
+  - "cd ios/ && pod install --repo-update && cd .."
+  # Connect Remote Repository
+  - >-
+
+    if {% if repository_link != 'NA' %} true {% else %} false {% endif %}; then
+      git branch -M master
+      git remote add origin {{ repository_link }}
+      git remote -v
+    else
+      echo "Skipping to connect git repository..."
+    fi
+
+  # Update Folder Permission
+  - "cd .. && chmod -R 777 {{ _krupy_conf.dst_path }} && cd {{ _krupy_conf.dst_path }}"
+
+  # Update local file format
+  - >-
+    if {% if 'EsLint' in feature %} true {% else %} false {% endif %}; then
+      yarn eslint-fix
+    else
+      echo "Skipping to fix eslint issue..."
+    fi
+    if {% if 'Prettier' in feature %} true {% else %} false {% endif %}; then
+      yarn pretty
+    else
+      echo "Skipping to fix pretty issue..."
+    fi
+
+  # Launch Android Studio
+  - >-
+
+    if [[ -z ${CI+x} ]]; then
+        if {% if 'Android Studio' in launch_by %} true {% else %} false {% endif %}; then
+             if [[ "$OSTYPE" == "darwin"* ]]; then
+                /Applications/Android\ Studio.app/Contents/MacOS/studio ./android
+                echo "Android Studio should now be running, have fun with your new project!"
+            else
+                echo "Unsupported operating system: skipping the launching of Android Studio..."
+            fi
+        else
+            echo "Skipping the launching of Android Studio..."
+        fi
+    else
+        echo "Skipping the launching of Android Studio because we're building on CI..."
+    fi
+
+  # Launch Xcode
+  - >-
+
+    if [[ -z ${CI+x} ]]; then
+        if {% if 'Xcode' in launch_by %} true {% else %} false {% endif %}; then
+             if [[ "$OSTYPE" == "darwin"* ]]; then
+                open ./ios/{{project_name}}.xcodeproj
+                echo "Xcode should now be running, have fun with your new project!"
+            else
+                echo "Unsupported operating system: skipping the launching of Xcode..."
+            fi
+        else
+            echo "Skipping the launching of Xcode..."
+        fi
+    else
+        echo "Skipping the launching of Xcode because we're building on CI..."
+    fi
+
+  # Launch Visual Studio Code
+  - >-
+
+    if [[ -z ${CI+x} ]]; then
+        if {% if 'Visual Studio Code' in launch_by %} true {% else %} false {% endif %}; then
+             if [[ "$OSTYPE" == "darwin"* ]]; then
+                if grep -q 'export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"' ~/.zshrc; then
+                    code .
+                else
+                    echo 'export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"' >> ~/.zshrc
+                    source ~/.zshrc
+                    code .
+                fi 
+                echo "Visual Studio Code should now be running, have fun with your new project!"
+            else
+                echo "Unsupported operating system: skipping the launching of Visual Studio Code..."
+            fi
+        else
+            echo "Skipping the launching of Visual Studio Code..."
+        fi
+    else
+        echo "Skipping the launching of Visual Studio Code because we're building on CI..."
+    fi
+
+# Display message from start and end of copy process
+_message_before_copy: |
+
+   ************************************************************
+   * Thanks for generating a project using our template.      *
+   *                                                          *
+   * You'll be asked a series of questions whose answers will *
+   * be used to generate a tailored project for you.          *
+   ************************************************************
+
+_message_after_copy: |
+  ********************************************************************
+  * Your project "{{ project_name }}" has been created successfully! *
+  ********************************************************************
+
+# Questions
+project_name:
+  type: str
+  help: >-
+    What's your project name?
+
+    Project directory and package name will be created based on this.
+
+    Must use a first upper letter followed by one or more of (A-Z, a-z, 0-9).
+  default: ProjectName
+  placeholder: "Please enter project name"
+  validator: >-
+    {% if not (project_name | regex_search('^[^\s].*$')) %}
+    project name cannot be empty nor start with a blank character.
+    {% elif not (project_name | regex_search('^[A-Z][a-zA-Z0-9]+$')) %}
+    project name must be a valid name.
+    {% endif %}
+
+project_name_with_lower_case:
+  type: str
+  default: "{{ project_name | lower }}"
+  when: no
+
+bundle_identifier:
+  type: str
+  help: >-
+    What's your project bundle identifier or package name?
+
+    Package directory will be created based on this.
+
+    Must use a letter followed by one or more of (A-Z, a-z, 0-9, .).
+  default: "com.krunal.{{ project_name | lower }}"
+  placeholder: "please enter project bundle identifier or package name"
+  validator: >-
+    {% if not (bundle_identifier | regex_search('^[^\s].*$')) %}
+    bundle identifier cannot be empty nor start with a blank character.
+    {% elif not (bundle_identifier | regex_search('^[a-zA-Z0-9.]+$')) %}
+    bundle identifier must be a valid string.
+    {% endif %}
+
+bundle_identifier_path:
+  type: str
+  default: "{{ bundle_identifier | replace('.', '/') }}"
+  when: no
+
+min_android_sdk:
+  type: int
+  help: >-
+    What's your project minimum SDK version for Android platform?
+
+    Must use a digit followed by one or more of (0-9).
+  default: 21
+  placeholder: "Please enter Android SDK version"
+  validator: >-
+    {% if not (min_android_sdk | string | regex_search('^[^\s].*$')) %}
+    Android SDK version cannot be empty nor start with a blank character.
+    {% elif not (min_android_sdk | string | regex_search('^[0-9]+$')) %}
+    Android SDK version must be a valid digit.
+    {% elif not (min_android_sdk | int > 0) %}
+    Android SDK version must be a grater than zero.
+    {% endif %}
+  
+min_ios_sdk:
+  type: float
+  help: >-
+    What's your project minimum SDK version for IOS platform?
+
+    Must use a digit followed by one or more of (0-9).
+  default: 12.4
+  placeholder: "Please enter IOS SDK version"
+  validator: >-
+    {% if not (min_ios_sdk | string | regex_search('^[^\s].*$')) %}
+    IOS SDK version cannot be empty nor start with a blank character.
+    {% elif not (min_ios_sdk | string | regex_search('^[0-9.]+$')) %}
+    IOS SDK version must be a valid digit.
+    {% elif not (min_ios_sdk | float > 0.0) %}
+    IOS SDK version must be a grater than zero.
+    {% endif %}
+
+state_management:
+  type: str
+  help: >-
+    Which state management tool do you want to use?
+
+    For React-Redux, we will use the Toolkit.
+  default: React Redux
+  multiselect: false
+  choices:
+    - "React Redux"
+    - "GraphQL"
+
+state_management_middleware:
+  type: str
+  help: >-
+    Which middleware tool do you want to use with React Redux state management?
+  default: Redux Thunk
+  multiselect: false
+  when: "{{ state_management == 'React Redux' }}"
+  choices:
+    - "Redux Thunk"
+    - "Redux Saga"
+
+api_middleware:
+  type: yaml
+  help: >-
+    Which middleware tool do you want to use when API call?
+  default: []
+  multiselect: true
+  when: "{{ state_management == 'React Redux' }}"
+  choices:
+    - ["Axios", "Axios", true]
+    - ["AWS Amplify", "AWS Amplify", false]
+
+react_native_web:
+  type: bool
+  help: >-
+    Do you want to enable web platform support?
+  default: false
+
+encryption_key:
+  type: str
+  help: >-
+    What's your project local storage encryption key?
+
+    Project directory and package name will be created based on this.
+
+    Must be 8 characters or more, One lowercase character, One uppercase character,
+    
+    One special character and One number followed by one or more of (A-Z, a-z, 0-9, symbol).
+  default: "{{ project_name }}"
+  placeholder: "Please enter encryption key"
+  validator: >-
+    {% if not (encryption_key | regex_search('^[^\s].*$')) %}
+    Encryption key cannot be empty nor start with a blank character.
+    {% elif not (encryption_key | length >= 8) %}
+    Encryption key must be a valid key.
+    {% endif %}
+
+base_url:
+  type: str
+  help: >-
+    What's your project API endpoint?
+
+    Based on this initialize your source code management tool(Git).
+
+    Must use a start with http or https followed by one or more of (A-Z, a-z, 0-9, symbol).
+  default: "https://{{ project_name | lower }}.com"
+  placeholder: "Please enter API endpoint"
+  validator: >-
+    {% if not (base_url | regex_search('^[^\s].*$')) %}
+    API endpoint cannot be empty nor start with a blank character.
+    {% elif not (base_url | regex_search('^((http|https)://)*')) %}
+    API endpoint must be a valid URL.
+    {% endif %}
+
+feature:
+  type: yaml
+  help: >-
+    Which feature do you want to configure when the project is created?
+  default: []
+  multiselect: true
+  choices:
+  - ["Sentry", "Sentry", false]
+  - ["CodePush", "CodePush", false]
+  - ["DeepLink", "DeepLink", false]
+  - ["Socket", "Socket", false]
+  - ["Translations", "Translations", true]
+  - ["EsLint", "EsLint", true]
+  - ["Prettier", "Prettier", true]
+  - ["CSpell", "CSpell", true]
+  - ["LeftHook", "LeftHook", true]
+
+components:
+  type: yaml
+  help: >-
+    Which type of component do you want to add when the project is created?
+  default: []
+  multiselect: true
+  choices:
+    - ["Button", "Button", false]
+    - ["Switch", "Switch", false]
+    - ["Progress", "Progress", false]
+    - ["ProfileAvatar", "ProfileAvatar", false]
+    - ["Header", "Header", true]
+    - ["Input", "Input", true]
+    - ["BottomSheet", "BottomSheet", true]
+    - ["Toast", "Toast", true]
+
+sentry_dsn_url:
+  type: str
+  help: >-
+    What's your project sentry DSN URL?
+
+    Based on this initialize your crashlytics tool(Sentry).
+
+    Must use a start with http or https followed by one or more of (A-Z, a-z, 0-9, symbol).
+  default: "NA"
+  placeholder: "Please enter sentry DSN URL"
+  when: "{{ 'Sentry' in feature }}"
+  validator: >-
+    {% if sentry_dsn_url != 'NA' and not (sentry_dsn_url | regex_search('^[^\s].*$')) %}
+    sentry DSN URL cannot be empty nor start with a blank character.
+    {% elif sentry_dsn_url != 'NA' and not (sentry_dsn_url | regex_search('^((http|https)://)*')) %}
+    sentry DSN URL must be a valid URL.
+    {% endif %}
+
+android_codePush_key:
+  type: str
+  help: >-
+    What's your project CodePush key for Android platform?
+
+    Based on this initialize your app center tool(CodePush).
+
+    Must use a start with character followed by one or more of (A-Z, a-z, 0-9, symbol).
+  default: "NA"
+  placeholder: "Please enter android code-push key"
+  when: "{{ 'CodePush' in feature }}"
+  validator: >-
+    {% if android_codePush_key != 'NA' and not (android_codePush_key | regex_search('^[^\s].*$')) %}
+    CodePush Key cannot be empty nor start with a blank character.
+    {% elif android_codePush_key != 'NA' and not (android_codePush_key | regex_search('^[a-zA-Z][a-zA-Z0-9]+$')) %}
+    CodePush Key must be a valid key.
+    {% endif %}
+
+ios_codePush_key:
+  type: str
+  help: >-
+    What's your project CodePush key for IOS platform?
+
+    Based on this initialize your app center tool(CodePush).
+
+    Must use a start with character followed by one or more of (A-Z, a-z, 0-9, symbol).
+  default: "NA"
+  placeholder: "Please enter ios code-push key"
+  when: "{{ 'CodePush' in feature }}"
+  validator: >-
+    {% if ios_codePush_key != 'NA' and not (ios_codePush_key | regex_search('^[^\s].*$')) %}
+    CodePush Key cannot be empty nor start with a blank character.
+    {% elif ios_codePush_key != 'NA' and not (ios_codePush_key | regex_search('^[a-zA-Z][a-zA-Z0-9]+$')) %}
+    CodePush Key must be a valid key.
+    {% endif %}
+
+deep_link_host:
+  type: str
+  help: >-
+    What's your project deep-link host?
+
+    DeepLink will be created based on this.
+
+    Must use a letter followed by one or more of (A-Z, a-z, 0-9, .).
+  default: "beta.{{ project_name | lower }}.com"
+  placeholder: "please enter deep-link host"
+  when: "{{ 'DeepLink' in feature }}"
+  validator: >-
+    {% if not (deep_link_host | regex_search('^[^\s].*$')) %}
+    Deep link host cannot be empty nor start with a blank character.
+    {% elif not (deep_link_host | regex_search('^[a-zA-Z0-9.]+$')) %}
+    Deep link host must be a valid string.
+    {% endif %}
+
+deep_link_scheme:
+  type: str
+  help: >-
+    What's your project deep-link schema?
+
+    Project deep-link schema will be created based on this. e.g. sample://
+
+    Must use a start with character followed by one or more of (A-Z, a-z, 0-9, symbol).
+  default: "{{ project_name }}"
+  placeholder: "Please enter deep link schema"
+  when: "{{ 'DeepLink' in feature }}"
+  validator: >-
+    {% if not (deep_link_scheme | regex_search('^[^\s].*$')) %}
+    Deep link schema cannot be empty nor start with a blank character.
+    {% elif not (deep_link_scheme | regex_search('^[a-zA-Z][a-zA-Z0-9]+$')) %}
+    Deep link schema must be a valid name.
+    {% endif %}
+
+repository_link:
+  type: str
+  help: >-
+    What's your project remote repository URL?
+
+    Based on this initialize your source code management tool(Git).
+
+    Must use a start with git, http or https followed by one or more of (A-Z, a-z, 0-9, symbol).
+  default: "NA"
+  placeholder: "Please enter repository URL"
+  validator: >-
+    {% if repository_link != 'NA' and not (repository_link | regex_search('^[^\s].*$')) %}
+    Repository URL cannot be empty nor start with a blank character.
+    {% elif repository_link != 'NA' and not (repository_link | regex_search('((git@|http(s)?:\/\/)([\w\.@]+)(\/|:))([\w,\-,\_]+)\/([\w,\-,\_]+)(.git){0,1}((\/){0,1})')) %}
+    Repository URL must be a valid URL.
+    {% endif %}
+
+launch_by:
+  type: yaml
+  help: >-
+    Which development tool do you want to open after project creation?
+  default: "Visual Studio Code"
+  multiselect: true
+  choices:
+    - "Visual Studio Code"
+    - "Android Studio"
+    - "Xcode"

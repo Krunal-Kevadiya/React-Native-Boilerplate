@@ -1,0 +1,227 @@
+import { Amplify } from 'aws-amplify';
+import { get, put, post, del, head, patch, ApiError, isCancelError } from 'aws-amplify/api';
+import { fetchAuthSession } from 'aws-amplify/auth';
+import has from 'lodash/has';
+{% if state_management_middleware == 'Redux Saga' %}
+import { CANCEL } from 'redux-saga';
+{% endif %}
+import { StringConst, AppConst } from '@constants';
+import {
+  formatString,
+  toNumber,
+  AWSAmplifyStorage,
+  getProblemFromError,
+  getProblemFromStatus,
+  in200s
+} from '@utils';
+import type {
+  ApiErrorResponse,
+  ApiOkResponse,
+  ApiAwsResponse,
+  AuthSession,
+  AwsMethod,
+  Operation,
+  RestApiResponse,
+  ApiErrorsResponse,
+  Headers
+} from './AwsAPITypes';
+import type { PROBLEM_CODE } from '../CommonTypes';
+
+const API = {
+  get,
+  put,
+  post,
+  del,
+  head,
+  patch
+};
+
+/**
+ * Configure aws amplify
+ * @param {any} config - The amplify config json.
+ * @returns {} - The empty object
+ */
+export const awsApiConfig = (config?: any): void => {
+  return Amplify.configure({
+    ...config,
+    storage: AWSAmplifyStorage
+  });
+};
+
+/**
+ * Converts an awsAmplify response/error into our response.
+ */
+const convertAwsResponse = async <T, U = T>(
+  startedAt?: number | null,
+  awsAmplifyResult?: RestApiResponse | ApiError | null
+): Promise<ApiAwsResponse<T, U>> => {
+  const end: number = toNumber(new Date());
+  const duration: number = end - (startedAt ?? 0);
+
+  // new in awsAmplify 0.13 -- some data could be buried 1 level now
+  const isError: boolean =
+    awsAmplifyResult instanceof Error ||
+    awsAmplifyResult instanceof ApiError ||
+    isCancelError(awsAmplifyResult);
+  const awsAmplifyResponse: RestApiResponse = awsAmplifyResult as RestApiResponse;
+  const awsAmplifyError: ApiError = awsAmplifyResult as ApiError;
+  const response: RestApiResponse | ApiErrorsResponse | undefined = isError
+    ? awsAmplifyError?.response
+    : awsAmplifyResponse;
+  const status: number | undefined = response?.statusCode;
+  const problem: PROBLEM_CODE | null = isError
+    ? getProblemFromError(awsAmplifyResult)
+    : getProblemFromStatus(status);
+  const originalError: ApiError | null = awsAmplifyError;
+  const originalResponse: RestApiResponse | null = awsAmplifyResponse;
+  const ok: boolean = in200s(status || 0);
+  const headers: Headers | undefined = response?.headers;
+
+  if (ok) {
+    // @ts-ignore
+    const data: T = isError ? response?.body : (response as RestApiResponse)?.body?.json();
+    return {
+      duration,
+      problem,
+      originalError,
+      ok,
+      status,
+      headers,
+      data,
+      originalResponse
+    } as ApiOkResponse<T>;
+  } else {
+    // @ts-ignore
+    const data: U = isError ? response?.body : (response as RestApiResponse)?.body?.json();
+    return {
+      duration,
+      problem,
+      originalError,
+      ok,
+      status,
+      headers,
+      data,
+      originalResponse
+    } as ApiErrorResponse<U>;
+  }
+};
+
+/**
+ * It takes a promise and returns a function that cancels the promise
+ * @param request - Operation<RestApiResponse> - The promise that was returned from the API call.
+ * @returns A function that returns a boolean.
+ */
+export const cancelAwsRequest = (request: Operation<RestApiResponse>) => (): void => {
+  return request.cancel(StringConst.ApiError.cancel);
+};
+
+/**
+ * Makes a request to the API with the given config.
+ * A function that takes in an object with an method, apiName, path, params, data, paths, and setting
+ * property. It also takes in a source parameter.
+ * @property {AwsMethod} method - The HTTP method to use.
+ * @property {string} apiName - The api name which you want to call from config object.
+ * @property {string} path - The url of the endpoint you're trying to hit.
+ * @property {boolean} isUnauthorized - if you call unauthorized api at that time pass true.
+ * @property {Record<string, any>} data - The data to be sent to the server.
+ * @property {Record<string, any>} params - The query parameters to be sent with the request.
+ * @property {Record<string, any>} paths - The path query parameters to be set with the url.
+ * @property { Record<string, any>} setting - The config parameters to be set when api call.
+ * @returns {Promise<ApiAwsResponse<T, U>>} - the response from the API
+ */
+export const awsApiWithCancelToken =
+  <T, U = T>(
+    method: AwsMethod,
+    apiName: string,
+    path: string,
+    args?: Partial<{
+      isUnauthorized: boolean;
+      data: Record<string, any>;
+      params: Record<string, any>;
+      paths: Record<string, any>;
+      setting: Record<string, any>;
+    }>
+  ): (({% if state_management_middleware == 'Redux Thunk' -%}signal: AbortSignal{% endif %}) => Promise<ApiAwsResponse<T, U>>) =>
+  async ({% if state_management_middleware == 'Redux Thunk' -%}signal: AbortSignal{% endif %}): Promise<ApiAwsResponse<T, U>> => {
+    const httpMethod: string = method.toLowerCase();
+    const hasData: boolean = ['post', 'put', 'patch'].indexOf(httpMethod) >= 0;
+    const isData: boolean = args?.data !== undefined || args?.params !== undefined;
+
+    let settings = {
+      ...(args?.setting || {}),
+      headers: {
+        ...(args?.setting?.headers ?? {})
+      },
+      response:
+        args?.setting?.response !== undefined && args?.setting?.response !== null
+          ? args?.setting?.response
+          : true,
+      ...(isData
+        ? { [hasData ? 'body' : 'queryStringParameters']: hasData ? args?.data : args?.params }
+        : {})
+    };
+    if (
+      args?.isUnauthorized === undefined ||
+      args?.isUnauthorized === null ||
+      args?.isUnauthorized === false
+    ) {
+      const useSession: AuthSession = await fetchAuthSession();
+      const token: string = useSession.tokens?.idToken?.toString() ?? '';
+      settings = {
+        ...settings,
+        headers: {
+          'x-amz-id-token': token,
+          ...settings.headers
+        }
+      };
+    } else if (has(settings, 'headers.x-amz-id-token')) {
+      delete settings.headers['x-amz-id-token'];
+    }
+
+    let finalPath = path;
+    if (args?.paths) {
+      finalPath = formatString(finalPath, args!.paths);
+    }
+
+    // @ts-ignore
+    const request: Operation<RestApiResponse> = API[httpMethod](apiName, finalPath, settings);
+    {% if state_management_middleware == 'Redux Saga' -%}
+    // @ts-ignore
+    request[CANCEL] = cancelAwsRequest(request);
+    {% elif state_management_middleware == 'Redux Thunk' -%}
+    signal.addEventListener('abort', () => {
+      cancelAwsRequest(request);
+    });
+    {% endif -%}
+
+    const startTime = toNumber(new Date());
+    /**
+     * after the call, convert the aws amplify response, then execute our monitors
+     * @param response
+     * @returns
+     */
+    const chain = async (response: AxiosResponse | AxiosError) => {
+      const ourResponse = await convertAwsResponse<T, U>(startTime, response);
+      if (AppConst.isDevelopment) {
+        // eslint-disable-next-line no-restricted-syntax
+        console.log(
+          'AWS API - RESPONSE',
+          JSON.stringify(
+            { method, apiName, path: finalPath, args, settings, response, ourResponse },
+            null,
+            2
+          )
+        );
+      }
+      return ourResponse;
+    };
+
+    if (AppConst.isDevelopment) {
+      // eslint-disable-next-line no-restricted-syntax
+      console.log(
+        'AWS API - REQUEST',
+        JSON.stringify({ method, apiName, path: finalPath, args, settings }, null, 2)
+      );
+    }
+    return request.then(chain).catch(chain);
+  };

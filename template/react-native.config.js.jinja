@@ -1,0 +1,16 @@
+module.exports = {
+  assets: ['./app/assets/fonts'],
+  project: {
+    ios: {},
+    android: {}
+  },
+  dependencies: {
+    {% if react_native_web -%}
+    'react-native-permissions': {
+      platforms: {
+        web: null
+      }
+    }
+  {% endif -%}
+  }
+};

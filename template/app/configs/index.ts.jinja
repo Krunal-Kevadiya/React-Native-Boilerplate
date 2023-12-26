@@ -1,0 +1,12 @@
+{% if state_management == 'GraphQL' -%}
+export * from './GraphQlConfig';
+{% endif -%}
+{% if 'Sentry' in feature -%}
+export * from './SentryConfig';
+{% endif -%}
+{% if 'Translations' in feature -%}
+export { default as i18n } from './TranslationConfig';
+{% endif -%}
+{% if 'AWS Amplify' in api_middleware or 'Axios' in api_middleware %}
+export * from './api';
+{% endif -%}

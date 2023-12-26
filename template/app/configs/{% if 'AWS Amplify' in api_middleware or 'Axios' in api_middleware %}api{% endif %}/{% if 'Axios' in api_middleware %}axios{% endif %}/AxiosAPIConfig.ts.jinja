@@ -1,0 +1,237 @@
+import axios, {
+  AxiosInstance,
+  CancelTokenSource,
+  RawAxiosResponseHeaders,
+  type AxiosError,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+  type AxiosResponseHeaders
+} from 'axios';
+import has from 'lodash/has';
+{% if state_management_middleware == 'Redux Saga' %}
+import { CANCEL } from 'redux-saga';
+{% endif %}
+import { StringConst, AppConst } from '@constants';
+import { getStorage, type RootStateType } from '@redux';
+import { formatString, getProblemFromError, getProblemFromStatus, in200s, toNumber } from '@utils';
+import type {
+  ApiErrorResponse,
+  ApiOkResponse,
+  ApiAxiosResponse,
+  AxiosMethod
+} from './AxiosAPITypes';
+import type { PROBLEM_CODE } from '../CommonTypes';
+
+/**
+ * It creates an AxiosInstance instance with a base URL and some headers
+ * @param {string} baseURL - The base URL of the API.
+ * @returns {AxiosInstance} - The API instance
+ */
+export const axiosApiConfig = (baseURL?: string | null): AxiosInstance => {
+  return axios.create({
+    baseURL: baseURL ?? undefined,
+    timeout: 120000
+  });
+};
+
+/**
+ * Creating two instances of the API. One is authorized and the other is unauthorized.
+ * An Axios instance with the correct base URL and headers.
+ * @param {string} baseURL - the base URL for the API
+ * @returns {AxiosInstance} - the Axios instance
+ */
+export const axiosInstance: AxiosInstance = axiosApiConfig(AppConst.apiUrl);
+
+/**
+ * Set the base URL for the Axios API instance.
+ * @param {string} baseURL - The base URL of the API.
+ * @returns None
+ */
+export const setAxiosApiBaseURL = (baseURL?: string | null): void => {
+  axiosInstance.defaults.baseURL = baseURL ?? undefined;
+};
+
+/**
+ * Set the headers for the authorized API.
+ * @param {Record<string, any>} headers - the headers to set for the authorized API.
+ * @returns None
+ */
+export const setAxiosApiHeaders = (headers?: Record<string, any> | null): void => {
+  axiosInstance.defaults.headers.common = headers ?? {};
+};
+
+/**
+ * Converts an axios response/error into our response.
+ */
+const convertAxiosResponse = async <T, U = T>(
+  startedAt?: number | null,
+  axiosResult?: AxiosResponse | AxiosError | null
+): Promise<ApiAxiosResponse<T, U>> => {
+  const end: number = toNumber(new Date());
+  const duration: number = end - (startedAt ?? 0);
+
+  // new in Axios 0.13 -- some data could be buried 1 level now
+  const isError: boolean =
+    axiosResult instanceof Error || axios.isCancel(axiosResult) || axios.isAxiosError(axiosResult);
+  const axiosResponse: AxiosResponse<any, any> = axiosResult as AxiosResponse;
+  const axiosError: AxiosError<unknown, any> = axiosResult as AxiosError;
+  const response: AxiosResponse<any, any> | undefined = isError
+    ? axiosError?.response
+    : axiosResponse;
+  const status: number | undefined = response?.status;
+  const problem: PROBLEM_CODE | null = isError
+    ? getProblemFromError(axiosResult)
+    : getProblemFromStatus(status);
+  const originalError: AxiosError<unknown, any> | null = axiosError;
+  const originalResponse: AxiosResponse<any, any> | null = axiosResponse;
+  const ok: boolean = in200s(status || 0);
+  const config: AxiosRequestConfig<any> | undefined = axiosResult?.config;
+  const headers: RawAxiosResponseHeaders | AxiosResponseHeaders | undefined = response?.headers;
+
+  if (ok) {
+    const data: T = response?.data;
+    return {
+      duration,
+      problem,
+      originalError,
+      ok,
+      status,
+      headers,
+      config,
+      data,
+      originalResponse
+    } as ApiOkResponse<T>;
+  } else {
+    const data: U = response?.data;
+    return {
+      duration,
+      problem,
+      originalError,
+      ok,
+      status,
+      headers,
+      config,
+      data,
+      originalResponse
+    } as ApiErrorResponse<U>;
+  }
+};
+
+/**
+ * It takes a CancelTokenSource as an argument and returns a function that cancels the request
+ * @param {CancelTokenSource} source - CancelTokenSource - this is the source of the cancel token that
+ * we created in the previous step.
+ * @returns A function that takes no arguments and returns void.
+ */
+export const cancelAxiosRequest = (source: CancelTokenSource) => (): void => {
+  return source?.cancel?.(StringConst.ApiError.cancel);
+};
+
+/**
+ * Makes a request to the API with the given config.
+ * A function that takes in an object with an api, method, url, params, data, and setting
+ * property. It also takes in a source parameter.
+ * @property {AxiosMethod} method - The HTTP method to use.
+ * @property {string} path - The url of the endpoint you're trying to hit.
+ * @property {boolean} isUnauthorized - if you call unauthorized api at that time pass true.
+ * @property {Record<string, any>} data - The data to be sent to the server.
+ * @property {Record<string, any>} params - The query parameters to be sent with the request.
+ * @property {AxiosRequestConfig<any>} setting - This is an object that contains the following properties:
+ * @property {Record<string, any>} paths - The path query parameters to be set with the url.
+ * @returns {Promise<ApiAxiosResponse<Response>>} - the response from the API
+ */
+export const axiosApiWithCancelToken =
+  <T, U = T>(
+    method: AxiosMethod,
+    path: string,
+    args?: Partial<{
+      isUnauthorized: boolean;
+      data: Record<string, any>;
+      params: Record<string, any>;
+      setting: AxiosRequestConfig<any>;
+      paths: Record<string, any>;
+    }>
+  ): (({% if state_management_middleware == 'Redux Thunk' -%}signal: AbortSignal{% endif %}) => Promise<ApiAxiosResponse<T, U>>) =>
+  async ({% if state_management_middleware == 'Redux Thunk' -%}signal: AbortSignal{% endif %}): Promise<ApiAxiosResponse<T, U>> => {
+    const httpMethod: string = method.toLowerCase();
+    const hasData: boolean = ['post', 'put', 'patch'].indexOf(httpMethod) >= 0;
+
+    let settings = {
+      ...(args?.setting || {}),
+      headers: {
+        ...(args?.setting?.headers ?? {})
+      },
+      ...(!hasData && args?.params ? { params: args?.params } : {})
+    };
+    if (
+      args?.isUnauthorized === undefined ||
+      args?.isUnauthorized === null ||
+      args?.isUnauthorized === false
+    ) {
+      const state: RootStateType | undefined | null = getStorage();
+      // TODO: Update based on auth response
+      const token: string = state?.auth?.user?.id ?? '';
+      settings = {
+        ...settings,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          ...settings.headers
+        }
+      };
+    } else if (has(settings, 'headers.Authorization')) {
+      delete settings.headers.Authorization;
+    }
+
+    const source: CancelTokenSource = axios.CancelToken.source();
+    settings.cancelToken = source.token;
+
+    let finalPath: string = path;
+    if (args?.paths) {
+      finalPath = formatString(finalPath, args!.paths);
+    }
+
+    const request: Promise<AxiosResponse<T, U>> = hasData
+      ? // @ts-ignore
+        axiosInstance[httpMethod](finalPath, args?.data, settings)
+      : // @ts-ignore
+        axiosInstance[httpMethod](finalPath, settings);
+    {% if state_management_middleware == 'Redux Saga' %}
+// @ts-ignore
+    request[CANCEL] = cancelAxiosRequest(source);
+    {% elif state_management_middleware == 'Redux Thunk' -%}
+    signal.addEventListener('abort', () => {
+      cancelAxiosRequest(source);
+    });
+    {% endif -%}
+
+    const startTime = toNumber(new Date());
+    /**
+     * after the call, convert the axios response, then execute our monitors
+     * @param response
+     * @returns
+     */
+    const chain = async (response: AxiosResponse<T, U> | AxiosError<T, U>) => {
+      const ourResponse = await convertAxiosResponse<T, U>(startTime, response);
+      if (AppConst.isDevelopment) {
+        // eslint-disable-next-line no-restricted-syntax
+        console.log(
+          'AXIOS API - RESPONSE',
+          JSON.stringify(
+            { method, path: finalPath, args, settings, response, ourResponse },
+            null,
+            2
+          )
+        );
+      }
+      return ourResponse;
+    };
+
+    if (AppConst.isDevelopment) {
+      // eslint-disable-next-line no-restricted-syntax
+      console.log(
+        'AXIOS API - REQUEST',
+        JSON.stringify({ method, path: finalPath, args, settings }, null, 2)
+      );
+    }
+    return request.then(chain).catch(chain);
+  };

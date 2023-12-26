@@ -1,0 +1,102 @@
+{% if 'Toast' in components -%}
+import { ToastType } from '@components';
+{% endif %}
+{% if state_management_middleware == 'Redux Saga' -%}
+import type { APIOptionalArgs } from '@configs';
+{% elif state_management_middleware == 'Redux Thunk' %}
+import type { ThunkAPIOptionalArgs } from '@configs';
+{% endif %}
+
+export const NONE = null;
+
+export const CLIENT_ERROR = 'CLIENT_ERROR';
+
+export const SERVER_ERROR = 'SERVER_ERROR';
+
+export const TIMEOUT_ERROR = 'TIMEOUT_ERROR';
+
+export const CONNECTION_ERROR = 'CONNECTION_ERROR';
+
+export const NETWORK_ERROR = 'NETWORK_ERROR';
+
+export const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
+
+export const CANCEL_ERROR = 'CANCEL_ERROR';
+
+export const TIMEOUT_ERROR_CODES = ['ECONNABORTED'];
+
+export const NODEJS_CONNECTION_ERROR_CODES = ['ENOTFOUND', 'ECONNREFUSED', 'ECONNRESET'];
+
+{% if 'AWS Amplify' in api_middleware -%}
+export const AwsMethodConst = Object.freeze({
+  get: 'get',
+  post: 'post',
+  put: 'put',
+  patch: 'patch',
+  del: 'del',
+  head: 'head'
+});
+{% endif %}
+
+{% if 'Axios' in api_middleware -%}
+export const AxiosMethodConst = Object.freeze({
+  get: 'get',
+  post: 'post',
+  put: 'put',
+  patch: 'patch',
+  head: 'head',
+  delete: 'delete',
+  options: 'options',
+  purge: 'purge',
+  link: 'link',
+  unlink: 'unlink'
+});
+{% endif %}
+
+export const ReduxActionSuffixNameConst = Object.freeze({
+  cancel: 'Cancel',
+  success: 'Success',
+  failure: 'Failure'
+});
+
+{% if state_management_middleware == 'Redux Saga' -%}
+export const OptionalArgsConst: APIOptionalArgs = Object.freeze({
+  reduxActionName: '',
+  successStatus: [200],
+  isShowFailureToast: true,
+  customFailureMessage: '',
+  parseFailureMessage: undefined,
+  toastShowParams: {
+    type: {% if 'Toast' in components -%} ToastType.error {%- else -%} undefined {%- endif -%},
+    message: undefined,
+    title: undefined,
+    image: undefined,
+    imageTint: undefined,
+    interval: 2000
+  }
+});
+{% elif state_management_middleware == 'Redux Thunk' %}
+export const OptionalArgsConst: ThunkAPIOptionalArgs = Object.freeze({
+  successStatus: [200],
+  isShowFailureToast: true,
+  customFailureMessage: '',
+  parseFailureMessage: undefined,
+  toastShowParams: {
+    type: {% if 'Toast' in components -%} ToastType.error {%- else -%} undefined {%- endif -%},
+    message: undefined,
+    title: undefined,
+    image: undefined,
+    imageTint: undefined,
+    interval: 2000
+  }
+});
+{% endif %}
+
+{% if state_management == 'React Redux' %}
+/**
+ * A constant freezing object that contains the paths to the API endpoint url.
+ */
+export const APISuffixURLConst = Object.freeze({
+  signIn: 'api/login'
+});
+{% endif %}

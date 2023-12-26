@@ -1,0 +1,86 @@
+import React from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import SpinnerButton from 'react-native-spinner-button';
+import { useTheme } from 'rn-custom-style-sheet';
+{% if 'Input' in components %}
+import { FormInput } from '@components';
+{% endif %}
+import { StringConst } from '@constants';
+import { Colors } from '@themes';
+import { isRemainingToFillForm } from '../SignInUtils';
+import styleSheet from './SignInFormStyles';
+import type { SignInFormPropsType } from './SignInFormTypes';
+
+/**
+ * The sign in form component.
+ * @param SignInFormPropsType props - The props for the sign in form.
+ * @returns A sign in form component.
+ */
+export default function SignInForm(props: SignInFormPropsType): React.ReactElement {
+  const { styles, themeMode } = useTheme(styleSheet);
+  const inputPasswordRef: React.LegacyRef<TextInput> = React.createRef();
+  const { handleSubmit, values, errors, loading } = props;
+  const disabled: boolean = isRemainingToFillForm(values, errors);
+
+  return (
+    <View style={styles.formContainer}>
+      {% if 'Input' in components -%}
+      <FormInput
+        autoFocus
+        id="email"
+        returnKeyType="next"
+        label={StringConst.Auth.textEmail}
+        placeholder={StringConst.Auth.inputEmail}
+        placeholderTextColor={Colors[themeMode]?.gray}
+        keyboardType="email-address"
+        selectionColor={Colors[themeMode]?.secondary}
+        style={styles.textInput}
+        containerStyle={styles.textInputContainer}
+        errorColor={Colors[themeMode]?.error}
+        {...props}
+        onSubmitEditing={() => {
+          inputPasswordRef.current?.focus();
+        }}
+      />
+      <FormInput
+        secureTextEntry
+        id="password"
+        ref={inputPasswordRef}
+        returnKeyType="done"
+        label={StringConst.Auth.textPassword}
+        placeholder={StringConst.Auth.inputPassword}
+        placeholderTextColor={Colors[themeMode]?.gray}
+        selectionColor={Colors[themeMode]?.secondary}
+        style={styles.textInput}
+        containerStyle={styles.textInputContainer}
+        errorColor={Colors[themeMode]?.error}
+        {...props}
+        onSubmitEditing={handleSubmit}
+      />
+      <FormInput
+        isTagInput
+        id="Tag"
+        editable={false}
+        style={StyleSheet.flatten([styles.textInput, styles.textSignInDesc])}
+        inputContainerStyle={styles.signUpDescContainer}
+        value={StringConst.Auth.textSignInDesc}
+      />
+      {% endif -%}
+      <SpinnerButton
+        buttonContainer={StyleSheet.flatten([styles.buttonContainer, styles.buttonTopMargin])}
+        buttonStyle={StyleSheet.flatten([styles.spinnerButton, styles.button])}
+        disableStyle={styles.disabledButton}
+        animatedDuration={150}
+        spinnerType="UIActivityIndicator"
+        spinnerColor={Colors[themeMode]?.secondary}
+        disabled={disabled}
+        isLoading={loading}
+        onPress={handleSubmit}
+      >
+        <Text style={StyleSheet.flatten([styles.textLabel, styles.buttonText])}>
+          {StringConst.Auth.btnSignIn}
+        </Text>
+      </SpinnerButton>
+    </View>
+  );
+}

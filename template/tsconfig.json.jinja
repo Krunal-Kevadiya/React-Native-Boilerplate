@@ -1,0 +1,49 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@assets-fonts": ["app/assets/fonts"],
+      "@assets-icons": ["app/assets/icons"],
+      "@assets-images": ["app/assets/images"],
+      "@assets-mock-data": ["app/assets/mock-data"],
+      "@assets": ["app/assets"],
+      "@components": ["app/components"],
+      "@configs": ["app/configs"],
+      "@constants": ["app/constants"],
+      "@hooks-utils": ["app/hooks/hooks-utils"],
+      "@hooks": ["app/hooks"],
+      "@modules-auth": ["app/modules/auth"],
+      "@modules-home": ["app/modules/home"],
+      "@modules-launch": ["app/modules/launch"],
+      "@modules": ["app/modules"],
+      "@navigators": ["app/navigators"],
+      "@models-forms": ["app/models/forms"],
+      "@models-others": ["app/models/others"],
+      "@models-requests": ["app/models/requests"],
+      "@models-responses": ["app/models/responses"],
+      "@models-schemas": ["app/models/schemas"],
+      "@models": ["app/models"],
+      {% if state_management == 'React Redux' -%}
+      "@redux-middleware": ["app/redux/middleware"],
+      "@redux": ["app/redux"],
+      {%- endif -%}
+      {% if state_management_middleware == 'Redux Saga' -%}
+      "@saga": ["app/saga"],
+      {%- endif -%}
+      {% if state_management == "GraphQL" -%}
+      "@graphql": ["app/graphql"],
+      {%- endif -%}
+      "@themes": ["app/themes"],
+      "@translations": ["app/translations"],
+      "@utils": ["app/utils"]
+    },
+    "typeRoots": [
+      "app/types"
+    ],
+    "importHelpers": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}

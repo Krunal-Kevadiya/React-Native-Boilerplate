@@ -11,23 +11,12 @@
     * ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"```
 * Python3
      * ```brew install python3```
-* Cookie Cutter
-    * ```brew install cookiecutter```
+* [Krupy](https://krunal-kevadiya.github.io/krupy/)
+    * ```brew untap Krunal-Kevadiya/tap```
+    * ```brew tap Krunal-Kevadiya/tap```
+    * ```brew install krupy```
 
-### Linux
-
-* Python3
-    * ```sudo apt-get update && sudo apt-get install python3.6```
-* Cookie Cutter
-    * ```sudo apt-get install cookiecutter```
-
-### Windows
-
-* Python3
-    * [Download](https://www.python.org/downloads/)
-    * ADD PYTHON TO ENVIORNMENT PATH
-* Cookie Cutter
-    * ```pip install --user cookiecutter```
+**NOTE :-** Please check your system to node properly work before trigger a command using `node -v`.
 
 ### Software and Tools
 
@@ -39,12 +28,9 @@
 
 * **Editor**: [Visual Studio Code](https://code.visualstudio.com/)
 
-
-**NOTE :-** Please check your system to node properly work before trigger a command using `node -v`.
-
 ## Project structure
 ```
- - <ProjectName>
+  - <ProjectName>
  |-- __tests__
  |-- .bundle
  |-- .husky
@@ -98,8 +84,7 @@
 
 ## Usage
 * Open terminal at your desired location
-* Run ```cookiecutter https://github.com/Krunal-Kevadiya/React-Native-Boilerplate``` to create template
-        * If it asks for "You have .../.cookiecutters/React-Native-Boilerplate downloaded before. Is it okay to delete and re-download it? [yes]:?" press "yes"
+* Run ```krupy copy https://github.com/SimformSolutionsPvtLtd/react-native-boilerplate Sample --trust``` to create template
 
 ## Required inputs
 
@@ -107,17 +92,19 @@ Input name | Description | Default
 --- | --- | --- |
 project_name | Application name(Start with Upper case without space & symbols) | AppName
 bundle_identifier | Bundle ID of project | com.krunalkevadiya.appname
-minimum_android_sdk_version | Minimum android SDK support | 21
-minimum_iOS_sdk_version | Minimum iOS SDK support | 12.4
-state_management | Which type of state management you want to used (thunk, saga, graphql) | thunk
-base_url | Base URL for a project rest api | https://reqres.in
-sentry_dsn_url | Sentry DSN URL for crash reporting | NA
+min_android_sdk | Minimum android SDK support | 21
+min_ios_sdk | Minimum iOS SDK support | 12.4
+state_management | Which type of state management you want to used (React Redux, GraphQL) | React Redux
+state_management_middleware | Which type of state management middleware you want to used (Redux Thunk, Redux Saga) | Redux Thunk
+react_native_web | Do need to support react native web | false
 encryption_key | Encryption key for local storage | AppName
-android_codePush_key | Android app center code push key | ""
-ios_codePush_key | IOS app center code push key | ""
-deep_link_scheme | Deep link scheme | "appName"
+base_url | Base URL for a project rest api | https://reqres.in
+feature | Which type of feature do you want to include (Sentry, CodePush, DeepLink, Socket, Translations, EsLint, Prettier, CSpell, LeftHook) | (Translations, EsLint, Prettier, CSpell, LeftHook)
+components| Which type of components do you want to include (Header, FormInput, Button, BottomSheet, Icon, ProfileAvatar, Progress, Switch, Toast) | (Icon, Toast)
+sentry_dsn_url | Sentry DSN URL for crash reporting | NA
+android_codePush_key | Android app center code push key | NA
+ios_codePush_key | IOS app center code push key | NA
 deep_link_host | Deep link host | "beta.appName.com"
+deep_link_scheme | Deep link scheme | "appName"
 repository_link | Repository link to connect project with remote | NA
-launch_android_studio | Open Android Studio after project is created. **Works only for MacOS** | 1 (false)
-launch_xcode | Open Xcode after project is created. **Works only for MacOS** | 1 (false)
-launch_visual_studio | Open visual Studio after project is created. **Works only for MacOS** | 1 (true)
+launch_by | Which type of tool do you want to open (Visual Studio Code, Android Studio, Xcode) **Works only for MacOS** | Visual Studio Code

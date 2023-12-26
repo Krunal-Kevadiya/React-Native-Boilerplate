@@ -1,0 +1,59 @@
+import { CustomStyleSheet, type StyleSheetOption } from 'rn-custom-style-sheet';
+import { Fonts } from '@assets';
+import { ApplicationStyles, Colors } from '@themes';
+import { colorOpacity } from '@utils';
+
+/**
+ * Create a custom style sheet for the given theme.
+ * @param {StyleSheetOption} option - The theme to create the style sheet for.
+ * @returns A custom style sheet that can be injected into the component.
+ */
+export default function styleSheet(option: StyleSheetOption) {
+  return CustomStyleSheet.create(
+    {
+      ...ApplicationStyles.lineStyle(option),
+      errorMsg: {
+        fontFamily: Fonts.regular,
+        fontSize: '14@ms',
+        marginLeft: '15@s'
+      },
+      container: {
+        flexDirection: 'column',
+        width: '100%'
+      },
+      inputContainer: {
+        flexDirection: 'row',
+        minHeight: '40@vs',
+        paddingHorizontal: '20@s',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: '20@ms',
+        borderWidth: 1,
+        borderColor: colorOpacity(Colors[option.themeMode]?.invertedBlack, 0.2)
+      },
+      inputContainerActive: {
+        borderColor: colorOpacity(Colors[option.themeMode]?.invertedBlack, 0.4)
+      },
+      inputContainerError: {
+        borderColor: Colors[option.themeMode]?.red
+      },
+      textLabel: {
+        fontFamily: Fonts.semibold,
+        fontSize: '14@ms',
+        marginRight: '12@s',
+        color: Colors[option.themeMode]?.invertedBlack
+      },
+      input: {
+        flex: 1,
+        fontFamily: Fonts.regular,
+        fontSize: '14@ms',
+        padding: 0,
+        color: Colors[option.themeMode]?.invertedBlack
+      },
+      foregroundColor: {
+        color: Colors[option.themeMode]?.invertedBlack
+      }
+    },
+    option
+  );
+}

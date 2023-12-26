@@ -1,0 +1,21 @@
+version: '0.2'
+language: 'en'
+words:
+  - 'persistor'
+  - 'Pressable'
+  - 'telprompt'
+  - 'MMKV'
+  - 'Formik'
+  - 'Apisauce'
+  - 'DeepLink'
+  - 'reduxjs'
+  - 'manaflair'
+  - 'tinycolor'
+  - 'constantin'
+  - 'Reactotron'
+  - 'uncompiled'
+  - 'svgr'
+  - 'chunkhash'
+
+flagWords:
+  - 'hte'

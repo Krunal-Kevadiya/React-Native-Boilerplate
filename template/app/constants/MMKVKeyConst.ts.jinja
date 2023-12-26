@@ -1,0 +1,18 @@
+/**
+ * A constant freezing object that contains the keys to the local storage.
+ * @type {Object}
+ */
+export default Object.freeze({
+  appTheme: 'appTheme',
+  systemTheme: 'systemTheme',
+  appLanguage: 'app-language',
+  {% if state_management == 'React Redux' -%}
+  redux: '{{project_name}}-redux',
+  {% endif -%}
+  {% if state_management == 'GraphQL' -%}
+  graphql: '{{project_name}}-graphql',
+  graphqlClient: '{{project_name}}-graphql-client',
+  {% endif -%}
+  storage: '{{project_name}}-storage',
+  storageKeyPrefix: 'AWSAmplifyStorage'
+});

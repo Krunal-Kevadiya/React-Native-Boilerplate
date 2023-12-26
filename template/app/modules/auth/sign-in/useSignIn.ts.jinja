@@ -1,0 +1,84 @@
+import { type RouteProp, useRoute } from '@react-navigation/core';
+import { useFormik, type FormikProps } from 'formik';
+{% if state_management == 'React Redux' and state_management_middleware == 'Redux Thunk' -%}
+import { useRef } from 'react';
+{% endif -%}
+{% if state_management == 'React Redux' -%}
+import { useSelector } from 'react-redux';
+{% endif -%}
+{% if state_management == "GraphQL" -%}
+import { SIGN_IN } from '@graphql';
+{% endif -%}
+import { useLifecycle{% if state_management == 'GraphQL' -%}, useMutationWithCancelToken{% endif %} } from '@hooks';
+import { SignInFormModel, SignInFormSchema, SignInRequest{% if state_management == 'React Redux' and state_management_middleware == 'Redux Thunk' -%}, UserResponse{% endif %} } from '@models';
+{% if state_management == 'React Redux' -%}
+import { AuthActions, useAppDispatch, AuthSelectors, type RootStateType } from '@redux';
+{% endif -%}
+import type { SignInHookReturnType, SignInRouteParamList } from './SignInTypes';
+{% if state_management == 'React Redux' and state_management_middleware == 'Redux Thunk' -%}
+import type { APIDispatch /*, ErrorPayload, SuccessPayload*/ } from '@configs';
+{% endif -%}
+
+/**
+ * Hook that returns the ref to the sign in form and the function to submit the form.
+ * @returns {SignInHookReturnType} - formik props.
+ */
+export default function useSignIn(): SignInHookReturnType {
+  {% if state_management == 'React Redux' -%}
+  const dispatch = useAppDispatch();
+  const loading: boolean = useSelector<RootStateType, boolean>(AuthSelectors.getLoading);
+  {% elif state_management == "GraphQL" -%}
+  const [signInRequest, { loading }, abort] = useMutationWithCancelToken(SIGN_IN);
+  {% endif -%}
+  {% if state_management == 'React Redux' and state_management_middleware == 'Redux Thunk' -%}
+  const refSignInDispatch = useRef<APIDispatch<SignInRequest, UserResponse>>();
+  {% endif -%}
+  const route = useRoute<RouteProp<SignInRouteParamList, 'SignIn'>>();
+
+  /* Creating a formik object that is used to submit the form. */
+  const formik: FormikProps<SignInFormModel> = useFormik<SignInFormModel>({
+    initialValues: SignInFormModel.empty(),
+    validationSchema: SignInFormSchema,
+    onSubmit: (values: SignInFormModel) => {
+      {% if state_management == 'React Redux' and state_management_middleware == 'Redux Thunk' -%}
+      refSignInDispatch.current = dispatch(
+        AuthActions.signInRequest(SignInRequest.withInit(values.email, values.password))
+      );
+      // TODO: If you want to get callback here
+      // refSignInDispatch.current
+      //   .unwrap()
+      //   .then((result: SuccessPayload<SignInRequest, UserResponse>) => {
+      //     // eslint-disable-next-line no-restricted-syntax
+      //     console.log('SignIn', result);
+      //   })
+      //   .catch((reason: ErrorPayload<SignInRequest, UserResponse>) => {
+      //     // eslint-disable-next-line no-restricted-syntax
+      //     console.log('SignIn', reason);
+      //   });
+    {% elif state_management == 'React Redux' and state_management_middleware == "Redux Saga" -%}
+      dispatch(AuthActions.signInRequest(SignInRequest.withInit(values.email, values.password)));
+    {% elif state_management == "GraphQL" -%}
+      signInRequest({
+        variables: SignInRequest.withInit(values.email, values.password)
+      });
+    {% endif -%}
+    }
+  });
+
+  useLifecycle(
+    () => {
+      formik?.setFieldValue('email', route.params?.email);
+    },
+    () => {
+      {% if state_management == 'React Redux' and state_management_middleware == 'Redux Thunk' -%}
+      refSignInDispatch.current?.abort();
+    {% elif state_management == 'React Redux' and state_management_middleware == "Redux Saga" -%}
+      dispatch(AuthActions.signInRequestCancel());
+    {% elif state_management == "GraphQL" -%}
+      abort();
+    {% endif -%}
+    }
+  );
+
+  return { ...formik, loading };
+}

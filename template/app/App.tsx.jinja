@@ -1,0 +1,146 @@
+{% if state_management == "GraphQL" -%}
+import { ApolloProvider } from '@apollo/client';
+import isNil from 'lodash/isNil';
+{% endif -%}
+import React{% if state_management == "GraphQL" -%}, { useState, useEffect }{% endif %} from 'react';
+import { StatusBar{% if state_management == "GraphQL" -%}, ActivityIndicator, StyleSheet, View{% endif %} } from 'react-native';
+{% if 'CodePush' in feature -%}
+import CodePush from 'react-native-code-push';
+{% endif -%}
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+{% if state_management == 'React Redux' -%}
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+{% endif -%}
+import { ThemeProvider } from 'rn-custom-style-sheet';
+import {
+  {% if 'Toast' in components -%}
+  Toast,
+  ToastHolder,
+  {% endif -%}
+  {% if 'Progress' in components -%}
+  FullScreenProgress,
+  FullScreenProgressHolder,
+  HorizontalProgress,
+  HorizontalProgressHolder
+  {%- endif -%}
+  {%- if 'CodePush' in feature -%}
+  ,
+  useCodePush,
+  UseCodePushReturnType,
+  MovableView
+{% endif -%}
+} from '@components';
+import { useLifecycle } from '@hooks';
+import { AppNavigator } from '@navigators';
+{% if state_management == 'React Redux' -%}
+import { Store } from '@redux';
+{% endif -%}
+import { ApplicationStyles } from '@themes';
+import { changeScreenOrientation, getStorageString, setStorageString } from '@utils';
+{% if state_management == "GraphQL" -%}
+import { persistor, client, initApolloClient } from './configs';
+{% endif %}
+
+/**
+ * The main App component.
+ * We're using the Provider component from react-redux to wrap our AppNavigator component, which is the
+ * component that contains all of our routes
+ * @returns The App component is being returned
+ */
+function App(): React.ReactElement {
+  {% if 'CodePush' in feature -%}
+  const { message, isBtnVisible }: UseCodePushReturnType = useCodePush();
+  {% endif -%}
+  {% if state_management == "GraphQL" -%}
+  const [loadingCache, setLoadingCache] = useState<boolean>(true);
+
+  useEffect(() => {
+    persistor.restore().then(() => {
+      initApolloClient();
+      setLoadingCache(false);
+    });
+  }, []);
+  {% endif -%}
+
+  useLifecycle(
+    () => {
+      changeScreenOrientation(true);
+    },
+    () => {
+      ToastHolder.clearToast();
+      {% if 'Progress' in components -%}
+      FullScreenProgressHolder.clearFullScreenProgress();
+      HorizontalProgressHolder.clearHorizontalProgress();
+    {% endif -%}
+    }
+  );
+
+  {% if state_management == "GraphQL" -%}
+  if (loadingCache || isNil(client)) {
+    return (
+      <View
+        style={StyleSheet.flatten([
+          ApplicationStyles.viewStyle.screen,
+          ApplicationStyles.viewStyle.centerAlign
+        ])}
+      >
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+  {% endif -%}
+
+  return (
+    <GestureHandlerRootView style={ApplicationStyles.viewStyle.screen}>
+      <ThemeProvider
+        {% raw -%}
+        storage={{
+          getStorage: getStorageString,
+          setStorage: setStorageString
+        }}
+      {% endraw -%}
+      >
+        <SafeAreaProvider style={ApplicationStyles.viewStyle.screen}>
+          <StatusBar animated hidden={false} />
+          {% if state_management == 'React Redux' -%}
+          <Provider store={Store.store}>
+            <PersistGate loading={null} persistor={Store.persistor}>
+              <AppNavigator />
+            </PersistGate>
+          </Provider>
+          {% elif state_management == "GraphQL" -%}
+          <ApolloProvider client={client}>
+            <AppNavigator />
+          </ApolloProvider>
+          {% else -%}
+            <AppNavigator />
+          {% endif -%}
+          {% if 'Toast' in components -%}
+          <Toast
+            translucent
+            numberOfLines={2}
+            toastPosition={'bottom'}
+            ref={(ref) => ToastHolder.setToast(ref)}
+          />
+          {% endif -%}
+          {% if 'Progress' in components -%}
+          <FullScreenProgress ref={(ref) => FullScreenProgressHolder.setFullScreenProgress(ref)} />
+          <HorizontalProgress ref={(ref) => HorizontalProgressHolder.setHorizontalProgress(ref)} />
+          {% endif -%}
+          {% if 'CodePush' in feature -%}
+          {message && <MovableView message={message} isBtnVisible={isBtnVisible} />}
+        {% endif -%}
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
+  );
+}
+
+{% if 'CodePush' in feature -%}
+const codePushOptions = { checkFrequency: CodePush.CheckFrequency.MANUAL };
+export default CodePush(codePushOptions)(App);
+{% else %}
+export default App;
+{% endif %}

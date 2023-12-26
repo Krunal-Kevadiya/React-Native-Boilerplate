@@ -1,0 +1,97 @@
+{% if 'Translations' in feature -%}
+import { i18n } from '@configs';
+{% endif -%}
+
+/**
+ * An object that contains all of the possible messages that can be returned by code push.
+ */
+const CodePush = Object.freeze({
+  textCheckingForUpdate: {% if 'Translations' in feature -%} i18n.t('codePush:textCheckingForUpdate'){% else -%} 'Checking for update.'{% endif -%},
+  textAwaitingUserAction: {% if 'Translations' in feature -%} i18n.t('codePush:textAwaitingUserAction'){% else -%} 'Awaiting user action.'{% endif -%},
+  textInstallingUpdate: {% if 'Translations' in feature -%} i18n.t('codePush:textInstallingUpdate'){% else -%} 'Installing update.'{% endif -%},
+  textAppUpToDate: {% if 'Translations' in feature -%} i18n.t('codePush:textAppUpToDate'){% else -%} 'App up to date.'{% endif -%},
+  textUpdateCancelledByUser: {% if 'Translations' in feature -%} i18n.t('codePush:textUpdateCancelledByUser'){% else -%} 'Update cancelled by user.'{% endif -%},
+  textUpdateInstalledAndWillBeAppliedOnRestart: {% if 'Translations' in feature -%} i18n.t(
+    'codePush:textUpdateInstalledAndWillBeAppliedOnRestart'
+  ){% else -%} 'Update installed and will be applied on restart.'{% endif -%},
+  textAnUnknownErrorOccurred: {% if 'Translations' in feature -%} i18n.t('codePush:textAnUnknownErrorOccurred'){% else -%} 'An unknown error occurred.'{% endif -%},
+  textDownloadingPackage: {% if 'Translations' in feature -%} i18n.t('codePush:textDownloadingPackage'){% else -%} 'Downloading package. {progress}%'{% endif -%},
+  btnRestart: {% if 'Translations' in feature -%} i18n.t('codePush:btnRestart'){%- else %} 'Restart'{% endif %}
+
+});
+
+/**
+ * An object that contains all of the possible error messages that can be returned by the API.
+ */
+const ApiError = Object.freeze({
+  network: {% if 'Translations' in feature -%} i18n.t('apiError:msgNetworkError'){% else -%} 'No internet connection, Please try again after sometime.'{% endif -%},
+  server: {% if 'Translations' in feature -%} i18n.t('apiError:msgServerError'){% else -%} 'Server side error.'{% endif -%},
+  somethingWentWrong: {% if 'Translations' in feature -%} i18n.t('apiError:msgSomethingWentWrong'){% else -%} 'Something went wrong. Try again!'{% endif -%},
+  cancelSaga: {% if 'Translations' in feature -%} i18n.t('apiError:msgCancelSagaError'){% else -%} 'Cancel api queue request and move forward'{% endif -%},
+  timeout: {% if 'Translations' in feature -%} i18n.t('apiError:msgTimeoutError'){% else -%} 'Server didn't respond in time.'{% endif -%},
+  client: {% if 'Translations' in feature -%} i18n.t('apiError:msgClientError'){% else -%} 'Client can not provided proper data.'{% endif -%},
+  cancel: {% if 'Translations' in feature -%} i18n.t('apiError:msgCancelError'){% else -%} 'Request has been cancelled. Only possible if `cancelToken` is provided in config, see axios `Cancellation`.'{% endif -%},
+  connection: {% if 'Translations' in feature -%} i18n.t('apiError:msgConnectionError'){% else -%} 'Server not available, bad dns.'{% endif -%},
+  unexpected: {% if 'Translations' in feature -%} i18n.t('apiError:msgUnexpectedError'){%- else %} 'An unexpected error occurred.'{% endif %}
+
+});
+
+/**
+ * A collection of error messages for the Yup validation schema.
+ */
+const YupError = Object.freeze({
+  requireEmail: {% if 'Translations' in feature -%} i18n.t('yupError:msgRequireEmail'){% else -%} 'Please enter email address'{% endif -%},
+  validEmail: {% if 'Translations' in feature -%} i18n.t('yupError:msgValidEmail'){% else -%} 'Please enter valid email address'{% endif -%},
+  requirePassword: {% if 'Translations' in feature -%} i18n.t('yupError:msgRequirePassword'){%- else %} 'Please enter password'{% endif %}
+
+});
+
+/**
+ * A collection of messages for the application.
+ */
+const Message = Object.freeze({
+  copyLinkSuccess: {% if 'Translations' in feature -%} i18n.t('message:copyLinkSuccess'){% else -%} 'Copy link successfully'{% endif -%},
+  fetchMustBeFunction: {% if 'Translations' in feature -%} i18n.t('message:fetchMustBeFunction'){% else -%} 'fetch must be a function'{% endif -%},
+  defaultsMustBeObject: {% if 'Translations' in feature -%} i18n.t('message:defaultsMustBeObject'){% else -%} 'defaults must be an object'{% endif -%},
+  retriesMustBePositiveInteger: {% if 'Translations' in feature -%} i18n.t('message:retriesMustBePositiveInteger'){% else -%} 'retries must be a positive integer'{% endif -%},
+  retryDelayMustNePositiveInteger: {% if 'Translations' in feature -%} i18n.t('message:retryDelayMustNePositiveInteger'){% else -%} 'retryDelay must be a positive integer or a function returning a positive integer'{% endif -%},
+  retryOnPropertyExpectsArrayOrFunction: {% if 'Translations' in feature -%} i18n.t('message:retryOnPropertyExpectsArrayOrFunction'){%- else %} 'retryOn property expects an array or function'{% endif %}
+
+});
+
+/**
+ * A collection of messages for the components.
+ */
+const Components = Object.freeze({
+  textSelectAPhoto: {% if 'Translations' in feature -%} i18n.t('components:textSelectAPhoto'){% else -%} 'Select a Photo'{% endif -%},
+  listSelectAPhoto: [
+    {% if 'Translations' in feature -%} i18n.t('components:listItemTakePhoto'){% else -%} 'Take Photo'{% endif -%},
+    {% if 'Translations' in feature -%} i18n.t('components:listItemChooseFromLibrary'){% else -%} 'Choose from Library'{% endif -%},
+    {% if 'Translations' in feature -%} i18n.t('components:listItemCancel'){%- else %} 'Cancel'{% endif %}
+
+  ]
+});
+
+const Auth = Object.freeze({
+  textEmail: {% if 'Translations' in feature -%} i18n.t('auth:textEmail'){% else -%} 'Email'{% endif -%},
+  inputEmail: {% if 'Translations' in feature -%} i18n.t('auth:inputEmail'){% else -%} 'janedoe@email.com'{% endif -%},
+  textPassword: {% if 'Translations' in feature -%} i18n.t('auth:textPassword'){% else -%} 'Password'{% endif -%},
+  inputPassword: {% if 'Translations' in feature -%} i18n.t('auth:inputPassword'){% else -%} '****'{% endif -%},
+  btnSignIn: {% if 'Translations' in feature -%} i18n.t('auth:btnSignIn'){% else -%} 'Sign In'{% endif -%},
+  textSignInDesc: {% if 'Translations' in feature -%} i18n.t('auth:textSignInDesc'){%- else %} 'By continuing, you agree to our ~Terms and Conditions~ and ~Privacy Policy~.'{% endif %}
+
+});
+
+/**
+ * Exporting all the strings in one object..
+ * Separate string object like Home, Setting & Auth etc...
+ * base on your modules dir structure
+ */
+export default Object.freeze({
+  CodePush,
+  ApiError,
+  YupError,
+  Message,
+  Components,
+  Auth
+});
